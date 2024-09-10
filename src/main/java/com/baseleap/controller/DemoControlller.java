@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RestController
 public class DemoControlller {
 	
 	@GetMapping("/demo")
