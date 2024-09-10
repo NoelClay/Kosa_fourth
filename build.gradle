@@ -48,6 +48,9 @@ dependencies {
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.1'
  	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
  	
+ 	
+ 	// typeleaf
+ 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {
