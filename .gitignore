@@ -1,6 +1,14 @@
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,eclipse,intellij,java,gradle,maven,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,eclipse,intellij,java,gradle,maven,visualstudiocode
 
+## 20240911 김남영 추가 수정 vscode 관련 ##
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
 ##추가##
 application.properties
 
