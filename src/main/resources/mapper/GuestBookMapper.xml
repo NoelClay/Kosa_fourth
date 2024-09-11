@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.baseleap.mapper.GuestBookMapper">
+
+    <!-- ownerId로 방명록 항목을 검색 -->
+    <select id="findByOwnerId" parameterType="long" resultType="com.baseleap.model.GuestBook">
+        SELECT * FROM Guest_book WHERE owner_id = #{ownerId}
+    </select>
+
+    <!-- 새로운 방명록 항목을 삽입 -->
+    <insert id="insertGuestBook" parameterType="com.baseleap.model.GuestBook" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO Guest_book (writer_id, owner_id, comment, created_at)
+        VALUES (#{writerId}, #{ownerId}, #{comment}, #{createdAt})
+    </insert>
+
+</mapper>
