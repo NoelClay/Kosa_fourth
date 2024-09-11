@@ -7,6 +7,12 @@
     <title>Title</title>
 </head>
 <body>
+
+	<form action="/demo" method="Get">
+		{데모)} : <input type="submit" value="전송">
+	</form>
+    <br>
+
 	<form action="/signup/signup" method="post">
 		<table>
 			<tr>
@@ -23,12 +29,11 @@
 			</tr>
 			<tr>
 				<td>프로필 이미지:</td>
-				<!-- <td><input type="text" name="profileImage"></td> -->
-				<td><select name="profileImage">
-                	<option value='resources/static/image/demo.png'><img src=resources/static/image/demo.png></option>
-                	<option value='resources/static/image/demo.png'><img src=static/image/demo.png></option>
-                	<option value='resources/static/image/demo.png'><img src=resources/static/image/demo.png></option>
-                </select></td>
+				<td>
+				<input type="radio" name="profileImage" value="cupid.png" checked><img src=/image/cupid.png  width = 50>
+                <input type="radio" name="profileImage" value="groceries.png"><img src=/image/groceries.png width = 50>
+                <input type="radio" name="profileImage" value="sculpture.png"><img src=/image/sculpture.png width = 50>
+                </td>
 			</tr>
 			<tr>
 				<td>간단한 소개:</td>
@@ -36,7 +41,7 @@
 			</tr>
 
 			<tr>
-				<td>주소:</td>
+				<td>질문:</td>
 				<td><select name="validationQuizQuestion">
 					<option value='졸업한 초등학교'>졸업한 초등학교</option>
 					<option value='가장 좋아하는 영화'>가장 좋아하는 영화</option>

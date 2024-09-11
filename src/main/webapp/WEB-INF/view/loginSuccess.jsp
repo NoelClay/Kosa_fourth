@@ -13,6 +13,16 @@
 	<form action="/demo" method="Get">
 		{데모)} : <input type="submit" value="전송">
 	</form>
+		<table>
+    		<tr>
+    			<th>번호</th>
+    			<th>메시지</th>
+    		</tr>
+    		<tr>
+    			<td>${user}</td>
+    			<td>${message.message}</td>
+    		</tr>
+    	</table>
 
 
 </body>

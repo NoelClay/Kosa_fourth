@@ -1,6 +1,5 @@
 package com.baseleap.service;
 
-import com.baseleap.mapper.LoginMapper;
 import com.baseleap.mapper.SignUpMapper;
 import com.baseleap.model.UserModel;
 import lombok.extern.slf4j.Slf4j;

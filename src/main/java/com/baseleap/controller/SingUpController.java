@@ -1,7 +1,6 @@
 package com.baseleap.controller;
 
 import com.baseleap.model.UserModel;
-import com.baseleap.service.LoginService;
 
 import com.baseleap.service.SignUpService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-
 @RequestMapping("/signup")
 public class SingUpController {
 
@@ -23,7 +21,7 @@ public class SingUpController {
     private SignUpService signUpService;
 
     // 회원 가입 폼으로 이동
-    @PostMapping(value = "/signUpForm")
+    @GetMapping(value = "/signUpForm")
     public String signUpForm() {
         log.info("signUpForm()");
 
@@ -42,7 +40,7 @@ public class SingUpController {
         log.info("signup() :: returnCnt = {} ",returnCnt);
 
         // 리턴
-        returnCnt = 0; // 태스트용
+        // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
             return "demo";
         }else {
