@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>업데이트  실페 입니다. </h1>
+<h1>업데이트  실패 입니다. </h1>
 
 
 	<form action="/demo" method="Get">
