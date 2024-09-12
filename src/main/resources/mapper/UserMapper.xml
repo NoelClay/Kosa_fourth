@@ -10,6 +10,7 @@
     <select id="login"
             resultType="com.baseleap.model.UserModel">
         select
+            id,
             email,
             password,
             nickname,
@@ -27,6 +28,7 @@
     <select id="getUser" parameterType="String"
             resultType="com.baseleap.model.UserModel">
         select
+        id,
         email,
         password,
         nickname,

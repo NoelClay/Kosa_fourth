@@ -2,6 +2,7 @@ package com.baseleap.model;
 
 public class UserModel {
 
+    private int id;
     private String email;
     private String password;
     private String nickName;
@@ -19,6 +20,14 @@ public class UserModel {
     public UserModel(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProfileImage() {
@@ -96,7 +105,8 @@ public class UserModel {
     @Override
     public String toString() {
         return "UserModel{" +
-                "email='" + email + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", profileImage='" + profileImage + '\'' +
