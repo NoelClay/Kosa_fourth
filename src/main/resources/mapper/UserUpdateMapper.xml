@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.baseleap.mapper.UserUpdateMapper">
+
+    <update id="userUpdate"
+            parameterType="com.baseleap.model.UserModel">
+        UPDATE User
+        SET
+        password = #{password},
+        nickname = #{nickName},
+        profile_image = #{profileImage},
+        user_introduce = #{userIntroduce}
+        WHERE email = #{email}
+    </update>
+
+    <update id="userUpdatePassword"
+            parameterType="com.baseleap.model.UserModel">
+        UPDATE User
+        SET
+        password = #{password}
+        WHERE email = #{email}
+    </update>
+
+</mapper>
