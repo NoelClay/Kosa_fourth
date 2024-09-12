@@ -1,10 +1,12 @@
-package com.baseleap.service.hyeondongService;
+package com.baseleap.mapper.hyeondongMapper;
 
 import com.baseleap.model.hyeondongModel.UserDTO;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 
-public interface UserService {
+@Mapper
+public interface HDUserMapper {
     UserDTO getUserByEmail(String email);
     void createUser(HashMap<String, String> paramMap);
 }

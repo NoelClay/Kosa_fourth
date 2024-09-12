@@ -49,17 +49,7 @@ public class MyPageController {
         return "my-page/follow-managing";
     }
 
-    @GetMapping("/follow")
-    public String unfollow(
-            HttpServletRequest request,
-            Model model) {
-        String stringUserId = (String) request.getSession().getAttribute("userId");
-        String stringTargetId = request.getParameter("targetId");
-        int userId = Integer.parseInt(stringUserId);
-        int targetId = Integer.parseInt(stringTargetId);
-        myPageService.followUser(userId, targetId);
-        return "my-page/follow-managing";
-    }
+
 
     @GetMapping("/follow-managing")
     public String followManaging(Model model) {

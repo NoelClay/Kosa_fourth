@@ -1,7 +1,7 @@
 package com.baseleap.controller.hyeondongController;
 
 import com.baseleap.model.hyeondongModel.UserDTO;
-import com.baseleap.service.hyeondongService.UserService;
+import com.baseleap.service.hyeondongService.HDUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 @RequestMapping(value = "/user")
 public class HDUserController {
     @Autowired
-    private UserService userService;
+    private HDUserService HDUserService;
 
     @GetMapping("/test-login")
     public String testLogin() {
@@ -34,7 +34,7 @@ public class HDUserController {
             HttpServletRequest request,
             Model model
     ) {
-        UserDTO userDTO = userService.getUserByEmail(email);
+        UserDTO userDTO = HDUserService.getUserByEmail(email);
         if (userDTO == null || !userDTO.getPassword().equals(password)) {
             model.addAttribute("error", "Wrong password");
             return "user/test-login";
@@ -51,7 +51,7 @@ public class HDUserController {
 
     @PostMapping("/test-signup")
     public String testSignup(@RequestParam HashMap<String, String> paramMap) {
-        userService.createUser(paramMap);
+        HDUserService.createUser(paramMap);
         return "redirect:/user/test-login";
     }
 }
