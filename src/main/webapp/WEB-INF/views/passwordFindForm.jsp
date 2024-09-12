@@ -34,7 +34,8 @@
 				<td><input type="text" name="validationQuizAnswer"></td>
 			</tr>
 
-		<input type="submit" value="등록"><input type="reset" value="취소">
+		    <input type="submit" value="등록"><input type="reset" value="취소">
+		</table>
 	</form>
 
 

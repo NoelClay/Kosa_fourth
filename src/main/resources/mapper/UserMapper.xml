@@ -43,5 +43,12 @@
     </select>
 
 
+    <update id="userUpdateLastLoginTime"
+            parameterType="com.baseleap.model.UserModel">
+        UPDATE User
+        SET
+        last_login_time = now()
+        WHERE email = #{email}
+    </update>
 
 </mapper>

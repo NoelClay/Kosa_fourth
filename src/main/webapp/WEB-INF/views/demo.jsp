@@ -22,5 +22,9 @@
     <br>
 
     <a href = "/find/passwordFindForm" >  {비밀 번호 찾기(GET)}</a>
+    <br>
+
+    <a href = "/delete/deleteForm" >  {회원 탈퇴(GET)}</a>
+    <br>
 </body>
 </html>

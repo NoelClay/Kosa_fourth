@@ -43,7 +43,6 @@ public class UserController {
 
         // 요청 처리
         UserModel returnUserModel = userService.login(userModel);
-        // 세션이 있으면 그냥 바로 메인으로 가고 없으면 로그인 폼으로 이동
 
         // 세션 처리
         // -세션에서 id(pk) 가져오기
@@ -53,13 +52,16 @@ public class UserController {
             session = request.getSession();
             session.setAttribute("loginEmail", returnUserModel.getEmail());
             session.setAttribute("loginUserId", returnUserModel.getId());
+            session.setAttribute("homePageId", returnUserModel.getId());
+            userService.userUpdateLastLoginTime(returnUserModel.getEmail());
+
         }
 
-        // 로그인 시간 체크
 
 
         // 리턴
         if (returnUserModel != null) {
+
             return "redirect:/login/loginSuccess";
         } else {
             return "redirect:/login/loginFail";

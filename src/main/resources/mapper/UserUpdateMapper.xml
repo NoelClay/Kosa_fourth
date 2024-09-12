@@ -26,4 +26,10 @@
         WHERE email = #{email}
     </update>
 
+    <delete id="deleteUser"
+            parameterType="String">
+        delete from db_message
+        where no = #{paramNo}
+    </delete>
+
 </mapper>
