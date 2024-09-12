@@ -30,13 +30,61 @@
             email like '%${keyword}%' or
             nickname like '%${keyword}%';
     </select>
-    <insert id="followUser" parameterType="com.baseleap.model.hyeondongModel.UserDTO">
+    <select id="getMyFollowers" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
+        select
+            u.profile_image as profileImage,
+            u.email,
+            u.nickname,
+            u.user_introduce as userIntroduce
+        from
+            follow as f
+        join
+            user as u
+        where
+            f.target_id = #{id} and
+            f.user_id = u.id;
+    </select>
+    <select id="getMeFollowings" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
+        select
+            u.profile_image as profileImage,
+            u.email,
+            u.nickname,
+            u.user_introduce as userIntroduce
+        from
+            follow as f
+        join
+            user as u
+        where
+            f.target_id = u.id and
+            f.user_id = #{id};
+    </select>
+    <select id="isFollowing" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.FollowDTO">
+        select
+            id,
+            user_id as userId,
+            target_id as targetId,
+            created_at as createdAt
+        from
+            follow
+        where
+            user_id = #{userId}
+        and
+            target_id = #{targetId}
+    </select>
+    <insert id="following" parameterType="com.baseleap.model.hyeondongModel.UserDTO">
         insert into follow
         value (
-        null,
-        #{userId},
-        #{targetId},
-        now()
+            null,
+            #{userId},
+            #{targetId},
+            now()
         );
     </insert>
+    <delete id="unfollow" parameterType="_int">
+        delete from follow
+        where
+            user_id = #{userId}
+        and
+            target_id = #{targetId};
+    </delete>
 </mapper>

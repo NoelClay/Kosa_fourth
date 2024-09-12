@@ -21,7 +21,7 @@ DB 아이디: ${userInfo.id}
 <br>
 닉네임: ${userInfo.nickname}
 <br>
-프로필 이미지: <img src="${userInfo.profileImage}">
+프로필 이미지: <img src="${userInfo.profileImage}" alt="">
 <br>
 자기소개: ${userInfo.userIntroduce}
 <br>
@@ -33,6 +33,8 @@ DB 아이디: ${userInfo.id}
 <br>
 비밀번호 찾기 답변: ${userInfo.validationQuizAnswer}
 <hr>
-<a href="${pageContext.request.contextPath}/my-page/follow-managing">팔로잉 관리하기</a>
+<a href="${pageContext.request.contextPath}/my-page/follower-list">나를 팔로우 중인 사람들</a>
+<a href="${pageContext.request.contextPath}/my-page/following-list">내가 팔로잉 중인 사람들</a>
+<a href="${pageContext.request.contextPath}/my-page/search">사람을 찾습니다...</a>
 </body>
 </html>
