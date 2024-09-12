@@ -1,8 +1,9 @@
-package com.baseleap.model;
+package com.baseleap.model.guestbook;
 
 import java.time.LocalDateTime;
 
 import lombok.Data;
+
 
 @Data
 public class GuestBook {

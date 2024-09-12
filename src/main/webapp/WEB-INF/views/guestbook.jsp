@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,10 @@
         </div>
         <div class="content">
             <h2>Messages</h2>
+
             <ul>
                 <c:forEach var="entry" items="${guestBooks}">
+                    <li>${entry.getComment()} - ${entry.getWriterId()} on ${entry.getCreatedAt()}</li>
                     <li>${entry.comment} - ${entry.writerId} on ${entry.createdAt}</li>
                 </c:forEach>
             </ul>

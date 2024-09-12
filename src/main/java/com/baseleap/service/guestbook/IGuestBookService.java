@@ -2,7 +2,7 @@ package com.baseleap.service.guestbook;
 
 import java.util.List;
 
-import com.baseleap.model.GuestBook;
+import com.baseleap.model.guestbook.GuestBook;
 
 public interface IGuestBookService {
     
