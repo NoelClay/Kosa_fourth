@@ -1,7 +1,7 @@
-package com.baseleap.controller;
+package com.baseleap.controller.hyeondongController;
 
-import com.baseleap.model.UserDTO;
-import com.baseleap.service.UserService;
+import com.baseleap.model.hyeondongModel.UserDTO;
+import com.baseleap.service.hyeondongService.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

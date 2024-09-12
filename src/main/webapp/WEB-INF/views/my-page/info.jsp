@@ -21,16 +21,18 @@ DB 아이디: ${userInfo.id}
 <br>
 닉네임: ${userInfo.nickname}
 <br>
-프로필 이미지: <img src="${userInfo.profile_image}">
+프로필 이미지: <img src="${userInfo.profileImage}">
 <br>
-자기소개: ${userInfo.user_introduce}
+자기소개: ${userInfo.userIntroduce}
 <br>
-가입 일자:${userInfo.created_time}
+가입 일자:${userInfo.createdTime}
 <br>
-마지막 로그인 시각: ${userInfo.last_login_time}
+마지막 로그인 시각: ${userInfo.lastLoginTime}
 <br>
-비밀번호 찾기 질문: ${userInfo.validation_quiz_question}
+비밀번호 찾기 질문: ${userInfo.validationQuizQuestion}
 <br>
-비밀번호 찾기 답변: ${userInfo.validation_quiz_answer}
+비밀번호 찾기 답변: ${userInfo.validationQuizAnswer}
+<hr>
+<a href="${pageContext.request.contextPath}/my-page/follow-managing">팔로잉 관리하기</a>
 </body>
 </html>

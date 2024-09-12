@@ -1,6 +1,6 @@
-package com.baseleap.service;
+package com.baseleap.service.hyeondongService;
 
-import com.baseleap.model.UserDTO;
+import com.baseleap.model.hyeondongModel.UserDTO;
 
 import java.util.HashMap;
 

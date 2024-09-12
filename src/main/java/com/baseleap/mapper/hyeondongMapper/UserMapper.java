@@ -1,6 +1,6 @@
-package com.baseleap.mapper;
+package com.baseleap.mapper.hyeondongMapper;
 
-import com.baseleap.model.UserDTO;
+import com.baseleap.model.hyeondongModel.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;

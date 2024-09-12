@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.baseleap.mapper.UserMapper">
-<insert id="createUser" parameterType="com.baseleap.model.UserDTO">
+<mapper namespace="com.baseleap.mapper.hyeondongMapper.UserMapper">
+<insert id="createUser" parameterType="com.baseleap.model.hyeondongModel.UserDTO">
     insert into user
     value (
         null,
@@ -18,7 +18,7 @@
         #{answer}
     );
 </insert>
-<select id="getUserByEmail" parameterType="string" resultType="com.baseleap.model.UserDTO">
+<select id="getUserByEmail" parameterType="string" resultType="com.baseleap.model.hyeondongModel.UserDTO">
     select *
     from user
     where email=#{email};

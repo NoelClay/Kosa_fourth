@@ -1,7 +1,7 @@
-package com.baseleap.service;
+package com.baseleap.service.hyeondongService;
 
-import com.baseleap.mapper.UserMapper;
-import com.baseleap.model.UserDTO;
+import com.baseleap.mapper.hyeondongMapper.UserMapper;
+import com.baseleap.model.hyeondongModel.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
