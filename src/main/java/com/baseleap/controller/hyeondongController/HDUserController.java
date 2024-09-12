@@ -18,7 +18,7 @@ import java.util.HashMap;
 @Slf4j
 @Controller
 @RequestMapping(value = "/user")
-public class UserController {
+public class HDUserController {
     @Autowired
     private UserService userService;
 
