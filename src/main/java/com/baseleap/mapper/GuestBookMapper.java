@@ -10,7 +10,15 @@ import com.baseleap.model.GuestBook;
 @Mapper
 public interface GuestBookMapper {
 
-    List<GuestBook> findByOwnerId(Long ownerId);
+    List<GuestBook> selectGuestBookListByOwnerId(Long ownerId);
 
     void insertGuestBook(GuestBook guestBook);
+
+    void updateGuestBook(GuestBook guestBook);
+
+    void deleteGuestBook(GuestBook guestBook);
+
+    GuestBook selectGuestBookByWriterOwnerId(Long OwnerId, Long WriterId);
+
+    
 }

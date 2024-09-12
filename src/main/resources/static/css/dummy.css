@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Slight off-white background */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-bottom: 2px solid #ccc; /* Border to separate header */
+}
+
+.logo {
+    width: 10%;
+    text-align: center;
+    color: #333;
+    padding: 10px;
+    font-size: 24px;
+    border-right: 2px solid #ccc; /* Border to separate logo from title */
+}
+
+.title {
+    width: 90%;
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    height: 90vh;
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #ffffff;
+    padding: 20px;
+    color: #333;
+    border-right: 2px solid #ccc; /* Border to separate sidebar */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 20px 0;
+    border-bottom: 1px solid #ddd; /* Light border for menu items */
+    padding-bottom: 10px;
+}
+
+.main-content {
+    width: 85%;
+    background-color: #ffffff;
+    padding: 20px;
+    color: #333;
+    overflow-y: auto;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+    }
+
+    .logo {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .title {
+        width: 100%;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+        border-right: none;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 10px;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 5px;
+    }
+
+    .logo {
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .sidebar {
+        padding: 10px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .logo {
+        width: 100%;
+        font-size: 18px;
+        padding: 5px;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .title {
+        width: 100%;
+        font-size: 18px;
+        padding: 5px;
+    }
+
+    .sidebar {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid #ccc;
+    }
+
+    .main-content {
+        width: 100%;
+        padding: 10px;
+    }
+}
