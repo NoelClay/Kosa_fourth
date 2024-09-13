@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Guestbook</title>
@@ -27,6 +27,18 @@
                     <li>${entry.comment} - ${entry.writerId} on ${entry.createdAt}</li>
                 </c:forEach>
             </ul>
+            <ul >
+                <li>
+                <div class="myhome">
+                    <li><input type="button" value="글쓰기"></li>
+                    <li><input type="button" value="취소"></li>
+                </div>
+                <div class="myhome">
+                    <li><input type="button" value="테마 변경"></li>
+                    <li><input type="button" value="배경음악 설정"></li>
+                </div>
+            </ul>
+
         </div>
     </div>
 </body>
