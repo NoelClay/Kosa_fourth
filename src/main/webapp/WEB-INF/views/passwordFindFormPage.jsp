@@ -24,9 +24,9 @@
 			<tr>
 				<td>질문:</td>
 				<td><select name="validationQuizQuestion">
-					<option value='졸업한 초등학교'>졸업한 초등학교</option>
-					<option value='가장 좋아하는 영화'>가장 좋아하는 영화</option>
-					<option value='가장 싫어하는 음식'>가장 싫어하는 음식</option>
+					<option value='1'>졸업한 초등학교</option>
+					<option value='2'>가장 좋아하는 영화</option>
+					<option value='3'>가장 싫어하는 음식</option>
 				</select></td>
 			</tr>
 			<tr>
@@ -34,7 +34,8 @@
 				<td><input type="text" name="validationQuizAnswer"></td>
 			</tr>
 
-		<input type="submit" value="등록"><input type="reset" value="취소">
+		    <input type="submit" value="등록"><input type="reset" value="취소">
+		</table>
 	</form>
 
 

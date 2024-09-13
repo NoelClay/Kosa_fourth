@@ -13,8 +13,10 @@ String email = (String)session.getAttribute("loginEmail");
 %>
 </head>
 <body>
-<h1>로그인 성공 확안용 패이지 입니다.</h1>
+<h1>회원 탈퇴 확인 </h1>
 
+
+	<form action="/signOut/signOut" method="Post">
 		<table>
             <tr>
 				<td>id:</td>
@@ -26,9 +28,9 @@ String email = (String)session.getAttribute("loginEmail");
 			</tr>
 
     	</table>
+		{정말 삭제 하시겠습니캬?)} : <input type="submit" value="전송">
+	</form>
 
-	<a href = "/test-main" >  {테스트 화면)}</a>
-        <br>
 
 </body>
 </html>

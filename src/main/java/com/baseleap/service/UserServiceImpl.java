@@ -27,5 +27,12 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUser(email);
     }
 
+    @Override
+    public int userUpdateLastLoginTime(String email) {
+        log.info("userUpdateLastLoginTime() :: email = {} ",email);
+
+        return userMapper.userUpdateLastLoginTime(email);
+    }
+
 
 }

@@ -7,7 +7,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>회원 가입  실패 입니다. </h1>
+<h1>회원 가입  실패 확안용 패이지 입니다. </h1>
 
 
 	<form action="/demo" method="Get">

@@ -25,10 +25,15 @@ public class UserController {
 
     //로그인 폼으로 이동한다
     @GetMapping(value = "/loginForm")
-    public String loginForm() {
-
+    public String loginForm(HttpSession session) {
+        String loginEmail =  (String) session.getAttribute("loginEmail");
+        // 세션에 따른 로그인 페이지 이동 제한 추가 하기
         log.info("loginForm()");
-        return "loginForm";
+        if(loginEmail == null){
+            return "loginFormPage";
+        } else {
+            return "test-main";
+        }
     }
 
     // 로그인을 처리한다
@@ -43,7 +48,6 @@ public class UserController {
 
         // 요청 처리
         UserModel returnUserModel = userService.login(userModel);
-        // 세션이 있으면 그냥 바로 메인으로 가고 없으면 로그인 폼으로 이동
 
         // 세션 처리
         // -세션에서 id(pk) 가져오기
@@ -53,13 +57,17 @@ public class UserController {
             session = request.getSession();
             session.setAttribute("loginEmail", returnUserModel.getEmail());
             session.setAttribute("loginUserId", returnUserModel.getId());
+            session.setAttribute("homePageId", returnUserModel.getId());
+            userService.userUpdateLastLoginTime(returnUserModel.getEmail());
+
         }
 
-        // 로그인 시간 체크
+
 
 
         // 리턴
         if (returnUserModel != null) {
+
             return "redirect:/login/loginSuccess";
         } else {
             return "redirect:/login/loginFail";
