@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Slf4j
 @RequestMapping("/signup")
-public class SingUpController {
+public class SignUpController {
 
     @Autowired
     private SignUpService signUpService;
@@ -25,7 +25,7 @@ public class SingUpController {
     public String signUpForm() {
         log.info("signUpForm()");
 
-        return "singUpForm";
+        return "signUpFormPage";
     }
 
     //회원 가입을 처리 한다
@@ -36,26 +36,32 @@ public class SingUpController {
         
         // 요청 처리
         // - 회원 정보를 저장
+        // 중복 이메일 예외처리 해야함
         int returnCnt = signUpService.signUp(userModel);
         log.info("signup() :: returnCnt = {} ",returnCnt);
 
-        // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "demo";
-        }else {
-            return "singUpFail";
+            return "redirect:/signup/signUpSuccess";
+        } else {
+            return "redirect:/signup/signUpFail";
         }
 
     }
 
-    // 회원 가입 성공(메인 화면)화면으로 건더
+    // 회원 가입 성공(메인 화면)화면으로 이동
+    @GetMapping(value = "/signUpSuccess")
+    public String loginSuccess() {
+        log.info("signUpSuccess()");
 
-    // 회원 가입 실패 화면으로 간다
-    @GetMapping(value = "/singUpFail")
-    public String singUpFail(){
-        log.info("singUpFail()");
+        return "demo";
+    }
 
-        return  "singUpFail";
+    // 회원 가입 실패 화면으로 이동
+    @GetMapping(value = "/signUpFail")
+    public String signUpFail(){
+        log.info("signUpFail()");
+
+        return  "signUpFail";
     }
 }

@@ -1,7 +1,7 @@
 package com.baseleap.service;
 
 
-import com.baseleap.mapper.UserDeleteMapper;
+import com.baseleap.mapper.UserSignOutMapper;
 import com.baseleap.mapper.UserMapper;
 import com.baseleap.model.UserModel;
 import lombok.extern.slf4j.Slf4j;
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserDeleteServiceImpl implements UserDeleteService {
+public class UserSignOutServiceImpl implements UserSignOutService {
 
     @Autowired
-    private UserDeleteMapper userDeleteMapper;
+    private UserSignOutMapper UserSignOutMapper;
 
     @Override
-    public int deleteUser(UserModel userModel) {
+    public int signOutUser(UserModel userModel) {
         log.info("email():: email == {}",userModel);
-        return userDeleteMapper.deleteUser(userModel.getEmail());
+        return UserSignOutMapper.signOutUser(userModel.getEmail());
     }
 }

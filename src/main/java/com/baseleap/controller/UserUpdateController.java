@@ -42,7 +42,7 @@ public class UserUpdateController {
             log.info("userUpdateForm() :: returnUserModel ={}", returnUserModel);
             model.addAttribute("user",returnUserModel);
 
-            return "updateForm";
+            return "updateFormPage";
         } else {
             log.info("userUpdateForm() :: loginEmail ={}", loginEmail);
             return "redirect:/login/loginForm";

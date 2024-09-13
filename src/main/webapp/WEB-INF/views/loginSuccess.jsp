@@ -13,7 +13,7 @@ String email = (String)session.getAttribute("loginEmail");
 %>
 </head>
 <body>
-<h1>로그인 성공입니다.. </h1>
+<h1>로그인 성공 확안용 패이지 입니다.</h1>
 
 		<table>
             <tr>
@@ -26,9 +26,7 @@ String email = (String)session.getAttribute("loginEmail");
 			</tr>
 
     	</table>
-	<form action="/demo" method="Get">
-		{데모)} : <input type="submit" value="전송">
-	</form>
+
 	<a href = "/test-main" >  {테스트 화면)}</a>
         <br>
 

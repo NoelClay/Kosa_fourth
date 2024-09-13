@@ -2,7 +2,7 @@ package com.baseleap.controller;
 
 
 import com.baseleap.model.UserModel;
-import com.baseleap.service.UserDeleteService;
+import com.baseleap.service.UserSignOutService;
 import com.baseleap.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -16,50 +16,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("/delete")
-public class UserDeleteController {
+@RequestMapping("/signOut")
+public class UserSignOutController {
 
 
     @Autowired
     private UserService userService;
 
     @Autowired
-    private UserDeleteService userDelete;
+    private UserSignOutService UserSignOut;
 
-    // 정보수정 폼으로 이동
-    @GetMapping(value = "/deleteForm")
-    public String userDeleteForm(HttpSession session) {
+    // 회원 탈퇴 확인 페이지로 이동
+    @GetMapping(value = "/signOutForm")
+    public String userSignOutForm(HttpSession session) {
         // 요청
         String loginEmail =  (String) session.getAttribute("loginEmail");
 
         // 요청 처리
         // 로그인 여부 확인
         if (loginEmail != null) {
-            log.info("userDeleteForm() :: loginEmail ={}", loginEmail);
-            return "userDeleteForm";
+            log.info("userSignOutForm() :: loginEmail ={}", loginEmail);
+            return "userSignOutFormPage";
         } else {
-            log.info("userDeleteForm() :: loginEmail ={}", loginEmail);
+            log.info("userSignOutForm() :: loginEmail ={}", loginEmail);
             return "redirect:/login/loginForm";
         }
     }
 
 
 
-    // 정보수정 처리
-    @PostMapping(value = "/delete")
-    public String deleteUser(HttpSession session , @ModelAttribute UserModel userModel) {
+    // 회원 탈퇴 처리
+    @PostMapping(value = "/signOut")
+    public String signOutUser(HttpSession session , @ModelAttribute UserModel userModel) {
         //요청
         String loginEmail =  (String) session.getAttribute("loginEmail");
 
         //요청 처리
         //  데이터 베이스에서 사용자 정보를 얻는다
         UserModel returnUserModel = userService.getUser(loginEmail);
-        log.info("userDeleteForm() :: returnUserModel ={}", returnUserModel);
+        log.info("UserSignOutForm() :: returnUserModel ={}", returnUserModel);
        
         //요청 처리
         // - 회원 정보를 삭제
-        int returnCnt =  userDelete.deleteUser(returnUserModel);
-        log.info("deleteUser() :: returnCnt = {} ",returnCnt);
+        int returnCnt =  UserSignOut.signOutUser(returnUserModel);
+        log.info("signOutUser() :: returnCnt = {} ",returnCnt);
 
 
         // 리턴

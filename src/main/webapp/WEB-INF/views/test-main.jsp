@@ -15,7 +15,7 @@
     <a href = "/update/updateForm" >  {정보 수정(GET)}</a>
     <br>
 
-    <a href = "/delete/deleteForm" >  {회원 탈퇴(GET)}</a>
+    <a href = "/signOut/signOutForm" >  {회원 탈퇴(GET)}</a>
     <br>
 
 </body>

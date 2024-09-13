@@ -38,7 +38,7 @@ public class PasswordFindController {
     public String passwordFindForm() {
         log.info("passwordFindForm()");
 
-        return "passwordFindForm";
+        return "passwordFindFormPage";
     }
 
 
@@ -63,8 +63,9 @@ public class PasswordFindController {
 
     }
 
+    // 비밀번호 변경 페이지로 이동
 
-    // 비밀번호 찾기 변경 처리
+    // 비밀번호 변경 처리
     @PostMapping(value = "/passwordFindResult")
     public String passwordFindResult(@ModelAttribute UserModel userModel , Model model) {
         //요청
