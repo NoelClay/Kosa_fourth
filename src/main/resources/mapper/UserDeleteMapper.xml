@@ -8,11 +8,12 @@
 <mapper namespace="com.baseleap.mapper.UserDeleteMapper">
 
 
-    <delete id="deleteUser"
+    <update id="deleteUser"
             parameterType="String">
-
-        delete from User
-        where email = #{email}
-    </delete>
+        UPDATE User
+        SET
+            active = 0
+        WHERE email = #{email}
+    </update>
 
 </mapper>

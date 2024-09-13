@@ -20,7 +20,7 @@
             user_introduce,
             created_time,
             validation_quiz_question,
-            validationq_uiz_answer
+            validation_quiz_answer
         )
         VALUES
         (

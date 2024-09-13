@@ -11,10 +11,10 @@
             parameterType="com.baseleap.model.UserModel">
         UPDATE User
         SET
-        password = #{password},
-        nickname = #{nickName},
-        profile_image = #{profileImage},
-        user_introduce = #{userIntroduce}
+            password = #{password},
+            nickname = #{nickName},
+            profile_image = #{profileImage},
+            user_introduce = #{userIntroduce}
         WHERE email = #{email}
     </update>
 
@@ -22,14 +22,10 @@
             parameterType="com.baseleap.model.UserModel">
         UPDATE User
         SET
-        password = #{password}
+            password = #{password}
         WHERE email = #{email}
     </update>
 
-    <delete id="deleteUser"
-            parameterType="String">
-        delete from db_message
-        where no = #{paramNo}
-    </delete>
+
 
 </mapper>

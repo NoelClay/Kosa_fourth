@@ -31,21 +31,14 @@ public class UserDeleteController {
     public String userDeleteForm(HttpSession session , Model model) {
         // 요청
         String loginEmail =  (String) session.getAttribute("loginEmail");
+
+        // 요청 처리
+        // 로그인 여부 확인
         if (loginEmail != null) {
-            log.info("updateForm() :: loginEmail ={}", loginEmail);
-
-            // ------------------------------------------
-            // 사용자 정보 조회
-            //-------------------------------------------
-
-            //  데이터 베이스에서 사용자 정보를 얻는다
-            UserModel returnUserModel = userService.getUser(loginEmail);
-            log.info("updateForm() :: returnUserModel ={}", returnUserModel);
-            model.addAttribute("user",returnUserModel);
-
-            return "redirect:/login/loginForm";
+            log.info("userDeleteForm() :: loginEmail ={}", loginEmail);
+            return "userDeleteForm";
         } else {
-            log.info("updateForm() :: loginEmail ={}", loginEmail);
+            log.info("userDeleteForm() :: loginEmail ={}", loginEmail);
             return "redirect:/login/loginForm";
         }
     }
@@ -54,20 +47,25 @@ public class UserDeleteController {
 
     // 정보수정 처리
     @PostMapping(value = "/delete")
-    public String deleteUser(@ModelAttribute UserModel userModel) {
+    public String deleteUser(HttpSession session , @ModelAttribute UserModel userModel) {
         //요청
-        log.info("deleteUser() :: userModel = {}",userModel);
+        String loginEmail =  (String) session.getAttribute("loginEmail");
 
         //요청 처리
+        //  데이터 베이스에서 사용자 정보를 얻는다
+        UserModel returnUserModel = userService.getUser(loginEmail);
+        log.info("userDeleteForm() :: returnUserModel ={}", returnUserModel);
+       
+        //요청 처리
         // - 회원 정보를 삭제
-        int returnCnt =  userDelete.deleteUser(userModel.getEmail());
+        int returnCnt =  userDelete.deleteUser(returnUserModel);
         log.info("deleteUser() :: returnCnt = {} ",returnCnt);
 
 
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "demo";
+            return "redirect:/login/loginForm";
         }else {
             return "demo";
         }
