@@ -13,7 +13,7 @@ String email = (String)session.getAttribute("loginEmail");
 %>
 </head>
 <body>
-<h1>로그인 성공입니다.. </h1>
+<h1>회원 탈퇴 확인 </h1>
 
 
 	<form action="/delete/delete" method="Post">

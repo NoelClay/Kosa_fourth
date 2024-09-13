@@ -28,7 +28,7 @@ public class UserDeleteController {
 
     // 정보수정 폼으로 이동
     @GetMapping(value = "/deleteForm")
-    public String userDeleteForm(HttpSession session , Model model) {
+    public String userDeleteForm(HttpSession session) {
         // 요청
         String loginEmail =  (String) session.getAttribute("loginEmail");
 

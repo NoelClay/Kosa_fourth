@@ -13,4 +13,12 @@ public class DemoControlller {
 		log.info("demo()");
 		return "demo";
 	}
+	// ================================
+	// 테스트 화면 이동
+	// ================================
+	@GetMapping("/test-main")
+	public String testMain() {
+		log.info("testMain()");
+		return "test-main";
+	}
 }

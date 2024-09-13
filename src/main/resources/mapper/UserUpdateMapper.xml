@@ -16,6 +16,7 @@
             profile_image = #{profileImage},
             user_introduce = #{userIntroduce}
         WHERE email = #{email}
+        and  active = 1
     </update>
 
     <update id="userUpdatePassword"
@@ -24,6 +25,7 @@
         SET
             password = #{password}
         WHERE email = #{email}
+        and  active = 1
     </update>
 
 

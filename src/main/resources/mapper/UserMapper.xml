@@ -43,6 +43,7 @@
             active
         from	user
         where  email = #{email}
+        and  active = 1
     </select>
 
 
@@ -52,6 +53,7 @@
         SET
             last_login_time = now()
         WHERE email = #{email}
+        and  active = 1
     </update>
 
 </mapper>
