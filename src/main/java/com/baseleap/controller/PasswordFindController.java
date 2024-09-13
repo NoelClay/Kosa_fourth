@@ -56,7 +56,7 @@ public class PasswordFindController {
         
         // 리턴
         if(returnCnt != null){
-            return "passwordFindResult";
+            return "passwordFindResultPage";
         } else {
             return "demo";
         }
