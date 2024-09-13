@@ -25,10 +25,15 @@ public class UserController {
 
     //로그인 폼으로 이동한다
     @GetMapping(value = "/loginForm")
-    public String loginForm() {
-
+    public String loginForm(HttpSession session) {
+        String loginEmail =  (String) session.getAttribute("loginEmail");
+        // 세션에 따른 로그인 페이지 이동 제한 추가 하기
         log.info("loginForm()");
-        return "loginForm";
+        if(loginEmail == null){
+            return "loginFormPage";
+        } else {
+            return "test-main";
+        }
     }
 
     // 로그인을 처리한다

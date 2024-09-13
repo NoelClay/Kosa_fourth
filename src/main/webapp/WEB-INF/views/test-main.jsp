@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TEST DEMO</title>
+    <link rel="stylesheet" href="static/css/home.css"> </head>
 </head>
 <body>
 <h1>테스트 화면 이동 </h1>
@@ -15,7 +16,7 @@
     <a href = "/update/updateForm" >  {정보 수정(GET)}</a>
     <br>
 
-    <a href = "/delete/deleteForm" >  {회원 탈퇴(GET)}</a>
+    <a href = "/signOut/signOutForm" >  {회원 탈퇴(GET)}</a>
     <br>
 
 </body>

@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TEST DEMO</title>
+ <link rel="stylesheet" href="static/css/home.css"> </head>
 </head>
 <body>
 <h1>데모입니다. </h1>

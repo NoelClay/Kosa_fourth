@@ -16,7 +16,7 @@ String email = (String)session.getAttribute("loginEmail");
 <h1>회원 탈퇴 확인 </h1>
 
 
-	<form action="/delete/delete" method="Post">
+	<form action="/signOut/signOut" method="Post">
 		<table>
             <tr>
 				<td>id:</td>

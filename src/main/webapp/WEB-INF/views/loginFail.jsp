@@ -7,7 +7,7 @@
 <title>ITEST DEMO</title>
 </head>
 <body>
-<h1>로그인 실페 입니다. </h1>
+<h1>로그인 실페 확안용 패이지 입니다. </h1>
 
 
 	<form action="/demo" method="Get">

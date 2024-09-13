@@ -15,4 +15,5 @@ public class UserDTO {
     private Date lastLoginTime;
     private String validationQuizQuestion;
     private String validationQuizAnswer;
+    private boolean active;
 }

@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/signup.css"> </head>
 </head>
 <body>
 
@@ -13,7 +14,7 @@
 	</form>
     <br>
 
-	<form action="/signup/signup" method="post">
+	<form action="/signup/signup" method="post" class="signup-form">
 		<table>
 			<tr>
 				<td>아이디(email형식):</td>
