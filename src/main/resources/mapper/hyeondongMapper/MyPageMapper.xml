@@ -14,7 +14,8 @@
             created_time as createdTime,
             last_login_time as lastLoginTime,
             validation_quiz_question as validationQuizQuestion,
-            validation_quiz_answer as validationQuizAnswer
+            validation_quiz_answer as validationQuizAnswer,
+            active
         from user
         where id=#{id};
     </select>
@@ -26,9 +27,9 @@
             nickname,
             user_introduce as userIntroduce
         from user
-        where
-            email like '%${keyword}%' or
-            nickname like '%${keyword}%';
+        where active = 1
+        and (email like '%${keyword}%' or nickname like '%${keyword}%');
+
     </select>
     <select id="getMyFollowers" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
         select
@@ -36,13 +37,11 @@
             u.email,
             u.nickname,
             u.user_introduce as userIntroduce
-        from
-            follow as f
-        join
-            user as u
-        where
-            f.target_id = #{id} and
-            f.user_id = u.id;
+        from follow as f
+        join user as u
+        where u.active = 1
+        and f.target_id = #{id}
+        and f.user_id = u.id;
     </select>
     <select id="getMeFollowings" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
         select
@@ -50,26 +49,21 @@
             u.email,
             u.nickname,
             u.user_introduce as userIntroduce
-        from
-            follow as f
-        join
-            user as u
-        where
-            f.target_id = u.id and
-            f.user_id = #{id};
+        from follow as f
+        join user as u
+        where u.active = 1
+        and f.target_id = u.id
+        and f.user_id = #{id};
     </select>
     <select id="isFollowing" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.FollowDTO">
         select
             id,
             user_id as userId,
             target_id as targetId,
-            created_at as createdAt
-        from
-            follow
-        where
-            user_id = #{userId}
-        and
-            target_id = #{targetId}
+            createdat as createdAt
+        from follow
+        where user_id = #{userId}
+        and target_id = #{targetId};
     </select>
     <insert id="following" parameterType="com.baseleap.model.hyeondongModel.UserDTO">
         insert into follow
@@ -82,9 +76,7 @@
     </insert>
     <delete id="unfollow" parameterType="_int">
         delete from follow
-        where
-            user_id = #{userId}
-        and
-            target_id = #{targetId};
+        where user_id = #{userId}
+        and target_id = #{targetId};
     </delete>
 </mapper>

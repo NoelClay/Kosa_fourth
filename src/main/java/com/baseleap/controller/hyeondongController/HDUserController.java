@@ -19,6 +19,10 @@ import java.util.HashMap;
 @Controller
 @RequestMapping(value = "/user")
 public class HDUserController {
+    /*
+    이 클래스는 작업용 임시 유저 컨트롤러 입니다.
+    정식 유저 컨트롤러는 controller.UserController 이니 그것을 쓰세요.
+     */
     @Autowired
     private HDUserService HDUserService;
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baseleap.mapper.hyeondongMapper.MessageMapper">
+    <insert id="createNewMessage" parameterType="com.baseleap.model.hyeondongModel.MessageDTO">
+        insert into message
+        value (
+            null,
+            #{senderId},
+            #{receiverId},
+            #{content},
+            now(),
+            null
+        );
+    </insert>
+    <select id="getAllMessages" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.MessageUserDTO">
+        select
+            m.id,
+            u.profile_image as profileImage,
+            u.nickname,
+            m.content,
+            m.createdat as createdAt,
+            m.read_at as readAt
+        from message as m
+        join user as u
+        where m.sender_id = u.id
+        and m.receiver_id = #{userId};
+    </select>
+    <select id="getNotReadMessages" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.MessageUserDTO">
+        select
+            m.id,
+            u.profile_image as profileImage,
+            u.nickname,
+            m.content,
+            m.createdat as createdAt,
+            m.read_at as readAt
+        from message as m
+        join user as u
+        where m.sender_id = u.id
+        and m.receiver_id = #{userId}
+        and m.read_at is null;
+    </select>
+    <update id="readMessage" parameterType="_int">
+        update message
+        set read_at = now()
+        where id = #{messageId};
+    </update>
+    <delete id="deleteMessage" parameterType="_int">
+        delete from message
+        where id = #{messageId};
+    </delete>
+</mapper>

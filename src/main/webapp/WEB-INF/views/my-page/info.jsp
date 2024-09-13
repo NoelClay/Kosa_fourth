@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-여기는 마이페이지 입니다.
+여기는 마이페이지 입니다. <a href="${pageContext.request.contextPath}/alarm/get-list">모든 알람 보기</a>
 <hr>
 DB 아이디: ${userInfo.id}
 <br>
@@ -32,9 +32,13 @@ DB 아이디: ${userInfo.id}
 비밀번호 찾기 질문: ${userInfo.validationQuizQuestion}
 <br>
 비밀번호 찾기 답변: ${userInfo.validationQuizAnswer}
+<br>
+회원 상태: ${userInfo.active}
 <hr>
 <a href="${pageContext.request.contextPath}/my-page/follower-list">나를 팔로우 중인 사람들</a>
 <a href="${pageContext.request.contextPath}/my-page/following-list">내가 팔로잉 중인 사람들</a>
 <a href="${pageContext.request.contextPath}/my-page/search">사람을 찾습니다...</a>
+<a href="${pageContext.request.contextPath}/my-page/new-messages">받은 메세지함</a>
+<a href="${pageContext.request.contextPath}/my-page/all-messages">전체 메세지함</a>
 </body>
 </html>
