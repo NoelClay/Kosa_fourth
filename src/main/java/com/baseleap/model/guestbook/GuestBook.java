@@ -13,6 +13,11 @@ public class GuestBook {
     private String comment;
     private LocalDateTime createdAt;
 
+    public GuestBook(){
+        this.createdAt = LocalDateTime.now();
+        setCreatedAt(LocalDateTime.now());
+    }
+
     // Getters and Setters
 }
 

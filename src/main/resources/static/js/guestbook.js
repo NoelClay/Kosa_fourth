@@ -2,6 +2,7 @@
     // Get the modal
     let modal = document.getElementById("modal");
     let themeModal = document.getElementById("theme-modal");
+    let noteCommentModal = document.getElementById("comment-modal");
 
     // Get the <span> element that closes the modal
     let span = document.getElementById("close");
@@ -18,9 +19,9 @@
     // When the user clicks a button, open the modal and set content
     if (writeButton) {
         writeButton.onclick = function() {
-            modal.style.display = "block";
-            document.getElementById("modalText").innerText = "글쓰기 기능이 여기에 표시됩니다.";
+            showModalElements('comment');
         }
+
     }
 
     //theme관련 변수 받아오기
@@ -76,44 +77,50 @@
             hideModalElements()
         }
     }
+// Hide all child elements of modal-content
+function hideModalElements() {
+    console.log("모달창 끄기");
+    let modalContent = document.getElementById("modal-content");
+    let children = modalContent.children;
+    for (let i = 0; i < children.length; i++) {
+        children[i].style.display = "none";  // Hide all child elements
+    }
+    modal.style.display = "none";  // Hide the modal itself
+}
 
-    function hideModalElements() {
-        console.log("모달창 꺼");
-        let children = modal.children;
-        for (let i = 0; i < children.length; i++) {
-            children[i].style.display = "none";  // 자식 요소 숨기기
-        }
-        modal.style.display = "none";  // 모달 숨기기
+// Show specific child elements based on contentType
+function showModalElements(contentType) {
+    console.log("모달창 열기");
+    
+    // First, hide all elements
+    hideModalElements();
+
+    // Ensure modal content and close button are always visible
+    document.getElementById("modal-content").style.display = "block";
+    span.style.display = "block"; // Assuming 'span' is your close button
+
+    // Show specific content based on contentType
+    switch (contentType) {
+        case 'theme':
+            console.log("테마 변경 모달 열기");
+            document.getElementById("theme-modal").style.display = "block";
+            document.getElementById("modalText").innerText = "테마 변경!";
+            break;
+        case 'music':
+            console.log("배경음악 설정 모달 열기");
+            document.getElementById("music-modal").style.display = "block";
+            document.getElementById("modalText").innerText = "배경음악 설정!";
+            break;
+        case 'comment':
+            console.log("방명록 등록 모달 열기");
+            document.getElementById("comment-modal").style.display = "block";
+            document.getElementById("modalText").innerText = "방명록 등록!";
+            break;
+        default:
+            console.warn("알 수 없는 콘텐츠 유형: " + contentType);
+            break;
     }
 
-    function showModalElements(contentType) {
-        console.log("쇼모달 출력")
-        let children = modal.children;
-
-        //함 더 호출
-        hideModalElements()
-
-        //필수적으로 켜줘야 하는 애들 켜줘
-        document.getElementById("modal-content").style.display = "block";
-        span.style.display = "block";
-
-        // contentType에 따라 특정 자식 요소를 보여줍니다.
-        switch (contentType) {
-            case 'theme':
-                console.log("테마이벤트온")
-                document.getElementById("theme-modal").style.display = "block";
-                document.getElementById("modalText").innerText = "테마 변경!";
-                break;
-            case 'music':
-                document.getElementById("music-modal").style.display = "block";
-                document.getElementById("modalText").innerText = "배경음악 설정!";
-                break;
-            // 필요한 경우 추가 케이스를 추가할 수 있습니다.
-            default:
-                console.warn("Unknown content type: " + contentType);
-                break;
-        }
-
-        // 모달 자체를 보여줍니다.
-        modal.style.display = "block";
-    }
+    // Finally, show the modal
+    modal.style.display = "block";
+}

@@ -1,9 +1,9 @@
 :root {
-    --item-color-1: #ff0000;
-    --item-color-2: #00ff00;
-    --item-color-3: #0000ff;
+    --item-color-1: #d7aaaa;
+    --item-color-2: #95a895;
+    --item-color-3: #c6c6d3;
     --font-color-1: #000000;
-    --font-color-2: #ffffff;
+    --font-color-2: #524397;
 }
 
 .actions {

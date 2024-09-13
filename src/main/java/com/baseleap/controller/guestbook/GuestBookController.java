@@ -37,6 +37,7 @@ public class GuestBookController {
             log.info(obj.getCreatedAt().toString());
 
         }
+        log.info("방명록 사이즈" + guestBooks.size());
         model.addAttribute("guestBooks", guestBooks);
         model.addAttribute("ownerId", ownerId);
         model.addAttribute("loginUserId", session.getAttribute("loginUserId"));
@@ -47,11 +48,15 @@ public class GuestBookController {
     @PostMapping("/add")
     public String addGuestBookEntry(@RequestParam Long writerId,
                                     @RequestParam Long ownerId,
-                                    @RequestParam String comment) {
+                                    @RequestParam String noteComment) {
         GuestBook guestBook = new GuestBook();
+
         guestBook.setWriterId(writerId);
+        log.info(Long.toString(writerId));
         guestBook.setOwnerId(ownerId);
-        guestBook.setComment(comment);
+        log.info(Long.toString(ownerId));
+        guestBook.setComment(noteComment);
+        log.info(noteComment);
         guestBookService.insertGuestBook(guestBook);
         return "redirect:/guestbook/" + ownerId; // 방명록 리스트 페이지로 리다이렉트
     }

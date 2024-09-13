@@ -24,7 +24,6 @@
             <ul>
                 <c:forEach var="entry" items="${guestBooks}">
                     <li>${entry.getComment()} - ${entry.getWriterId()} on ${entry.getCreatedAt()}</li>
-                    <li>${entry.comment} - ${entry.writerId} on ${entry.createdAt}</li>
                 </c:forEach>
             </ul>
 
@@ -33,14 +32,15 @@
                 <c:choose>
                     <c:when test="${loginUserId eq ownerId}">
                         <div class="myhome">
-                            <button type="button" id="writeButton">글쓰기</button>
-                            <button type="button">취소</button>
+                            <button type="button" id="themeButton">테마 변경</button>
+                            <button type="button" id="musicButton">배경음악 설정</button>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div class="otherhome">
-                            <button type="button" id="themeButton">테마 변경</button>
-                            <button type="button" id="musicButton">배경음악 설정</button>
+                            <button type="button" id="writeButton">글쓰기</button>
+                            <button type="button">취소</button>
+
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -75,8 +75,16 @@
                     <button id="applyThemeButton">적용</button>
                 </div>
 
+                <div id="comment-modal">
+                    <form action="/guestbook/add" method="post">
+                        <lable for="comment-modal-textarea"> 방명록 한마디 </lable>
+                        <textarea rows="3" cols="100" name="noteComment"></textarea>
+                        <input type="submit" value="등록">
+                        <input type="hidden" name="writerId" value="${loginUserId}">
+                        <input type="hidden" name="ownerId" value="${ownerId}">
+                    </form>
+                </div>
                 <span id="close">&times;</span>
-
             </div>
         </div>
     
