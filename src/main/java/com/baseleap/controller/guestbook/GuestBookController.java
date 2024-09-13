@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.baseleap.model.guestbook.GuestBook;
 import com.baseleap.service.guestbook.IGuestBookService;
 
-
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -27,7 +27,7 @@ public class GuestBookController {
 
     // 특정 사용자의 방명록 리스트를 가져오는 메서드
     @GetMapping("/{ownerId}")
-    public String getGuestBookList(@PathVariable("ownerId") Long ownerId, Model model) {
+    public String getGuestBookList(@PathVariable("ownerId") Long ownerId, Model model, HttpSession session) {
         List<GuestBook> guestBooks = guestBookService.getGuestBookListByOwnerId(ownerId);
         for(GuestBook obj : guestBooks){
             log.info(Long.toString(obj.getId()));
@@ -39,6 +39,7 @@ public class GuestBookController {
         }
         model.addAttribute("guestBooks", guestBooks);
         model.addAttribute("ownerId", ownerId);
+        model.addAttribute("loginUserId", session.getAttribute("loginUserId"));
         return "guestbook"; // JSP 파일 이름 (guestbook.jsp)
     }
 

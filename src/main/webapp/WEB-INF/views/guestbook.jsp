@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Guestbook</title>
-    <link rel="stylesheet" type="text/css" href="../../../resources/static/css/guestbook.css">
+    <link rel="stylesheet" type="text/css" href= "/css/guestbook.css">
 </head>
 <body>
     <div class="header">
@@ -27,19 +27,59 @@
                     <li>${entry.comment} - ${entry.writerId} on ${entry.createdAt}</li>
                 </c:forEach>
             </ul>
-            <ul >
-                <li>
-                <div class="myhome">
-                    <li><input type="button" value="글쓰기"></li>
-                    <li><input type="button" value="취소"></li>
-                </div>
-                <div class="myhome">
-                    <li><input type="button" value="테마 변경"></li>
-                    <li><input type="button" value="배경음악 설정"></li>
-                </div>
-            </ul>
+
+
+            <div class="actions">
+                <c:choose>
+                    <c:when test="${loginUserId eq ownerId}">
+                        <div class="myhome">
+                            <button type="button" id="writeButton">글쓰기</button>
+                            <button type="button">취소</button>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="otherhome">
+                            <button type="button" id="themeButton">테마 변경</button>
+                            <button type="button" id="musicButton">배경음악 설정</button>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
 
         </div>
     </div>
+
+        <!-- Modal Structure -->
+        <div id="modal" class="modal">
+            <div id="modal-content">
+
+                <p id="modalText">Some text in the Modal..</p>
+
+                <div id="theme-modal">
+                    <label for="itemColor1">아이템 색상 1:</label>
+                    <input type="color" id="itemColor1" value="#ff0000">
+            
+                    <label for="itemColor2">아이템 색상 2:</label>
+                    <input type="color" id="itemColor2" value="#00ff00">
+            
+                    <label for="itemColor3">아이템 색상 3:</label>
+                    <input type="color" id="itemColor3" value="#0000ff">
+            
+                    <!-- Font Color Selection -->
+                    <label for="fontColor1">폰트 색상 1:</label>
+                    <input type="color" id="fontColor1" value="#000000">
+            
+                    <label for="fontColor2">폰트 색상 2:</label>
+                    <input type="color" id="fontColor2" value="#ffffff">
+            
+                    <button id="applyThemeButton">적용</button>
+                </div>
+
+                <span id="close">&times;</span>
+
+            </div>
+        </div>
+    
+        <script src="/js/guestbook.js"></script>
 </body>
 </html>
