@@ -36,7 +36,7 @@ public class UserSignOutController {
         // 로그인 여부 확인
         if (loginEmail != null) {
             log.info("userSignOutForm() :: loginEmail ={}", loginEmail);
-            return "userSignOutFormPage";
+            return "signOutPage";
         } else {
             log.info("userSignOutForm() :: loginEmail ={}", loginEmail);
             return "redirect:/login/loginForm";

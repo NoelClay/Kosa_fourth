@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TEST DEMO</title>
+    <link rel="stylesheet" href="static/css/home.css"> </head>
 </head>
 <body>
 <h1>테스트 화면 이동 </h1>
