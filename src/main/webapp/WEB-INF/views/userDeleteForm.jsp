@@ -13,8 +13,10 @@ String email = (String)session.getAttribute("loginEmail");
 %>
 </head>
 <body>
-<h1>로그인 성공입니다.. </h1>
+<h1>회원 탈퇴 확인 </h1>
 
+
+	<form action="/delete/delete" method="Post">
 		<table>
             <tr>
 				<td>id:</td>
@@ -26,11 +28,9 @@ String email = (String)session.getAttribute("loginEmail");
 			</tr>
 
     	</table>
-	<form action="/demo" method="Get">
-		{데모)} : <input type="submit" value="전송">
+		{정말 삭제 하시겠습니캬?)} : <input type="submit" value="전송">
 	</form>
-	<a href = "/test-main" >  {테스트 화면)}</a>
-        <br>
+
 
 </body>
 </html>

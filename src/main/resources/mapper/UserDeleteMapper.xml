@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.baseleap.mapper.UserDeleteMapper">
+
+
+    <update id="deleteUser"
+            parameterType="String">
+        UPDATE User
+        SET
+            active = 0
+        WHERE email = #{email}
+    </update>
+
+</mapper>

@@ -40,7 +40,8 @@
 				<td>간단한 소개:</td>
                 <td><input type="text" name="userIntroduce" value = "${user.userIntroduce}"></td>
 			</tr>
-		<input type="submit" value="등록"><input type="reset" value="취소">
+		    <input type="submit" value="등록"><input type="reset" value="취소">
+		</table>
 	</form>
 
 

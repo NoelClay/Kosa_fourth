@@ -6,4 +6,6 @@ public interface UserService {
     public UserModel login(UserModel userModel);
 
     public UserModel getUser(String email);
+
+    public int userUpdateLastLoginTime(String email);
 }
