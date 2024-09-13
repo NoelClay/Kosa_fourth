@@ -64,7 +64,7 @@ public class UserUpdateController {
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "demo";
+            return "test-main";
         }else {
             return "updateFail";
         }

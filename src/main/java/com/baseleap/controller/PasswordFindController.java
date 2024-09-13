@@ -18,14 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/find")
 public class PasswordFindController {
 
-    /*
-    * 1. 비밀번호 찾기 선택 후 비밀번호 찾는 폼으로 이동
-    * 2. 거기서 비밀번호 찾는 정보를 입력
-    * 3. 디비에 입력한 정보를 토대로 유저가 있으면
-    * 4. 비밀번호를 알려줌(비밀번호 수정 가능) // 여기 까지 완료
-    * 5. 3에 정보가 없으면
-    * 6. 다시 비밀번호 찾는 폼으로 이동
-    * */
 
     @Autowired
     private PasswordFindService passwordFindService;
@@ -58,7 +50,7 @@ public class PasswordFindController {
         if(returnCnt != null){
             return "passwordFindResultPage";
         } else {
-            return "demo";
+            return "passwordFindFormPage";
         }
 
     }

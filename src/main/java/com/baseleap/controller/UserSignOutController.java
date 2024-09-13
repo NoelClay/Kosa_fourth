@@ -44,7 +44,6 @@ public class UserSignOutController {
     }
 
 
-
     // 회원 탈퇴 처리
     @PostMapping(value = "/signOut")
     public String signOutUser(HttpSession session , @ModelAttribute UserModel userModel) {
@@ -60,7 +59,7 @@ public class UserSignOutController {
         // - 회원 정보를 삭제
         int returnCnt =  UserSignOut.signOutUser(returnUserModel);
         log.info("signOutUser() :: returnCnt = {} ",returnCnt);
-
+        session.invalidate();
 
         // 리턴
         // returnCnt = 0; // 태스트용
