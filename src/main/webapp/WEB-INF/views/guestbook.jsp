@@ -75,6 +75,17 @@
                     <button id="applyThemeButton">적용</button>
                 </div>
 
+                <div id="music-modal">
+                    <form action="/music/add" method="post">
+                        <lable for="music-modal-input-file">음악 파일 불러오기</lable>
+                        <input type="file" name="music-file" id="music-file">
+
+                        <input type="submit" value="등록">
+                        <input type="hidden" name="userId" value="${loginUserId}">
+                    </form>
+                </div>
+                <span id="close">&times;</span>
+
                 <div id="comment-modal">
                     <form action="/guestbook/add" method="post">
                         <lable for="comment-modal-textarea"> 방명록 한마디 </lable>
