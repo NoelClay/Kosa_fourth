@@ -35,6 +35,10 @@
         )
     </insert>
 
-
+    <select id="getUserByEmail" parameterType="string" resultType="com.baseleap.model.UserModel">
+        select *
+        from user
+        where email=#{email};
+    </select>
 
 </mapper>

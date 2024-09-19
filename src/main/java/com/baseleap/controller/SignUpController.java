@@ -2,7 +2,9 @@ package com.baseleap.controller;
 
 import com.baseleap.model.UserModel;
 
+import com.baseleap.model.hyeondongModel.UserDTO;
 import com.baseleap.service.SignUpService;
+import com.baseleap.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class SignUpController {
     @Autowired
     private SignUpService signUpService;
 
+    @Autowired
+    private UserService userService;
+
     // 회원 가입 폼으로 이동
     @GetMapping(value = "/signUpForm")
     public String signUpForm() {
@@ -33,17 +38,17 @@ public class SignUpController {
     public String signup( @ModelAttribute UserModel userModel ) {
         // 요청
         log.info("signup() :: userModel.getCreatedTime = {} ",userModel.toString());
-        
+
         // 요청 처리
         // - 회원 정보를 저장
         // 중복 이메일 예외처리 해야함
-        int returnCnt = signUpService.signUp(userModel);
-        log.info("signup() :: returnCnt = {} ",returnCnt);
-
-        // returnCnt = 0; // 태스트용
-        if (returnCnt == 1){
+        UserModel returnUserEmail = signUpService.getUserByEmail(userModel.getEmail());
+        log.info("signup() :: userModel.returnUserModel = {} ",returnUserEmail);
+        if (returnUserEmail == null) {
+            int returnCnt = signUpService.signUp(userModel);
+            log.info("signup() :: returnCnt = {} ",returnCnt);
             return "redirect:/signup/signUpSuccess";
-        } else {
+        }else {
             return "redirect:/signup/signUpFail";
         }
 
