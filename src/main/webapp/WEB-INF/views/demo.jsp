@@ -293,27 +293,23 @@ $(document).ready(function() {
             },
             body: JSON.stringify(data)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            if (data.success == 1) {
-                alert('비밀번호 찾기 성공!');
-               // window.location.href = '/find/passwordFindResultPage';
-                res.redirect('/find/passwordFindResultPage');
-            } else {
-                alert('비밀번호 찾기 실패: ' + data.message);
-            }
+          if (data.success == 1){
+            alert('비밀번호 찾기 성공!');
+            // 비밀벊 찾기 후 이동
+             window.location.href = '/find/passwordFindResultPage';
+             //res.redirect('/find/passwordFindResultPage');
+          } else {
+            alert('비밀번호 찾기 실패: ' + data.message);
+          }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('비밀번호 찾기 중 오류 발생');
+          alert('비밀번호 찾기 중 오류 발생');
+          console.error(error);
         });
+      });
     });
-});
 </script>
 
 </html>

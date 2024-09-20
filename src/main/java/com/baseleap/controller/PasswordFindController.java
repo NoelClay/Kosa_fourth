@@ -37,14 +37,19 @@ public class PasswordFindController {
     // 비밀번호 찾기 처리
     @ResponseBody
     @PostMapping(value = "/passwordFind")
-    public Map<String,Integer> passwordFind(@RequestBody UserModel userModel , Model model) {
+    // 왜 RequestParam 인지 모름
+    public Map<String, Integer> passwordFind(
+            @RequestParam("email") String email,
+            @RequestParam("validationQuizQuestion") String validationQuizQuestion,
+            @RequestParam("validationQuizAnswer") String validationQuizAnswer,
+            Model model) {
         //요청
-        log.info("passwordFind() :: userModel = {}",userModel);
+        log.info("passwordFind() :: userModel = {}",email);
 
         //요청 처리
         // - 받은 정보로 유저 검색
         Map<String, Integer> findMap = new HashMap<>();
-        UserModel returnCnt = passwordFindService.findUserPassword(userModel.getEmail(),userModel.getValidationQuizQuestion(),userModel.getValidationQuizAnswer());
+        UserModel returnCnt = passwordFindService.findUserPassword(email,validationQuizQuestion,validationQuizAnswer);
         log.info("passwordFind() :: returnCnt = {} ",returnCnt);
         model.addAttribute("userFind",returnCnt);
         
