@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baseleap.mapper.GuestBookMapper;
-import com.baseleap.model.GuestBook;
+import com.baseleap.mapper.guestbook.GuestBookMapper;
+import com.baseleap.model.guestbook.GuestBook;
 
 @Service
 public class GuestBookServiceImpl implements IGuestBookService {

@@ -1,4 +1,4 @@
-package com.baseleap.controller;
+package com.baseleap.controller.guestbook;
 
 import java.util.List;
 
@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.baseleap.model.GuestBook;
+import com.baseleap.model.guestbook.GuestBook;
 import com.baseleap.service.guestbook.IGuestBookService;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/guestbook")
+@Slf4j
 public class GuestBookController {
 
     @Autowired
@@ -23,10 +27,20 @@ public class GuestBookController {
 
     // 특정 사용자의 방명록 리스트를 가져오는 메서드
     @GetMapping("/{ownerId}")
-    public String getGuestBookList(@PathVariable("ownerId") Long ownerId, Model model) {
+    public String getGuestBookList(@PathVariable("ownerId") Long ownerId, Model model, HttpSession session) {
         List<GuestBook> guestBooks = guestBookService.getGuestBookListByOwnerId(ownerId);
+        for(GuestBook obj : guestBooks){
+            log.info(Long.toString(obj.getId()));
+            log.info(Long.toString(obj.getWriterId()));
+            log.info(Long.toString(obj.getOwnerId()));
+            log.info(obj.getComment());
+            log.info(obj.getCreatedAt().toString());
+
+        }
+        log.info("방명록 사이즈" + guestBooks.size());
         model.addAttribute("guestBooks", guestBooks);
         model.addAttribute("ownerId", ownerId);
+        model.addAttribute("loginUserId", session.getAttribute("loginUserId"));
         return "guestbook"; // JSP 파일 이름 (guestbook.jsp)
     }
 
@@ -34,11 +48,15 @@ public class GuestBookController {
     @PostMapping("/add")
     public String addGuestBookEntry(@RequestParam Long writerId,
                                     @RequestParam Long ownerId,
-                                    @RequestParam String comment) {
+                                    @RequestParam String noteComment) {
         GuestBook guestBook = new GuestBook();
+
         guestBook.setWriterId(writerId);
+        log.info(Long.toString(writerId));
         guestBook.setOwnerId(ownerId);
-        guestBook.setComment(comment);
+        log.info(Long.toString(ownerId));
+        guestBook.setComment(noteComment);
+        log.info(noteComment);
         guestBookService.insertGuestBook(guestBook);
         return "redirect:/guestbook/" + ownerId; // 방명록 리스트 페이지로 리다이렉트
     }
