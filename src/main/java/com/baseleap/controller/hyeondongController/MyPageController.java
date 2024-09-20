@@ -11,12 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -39,18 +39,21 @@ public class MyPageController {
     }
 
     // 팔로잉.
+    @ResponseBody
     @PostMapping("/following")
-    public String following(
-            HttpServletRequest request) {
+    public Map<String, String> following(
+            HttpServletRequest request,
+            @RequestBody HashMap<String, Integer> requestBody) {
         String stringUserId = (String) request.getSession().getAttribute("userId");
-        String stringTargetId = request.getParameter("targetId");
         int userId = Integer.parseInt(stringUserId);
-        int targetId = Integer.parseInt(stringTargetId);
+        int targetId = requestBody.get("targetId");
         // 팔로우 여부를 알아내기 위한 팔로우DTO.
         FollowDTO followDTO = myPageService.isFollowing(userId, targetId);
+        Map<String, String> responseBody = new HashMap<>();
         if (followDTO != null) {
-            request.setAttribute("error", "이미 팔로우 중입니다.");
-            return "my-page/follow-error";
+            responseBody.put("status", "failure");
+            responseBody.put("error", "이미 팔로우 중입니다.");
+            return responseBody;
         };
         myPageService.following(userId, targetId);
 
@@ -58,26 +61,33 @@ public class MyPageController {
         String alarmContent = "새 팔로워";
         alarmService.createNewAlarm(userId, targetId, alarmContent);
 
-        return "redirect:/my-page/search";
+        responseBody.put("status", "success");
+        responseBody.put("message", "팔로잉 성공!!!");
+        return responseBody;
     }
 
     // 언팔로우.
-    @PostMapping("/unfollow")
-    public String unfollow(
-            HttpServletRequest request) {
+    @ResponseBody
+    @DeleteMapping("/unfollow")
+    public Map<String, String> unfollow(
+            HttpServletRequest request,
+            @RequestBody HashMap<String, Integer> requestBody) {
         String stringUserId = (String) request.getSession().getAttribute("userId");
-        String stringTargetId = request.getParameter("targetId");
         int userId = Integer.parseInt(stringUserId);
-        int targetId = Integer.parseInt(stringTargetId);
+        int targetId = requestBody.get("targetId");
         // 팔로우 여부를 알아내기 위한 팔로우DTO.
         FollowDTO followDTO = myPageService.isFollowing(userId, targetId);
+        Map<String, String> responseBody = new HashMap<>();
         if (followDTO == null) {
-            request.setAttribute("error", "팔로우 하고 있지 않습니다.");
-            return "my-page/follow-error";
+            responseBody.put("status", "failure");
+            responseBody.put("message", "팔로우 하고 있지 않습니다.");
+            return responseBody;
         };
         myPageService.unfollow(userId, targetId);
 
-        return "redirect:/my-page/search";
+        responseBody.put("status", "success");
+        responseBody.put("message", "언팔 성공!!!");
+        return responseBody;
     }
 
     // 팔로우 에러.
