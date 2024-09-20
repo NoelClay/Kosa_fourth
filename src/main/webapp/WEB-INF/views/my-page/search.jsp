@@ -9,65 +9,121 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <html>
 <head>
-    <title>Title</title>
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/my-page/search-result" method="post">
-  유저 검색: <input type="text" name="keyword">
-  <button type="submit">검색하기</button>
-</form>
-<hr>
-<table>
-  <tr>
-    <th>이미지</th>
-    <th>이메일</th>
-    <th>닉네임</th>
-    <th>자기소개</th>
-    <th>팔로우</th>
-    <th>메세지 전송</th>
-  </tr>
-  <jsp:useBean id="userId" scope="session" type="java.lang.String"/>
-  <c:forEach var="userFollowStatus" items="${userFollowStatusList}">
-    <tr>
-      <td><img src="${userFollowStatus.userDTO.profileImage}" alt=""></td>
-      <td>${userFollowStatus.userDTO.email}</td>
-      <td>${userFollowStatus.userDTO.nickname}</td>
-      <td>${userFollowStatus.userDTO.userIntroduce}</td>
+<div class="mt-3">
+  <div class="d-flex justify-content-center align-items-center">
+    <form action="${pageContext.request.contextPath}/my-page/search-result" method="post">
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="keyword" class="form-label">유저 검색</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" class="form-control" id="keyword" name="keyword">
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">검색하기</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div>
+    <div class="d-flex justify-content-center align-items-center">
       <c:choose>
-        <c:when test="${!userFollowStatus.userDTO.id.equals(userId)}">
-          <c:choose>
-            <c:when test="${!userFollowStatus.follow}">
-              <td>
-                <form action="${pageContext.request.contextPath}/my-page/following" method="post">
-                  <input type="hidden" name="targetId" value="${userFollowStatus.userDTO.id}">
-                  <button type="submit">팔로잉</button>
-                </form>
-              </td>
-            </c:when>
-            <c:otherwise>
-              <td>
-                <form action="${pageContext.request.contextPath}/my-page/unfollow" method="post">
-                  <input type="hidden" name="targetId" value="${userFollowStatus.userDTO.id}">
-                  <button type="submit">언팔로우</button>
-                </form>
-              </td>
-            </c:otherwise>
-          </c:choose>
-          <td>
-            <form action="${pageContext.request.contextPath}/message/send-message" method="post">
-              <input type="hidden" name="receiverId" value="${userFollowStatus.userDTO.id}">
-              내용: <input type="text" name="content">
-              <button type="submit">보내기</button>
-            </form>
-          </td>
+        <%--검색 결과가 없을 때...--%>
+        <c:when test="${empty userFollowStatusList}">
+          결과가 없습니다.
         </c:when>
+        <%--검색 결과 있음...--%>
         <c:otherwise>
-          <td>자신</td>
-          <td>자신</td>
+          <div>
+            <table class="table table-hover table-bordered">
+              <thead>
+                <th>프로필 이미지</th>
+                <th>이메일</th>
+                <th>닉네임</th>
+                <th>자기소개</th>
+                <th>팔로우</th>
+                <th>메세지 전송</th>
+              </thead>
+              <tbody>
+              <c:forEach var="userFollowStatus" items="${userFollowStatusList}" varStatus="status">
+                <tr>
+                  <td><img src="${userFollowStatus.userDTO.profileImage}" alt=""></td>
+                  <td>${userFollowStatus.userDTO.email}</td>
+                  <td>${userFollowStatus.userDTO.nickname}</td>
+                  <td>${userFollowStatus.userDTO.userIntroduce}</td>
+                  <c:choose>
+                    <c:when test="${!userFollowStatus.userDTO.id.equals(sessionScope.userId)}">
+                      <c:choose>
+                        <c:when test="${!userFollowStatus.follow}">
+                          <td>
+                            <form id="following-form-${status.count}" onsubmit="submitFollowingForm(event)">
+                              <input type="hidden" value="${userFollowStatus.userDTO.id}">
+                              <button type="submit">팔로잉</button>
+                            </form>
+                          </td>
+                        </c:when>
+                        <c:otherwise>
+                          <td>
+                            <form id="unfollow-form-${status.count}" onsubmit="submitUnfollowForm(event)">
+                              <input type="hidden" value="${userFollowStatus.userDTO.id}">
+                              <button type="submit">언팔로우</button>
+                            </form>
+                          </td>
+                        </c:otherwise>
+                      </c:choose>
+                      <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#message-modal-${status.count}">메세지 보내기</button>
+                        
+                        <div class="modal fade" id="message-modal-${status.count}" tabindex="-1" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5">메세지 보내기</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form id="send-message-form-${status.count}" onsubmit="submitSendMessageForm(event)">
+                                  <input type="hidden" class="receiver-id" value="${userFollowStatus.userDTO.id}">
+                                  <div class="mb-3">
+                                    <label for="target-user-${status.count}" class="col-form-label">받는 사람: </label>
+                                    <input type="text" class="form-control" id="target-user-${status.count}" value="${userFollowStatus.userDTO.nickname}" readonly>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text-${status.count}" class="col-form-label">메세지 내용: </label>
+                                    <textarea class="form-control" id="message-text-${status.count}"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button form="send-message-form-${status.count}" type="submit" class="btn btn-primary">보내기</button>
+                                <button form="send-message-form-${status.count}" type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </c:when>
+                    <c:otherwise>
+                      <td>자신</td>
+                      <td>자신</td>
+                    </c:otherwise>
+                  </c:choose>
+                </tr>
+              </c:forEach>
+              </tbody>
+            </table>
+          </div>
         </c:otherwise>
       </c:choose>
-    </tr>
-  </c:forEach>
-</table>
+    </div>
+  </div>
+</div>
 </body>
+<script type="application/javascript" src="/js/follow.js"></script>
+<script type="application/javascript" src="/js/message.js"></script>
 </html>
