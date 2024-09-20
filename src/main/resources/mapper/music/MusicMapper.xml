@@ -3,52 +3,37 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.baseleap.mapper.guestbook.GuestBookMapper">
+<mapper namespace="com.baseleap.mapper.music.MusicMapper">
 
-    <resultMap id="guestBookResultMap" type="com.baseleap.model.guestbook.GuestBook">
-        <id property="id" column="id"/>
-        <result property="writerId" column="writer_id"/>
-        <result property="ownerId" column="owner_id"/>
-        <result property="comment" column="comment"/>
-        <result property="createdAt" column="created_at"/>
-    </resultMap>
-
-    <!-- 특정 ownerId에 해당하는 모든 방명록 항목을 검색 -->
-    <select id="selectGuestBookListByOwnerId" parameterType="Long" resultType="com.baseleap.model.guestbook.GuestBook">
-        SELECT id,
-            writer_id as writerId,
-            owner_id as ownerId,
-            comment,
-            created_at as createdAt
-        FROM guest_book
-        where owner_id = #{ownerId}
-    </select>
-
-    <!-- 새로운 방명록 항목을 삽입 -->
-    <insert id="insertGuestBook" parameterType="com.baseleap.model.guestbook.GuestBook" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO Guest_book (writer_id, owner_id, comment, created_at)
-        VALUES (#{writerId}, #{ownerId}, #{comment}, #{createdAt})
+<!-- create -->
+    <insert id="insertMusic" parameterType="com.baseleap.model.music.MusicModel">
+        INSERT INTO Music (name, path, is_active, user_id)
+        VALUES (#{name}, #{path}, #{isActive}, #{userId})
     </insert>
 
-    <!-- 방명록 항목을 업데이트 -->
-    <update id="updateGuestBook" parameterType="com.baseleap.model.guestbook.GuestBook">
-        UPDATE Guest_book
-        SET comment = #{comment},
-            updated_at = NOW()
+<!-- read list by userid -->
+    <select id="selectMusicListByUserId" parameterType="Long" resultType="com.baseleap.model.music.MusicModel">
+        SELECT id,
+            name,
+            path,
+            is_active as isActive,
+            user_id as userId
+        FROM Music
+        where user_id = #{userId}
+    </select>
+
+<!-- update specific music isactive -->
+    <update id="updateIsActiveByMusicModel" parameterType="com.baseleap.model.music.MusicModel">
+        UPDATE Music
+        SET is_active = #{isActive}
         WHERE id = #{id}
     </update>
 
-    <!-- 방명록 항목을 삭제 -->
-    <delete id="deleteGuestBook" parameterType="com.baseleap.model.guestbook.GuestBook">
-        DELETE FROM Guest_book
+
+<!-- Delete specific music -->
+    <delete id="deleteMusicByMusicModel" parameterType="com.baseleap.model.music.MusicModel">
+        DELETE FROM music
         WHERE id = #{id}
     </delete>
-
-    <!-- 특정 writerId와 ownerId에 해당하는 방명록 항목을 검색 -->
-    <select id="selectGuestBookByWriterOwnerId" parameterType="map" resultType="com.baseleap.model.guestbook.GuestBook">
-        SELECT *
-        FROM Guest_book
-        WHERE owner_id = #{ownerId} AND writer_id = #{writerId}
-    </select>
 
 </mapper>

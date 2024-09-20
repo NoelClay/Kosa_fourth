@@ -1,5 +1,7 @@
 package com.baseleap.mapper.music;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.baseleap.model.music.MusicModel;
@@ -7,11 +9,11 @@ import com.baseleap.model.music.MusicModel;
 @Mapper
 public interface MusicMapper {
     //crud
-    public void insertMusic( String filePath, Long userId);
+    public void insertMusic( MusicModel music );
 
-    public MusicModel selectMusicByUserId ( Long userId );
+    public List<MusicModel> selectMusicListByUserId ( Long userId );
 
-    public MusicModel updateIsActiveByMusicModel (boolean isTrue, Long musicPk);
+    public void updateIsActiveByMusicModel ( MusicModel music );
 
-    public void deleteMusicByUserId (Long userId);
+    public void deleteMusicByMusicModel (MusicModel music );
 }

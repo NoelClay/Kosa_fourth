@@ -7,6 +7,7 @@ public class MusicModel {
 
     Long id;
     String name;
-    boolean is_active;
-    Long user_id;
+    String path;
+    boolean isActive;
+    Long userId;
 }
