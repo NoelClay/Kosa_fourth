@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Kosa4miniApplication<Kosa_fourth>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.baseleap.Kosa4miniApplication",
+            "projectName": "Kosa_fourth",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

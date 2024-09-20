@@ -11,19 +11,23 @@
             parameterType="com.baseleap.model.UserModel">
         UPDATE User
         SET
-        password = #{password},
-        nickname = #{nickName},
-        profile_image = #{profileImage},
-        user_introduce = #{userIntroduce}
+            password = #{password},
+            nickname = #{nickName},
+            profile_image = #{profileImage},
+            user_introduce = #{userIntroduce}
         WHERE email = #{email}
+        and  active = 1
     </update>
 
     <update id="userUpdatePassword"
             parameterType="com.baseleap.model.UserModel">
         UPDATE User
         SET
-        password = #{password}
+            password = #{password}
         WHERE email = #{email}
+        and  active = 1
     </update>
+
+
 
 </mapper>

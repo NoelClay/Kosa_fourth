@@ -19,29 +19,42 @@
             created_time as createdTime,
             last_login_time as lastLoginTime,
             validation_quiz_question as validationQuizQuestion,
-            validation_quiz_answer as validationQuizAnswer
+            validation_quiz_answer as validationQuizAnswer,
+            active
+
         from	user
         where  email = #{email}
-        and     password  = #{password}
+        and  password  = #{password}
+        and  active = 1
     </select>
 
     <select id="getUser" parameterType="String"
             resultType="com.baseleap.model.UserModel">
         select
-        id,
-        email,
-        password,
-        nickname,
-        profile_image as profileImage,
-        user_introduce as userIntroduce,
-        created_time as createdTime,
-        last_login_time as lastLoginTime,
-        validation_quiz_question as validationQuizQuestion,
-        validationq_uiz_answer as validationQuizAnswer
+            id,
+            email,
+            password,
+            nickname,
+            profile_image as profileImage,
+            user_introduce as userIntroduce,
+            created_time as createdTime,
+            last_login_time as lastLoginTime,
+            validation_quiz_question as validationQuizQuestion,
+            validation_quiz_answer as validationQuizAnswer,
+            active
         from	user
         where  email = #{email}
+        and  active = 1
     </select>
 
 
+    <update id="userUpdateLastLoginTime"
+            parameterType="com.baseleap.model.UserModel">
+        UPDATE User
+        SET
+            last_login_time = now()
+        WHERE email = #{email}
+        and  active = 1
+    </update>
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.baseleap.service.hyeondongService;
 
+import com.baseleap.model.hyeondongModel.FollowDTO;
 import com.baseleap.model.hyeondongModel.UserDTO;
 import com.baseleap.mapper.hyeondongMapper.MyPageMapper;
 
@@ -21,7 +22,28 @@ public class MyPageServiceImpl implements MyPageService {
         return myPageMapper.getSearchingUserList(keyword);
     }
 
-    public void followUser(int userId, int targetId) {
-        myPageMapper.followUser(userId, targetId);
+    // 팔로우중인지 확인.
+    public FollowDTO isFollowing(int userId, int targetId) {
+        return myPageMapper.isFollowing(userId, targetId);
+    }
+
+    // 팔로우하기.
+    public void following(int userId, int targetId) {
+        myPageMapper.following(userId, targetId);
+    }
+
+    // 팔로워들 리스트로 가져오기.
+    public List<UserDTO> getMyFollowers(int userId) {
+        return myPageMapper.getMyFollowers(userId);
+    }
+
+    // 팔로잉중인 사람들 리스트로 가져오기.
+    public List<UserDTO> getMeFollowings(int userId) {
+        return myPageMapper.getMeFollowings(userId);
+    }
+
+    // 언팔로우.
+    public void unfollow(int userId, int targetId) {
+        myPageMapper.unfollow(userId, targetId);
     }
 }

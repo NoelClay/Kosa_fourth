@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 10%;
+}
+
+.container {
+    display: flex;
+    margin-top: 10%;
+}
+
+.nav {
+    width: 10%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav ul li {
+    margin: 10px 0;
+}
+
+.nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.content {
+    width: 90%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.profile img {
+    max-width: 150px;
+    border-radius: 50%;
+}
+
+.audio-player {
+    margin-top: 20px;
+}
+
+.guestbook-preview ul {
+    list-style-type: none;
+    padding: 0;
+}
