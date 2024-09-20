@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.baseleap.mapper.PostCommentMapper">
+    <insert id="insert" parameterType="com.baseleap.model.post.PostCommentCreateModel">
+        insert into postcomment (comment, createdat, postid, userid) values (#{comment}, #{createdAt} , #{postId},#{userId})
+    </insert>
+
+    <insert id="replyInsert" parameterType="com.baseleap.model.post.PostReplyCreateModel">
+        insert into postcomment (parentid, comment, createdat, postid, userid) values ( #{commentId}, #{reply}, #{createdAt} , #{postId}, #{userId})
+    </insert>
+    <update id="update" parameterType="com.baseleap.model.post.PostCommentUpdateModel">
+        update postcomment  SET
+        comment = #{comment}
+        where id = #{commentId};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        delete from postcomment where id = #{commentId}
+    </delete>
+
+    <select id="findByPostId" parameterType="long" resultType="com.baseleap.model.post.PostCommentFindModel">
+        WITH RECURSIVE CommentHierarchy AS (
+
+        SELECT
+        pc.id,
+        pc.parentid,
+        pc.comment,
+        DATE_FORMAT(pc.createdat, '%Y.%m.%d. %H:%i') AS createdat,
+        DATE_FORMAT(pc.updatedat, '%Y.%m.%d. %H:%i') AS updatedat,
+        pc.postid,
+        pc.userid,
+        u.nickname AS usernickname,
+        0 AS depth,
+        CAST(pc.id AS CHAR(200)) AS path,
+        pc.id as level
+        FROM postcomment pc
+        JOIN user u ON pc.userid = u.id
+        WHERE pc.parentid IS NULL
+        AND pc.postid = #{postId}
+
+        UNION ALL
+
+        SELECT
+        c.id,
+        c.parentid,
+        c.comment,
+        DATE_FORMAT(c.createdat, '%Y.%m.%d. %H:%i') AS createdat,
+        DATE_FORMAT(c.updatedat, '%Y.%m.%d. %H:%i') AS updatedat,
+        c.postid,
+        c.userid,
+        u.nickname AS usernickname,
+        ch.depth + 1,
+        CONCAT(ch.path, ',', c.id),
+        ch.level
+        FROM postcomment c
+        JOIN CommentHierarchy ch ON c.parentid = ch.id
+        JOIN user u ON c.userid = u.id
+        WHERE c.parentid IS NOT NULL
+        )
+        SELECT
+        id,
+        parentid,
+        comment,
+        createdat,
+        updatedat,
+        postid,
+        usernickname
+        FROM CommentHierarchy
+        ORDER BY level, path
+    </select>
+<!--    <update id="update" parameterType="com.baseleap.model.post.PostUpdateModel">-->
+<!--        update post SET-->
+<!--        title = #{title},-->
+<!--        content = #{content},-->
+<!--        updatedat = now()-->
+<!--        where id = #{postId}-->
+<!--    </update>-->
+
+    <!--    <delete id="delete" parameterType="">-->
+    <!--        delete from post where id = 15 and userid = 1;-->
+    <!--    </delete>-->
+</mapper>
