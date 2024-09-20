@@ -6,17 +6,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인트로 페이지</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Bootstrap CSS CDN 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- 사용자 정의 CSS -->
-    <link rel="stylesheet" href="style.css">
+
     <!-- 사용자 정의 JavaScript -->
     <script src="modal.js"></script>
 
     <!-- jQuery, Popper.js, Bootstrap JS CDN 추가 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -53,18 +55,18 @@
                     <div class="tab-content">
                         <div id="login" class="tab-pane fade show active" role="tabpanel">
                             <h3 class="mt-3">로그인</h3>
-                            <form id="login-form" action="/login/login" method="post" class="mt-4">
+                            <form id="login-form" action="/loginMain/login" method="post" class="mt-4">
                                 <div class="form-group">
                                     <label>이메일(아이디):
-                                    <input type="email" class="form-control"  name="email" required>
+                                    <input type="email" class="form-control" id="loginemail" name="email" required>
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label >비밀번호:
-                                    <input type="password" class="form-control" name="password" required>
+                                    <input type="password" class="form-control" id="loginpassword" name="password" required>
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">로그인</button>
+                                <button type="submit" id="login-btn" class="btn btn-primary btn-block">로그인</button>
                                 <input type="submit" value="등록"><input type="reset" value="취소">
                             </form>
                         </div>
@@ -166,4 +168,150 @@
 
     <a href = "/find/passwordFindForm" >  {비밀 번호 찾기(GET)}</a>
 </body>
+
+<script>
+$(document).ready(function() {
+      $('#login-btn').click(function(event) {
+        event.preventDefault();
+        console.log("로그인 버튼 클릭");
+        const email = $('#loginemail').val();
+        const password = $('#loginpassword').val();
+        const data = {
+          email,
+          password
+        };
+
+        console.log("로그인 fetch 바로 전");
+
+        fetch('/loginMain/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success == 1){
+            alert('로그인 성공!');
+            // 로그인 성공 후 처리 (예: 메인 페이지 이동)
+            window.location.href = '/main';
+          } else {
+            alert('로그인 실패: ' + data.success);
+          }
+        })
+        .catch(error => {
+          alert('로그인 중 오류 발생');
+          console.error(error);
+        });
+      });
+    });
+
+
+$(document).ready(function() {
+  $('#signupButton').click(function(event) {
+    event.preventDefault();
+
+    // 입력 값 가져오기
+    const email = $('#email').val();
+    const password = $('#password').val();
+    const password2 = $('#password2').val();
+    const nickName = $('#nickName').val();
+    const profileImage = $('input[name="profileImage"]:checked').val();
+    const userIntroduce = $('#userIntroduce').val();
+    const validationQuizQuestion = $('#validationQuizQuestion').val();
+    const validationQuizAnswer = $('#validationQuizAnswer').val();
+
+    const data = {
+      email,
+      password,
+      nickName,
+      profileImage,
+      userIntroduce,
+      validationQuizQuestion,
+      validationQuizAnswer
+    };
+
+
+    // Fetch 요청
+    fetch('/signup/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (data.success) {
+        alert('회원가입 성공!');
+        // 회원가입 후 처리 (메인 페이지 이동 등)
+         window.location.href = '/demo';
+      } else {
+        alert('회원가입 실패: ' + data.message);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('회원가입 중 오류가 발생했습니다.');
+    });
+  });
+
+  // 유효성 검사 함수 (예시)
+  function validateForm(data) {
+    // 이메일, 비밀번호, 닉네임 등 유효성 검사
+    // ...
+
+    return isValid; // 모든 검사 통과 시 true 반환
+  }
+});
+
+$(document).ready(function() {
+    $('#reset-form').submit(function(event) {
+        event.preventDefault(); // 기본 submit 행동 방지
+
+        const email = $('#email').val();
+        const validationQuizQuestion = $('#validationQuizQuestion').val();
+        const validationQuizAnswer = $('#validationQuizAnswer').val();
+
+        const data = {
+            email,
+            validationQuizQuestion,
+            validationQuizAnswer
+        };
+
+        fetch('/find/passwordFind', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('비밀번호 찾기 성공!');
+                window.location.href = '/find/passwordFindResult';
+            } else {
+                alert('비밀번호 찾기 실패: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('비밀번호 찾기 중 오류 발생');
+        });
+    });
+});
+</script>
+
 </html>

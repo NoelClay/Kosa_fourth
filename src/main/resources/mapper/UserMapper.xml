@@ -7,7 +7,7 @@
 
 <mapper namespace="com.baseleap.mapper.UserMapper">
 
-    <select id="login"
+    <select id="login" parameterType="com.baseleap.model.UserModel"
             resultType="com.baseleap.model.UserModel">
         select
             id,
