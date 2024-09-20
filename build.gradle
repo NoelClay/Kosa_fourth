@@ -51,6 +51,8 @@ dependencies {
 
 	// s3
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+	// page관련
+	implementation 'org.springframework.data:spring-data-commons:2.7.0'
 }
 
 tasks.named('test') {

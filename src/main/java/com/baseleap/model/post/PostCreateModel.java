@@ -22,4 +22,20 @@ public class PostCreateModel {
         this.userId = userId;
         this.image = image;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public List<MultipartFile> getImage() {
+        return image;
+    }
 }

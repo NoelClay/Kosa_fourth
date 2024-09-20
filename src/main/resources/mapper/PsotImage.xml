@@ -8,16 +8,15 @@
 <mapper namespace="com.baseleap.mapper.PostImageMapper">
     <insert id="insert" parameterType="map">
         insert into postimage (image1,image2, image3, postid) values
-        <choose>
-            <when test="urls.size() == 1">
-                (#{urls[0]}, null, null, #{postId})
-            </when>
-            <when test="urls.size() == 2">
-                (#{urls[0]}, #{urls[1]}, null, #{postId})
-            </when>
-            <when test="urls.size() == 3">
-                (#{urls[0]}, #{urls[1]}, #{urls[2]}, #{postId})
-            </when>
-        </choose>
+        (#{urls[0]}, #{urls[1]}, #{urls[2]}, #{postId})
     </insert>
+    <update id="update" parameterType="map">
+        update postimage
+        <set>
+            <if test="imageUrls[0] != ''">image1 = #{imageUrls[0]},</if>
+            <if test="imageUrls[1] != ''">image2 = #{imageUrls[1]},</if>
+            <if test="imageUrls[2] != ''">image3 = #{imageUrls[2]}</if>
+        </set>
+        where postid = #{postId}
+    </update>
 </mapper>
