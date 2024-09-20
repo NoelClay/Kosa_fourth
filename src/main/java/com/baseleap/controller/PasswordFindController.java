@@ -37,7 +37,7 @@ public class PasswordFindController {
     // 비밀번호 찾기 처리
     @ResponseBody
     @PostMapping(value = "/passwordFind")
-    public Map<String,Integer> passwordFind(@ModelAttribute UserModel userModel , Model model) {
+    public Map<String,Integer> passwordFind(@RequestBody UserModel userModel , Model model) {
         //요청
         log.info("passwordFind() :: userModel = {}",userModel);
 

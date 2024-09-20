@@ -300,9 +300,10 @@ $(document).ready(function() {
             return response.json();
         })
         .then(data => {
-            if (data.success) {
+            if (data.success == 1) {
                 alert('비밀번호 찾기 성공!');
-                window.location.href = '/find/passwordFindResult';
+               // window.location.href = '/find/passwordFindResultPage';
+                res.redirect('/find/passwordFindResultPage');
             } else {
                 alert('비밀번호 찾기 실패: ' + data.message);
             }
