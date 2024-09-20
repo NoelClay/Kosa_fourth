@@ -21,6 +21,7 @@
             validation_quiz_question as validationQuizQuestion,
             validation_quiz_answer as validationQuizAnswer,
             active
+
         from	user
         where  email = #{email}
         and  password  = #{password}

@@ -13,7 +13,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(userIdCheckInterceptor())
                 .addPathPatterns("/my-page/**");
-    }
+    } // 마이페이지에 해당하는 주소들은 인터셉터가 일단 한 번 확인하고 통과시킴.
 
     @Bean
     public UserIdCheckInterceptor userIdCheckInterceptor() {

@@ -1,11 +1,11 @@
-package com.baseleap.mapper;
+package com.baseleap.mapper.guestbook;
 
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.baseleap.model.GuestBook;
+import com.baseleap.model.guestbook.GuestBook;
 
 @Mapper
 public interface GuestBookMapper {

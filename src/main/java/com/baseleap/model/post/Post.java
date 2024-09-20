@@ -7,12 +7,12 @@ import java.time.LocalDateTime;
 
 @Getter
 public class Post {
-    private Long id;
-    private String title;
-    private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Long userId;
+    private final Long id;
+    private final String title;
+    private final String content;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
+    private final Long userId;
 
     @Builder
     public Post(Long id, String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt, Long userId) {
