@@ -9,4 +9,53 @@
 <insert id="insert" parameterType="com.baseleap.model.post.Post" useGeneratedKeys="true" keyProperty="id">
     insert into post (title, content, createdat, userid) values (#{title}, #{content}, #{createdAt} ,#{userId})
 </insert>
+
+<select id="findOneById" parameterType="long" resultType="com.baseleap.model.post.PostFindOneModel">
+    select p.id, title, content,
+    DATE_FORMAT(p.createdat, '%Y.%m.%d. %H:%i') AS createdat,
+    DATE_FORMAT(p.updatedat, '%Y.%m.%d. %H:%i') AS updatedat,
+    u.nickname, pi.image1, pi.image2 ,pi.image3
+    from  post p
+    inner join postimage pi on p.id = pi.postid
+    inner join user u on u.id = p.userid
+    where p.id = #{postId}
+</select>
+    <update id="update" parameterType="com.baseleap.model.post.PostUpdateModel">
+        update post SET
+        title = #{title},
+        content = #{content},
+        updatedat = now()
+        where id = #{postId}
+    </update>
+
+    <select id="findAll" parameterType="java.util.List" resultType="com.baseleap.model.post.PostListModel">
+        select p.id ,p.title, u.nickname as userNickName, pi.image1 as thmbnail, count(pc.id) as commentCount from post p
+        inner join postimage pi on p.id = pi.postid
+        inner join user u on u.id = p.userid
+        left join postcomment pc on p.id = pc.postid  and pc.parentid is NULL
+        where p.id in
+        <foreach item="item" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        group by p.id, p.title, u.nickname, pi.image1
+        ORDER by p.id desc
+    </select>
+
+    <select id="countByUserId" parameterType="long" resultType="int">
+        select count(*) from post p
+        inner join user u on u.id = p.userid
+        where u.id = #{userId}
+    </select>
+
+    <select id="ids" parameterType="map"  resultType="long">
+        select p.id  from  post p
+        inner join user u on u.id = p.userid
+        where u.id = 1
+        order by p.id desc
+        limit #{size} offset #{offset}
+    </select>
+
+<!--    <delete id="delete" parameterType="">-->
+<!--        delete from post where id = 15 and userid = 1;-->
+<!--    </delete>-->
 </mapper>

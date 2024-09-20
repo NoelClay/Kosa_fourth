@@ -19,7 +19,7 @@
             created_time as createdTime,
             last_login_time as lastLoginTime,
             validation_quiz_question as validationQuizQuestion,
-            validationq_uiz_answer as validationQuizAnswer
+            validation_quiz_answer as validationQuizAnswer
         from	user
         where  email = #{email}
         and     password  = #{password}
