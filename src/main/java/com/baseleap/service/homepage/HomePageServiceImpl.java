@@ -25,4 +25,6 @@ public class HomePageServiceImpl implements IHomePageService {
             return umodel.getNickName();
         }
     }
+    
+    
 }
