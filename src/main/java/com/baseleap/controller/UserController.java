@@ -120,7 +120,7 @@ public class UserController {
         // - 세션 삭제한다
         session.invalidate();
 
-        return "demo";
+        return "redirect:/demo";
     }
 
 }

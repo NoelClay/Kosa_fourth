@@ -66,8 +66,7 @@
                                     <input type="password" class="form-control" id="loginpassword" name="password" required>
                                     </label>
                                 </div>
-                                <button type="submit" id="login-btn" class="btn btn-primary btn-block">로그인</button>
-                                <input type="submit" value="등록"><input type="reset" value="취소">
+                                <button type="submit" id="loginBtn" class="btn btn-primary btn-block">로그인</button>
                             </form>
                         </div>
 
@@ -118,7 +117,6 @@
                                     <input type="text" class="form-control" id="validationQuizAnswer" name="validationQuizAnswer" required >
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-block" id="signupButton">회원가입</button>
-                                <input type="submit" value="등록"><input type="reset" value="취소">
                             </form>
                         </div>
 
@@ -128,12 +126,12 @@
                             <form id="reset-form"  action="/find/passwordFind" method="post" class="mt-4">
                                 <div class="form-group">
                                     <label>이메일:
-                                    <input type="email" class="form-control"  name="email" required>
+                                    <input type="email" id="findEmail" class="form-control"  name="email" required>
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <label >질문:
-                                    <select class="form-control"  name="validationQuizQuestion">
+                                    <select class="form-control" id = "findValidationQuizQuestion"  name="validationQuizQuestion">
                                         <option value='1'>졸업한 초등학교</option>
                                         <option value='2'>가장 좋아하는 영화</option>
                                         <option value='3'>가장 싫어하는 음식</option>
@@ -142,7 +140,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label >답변:
-                                    <input type="text" class="form-control"  name="validationQuizAnswer" required >
+                                    <input type="text" class="form-control" id="findValidationQuizAnswer" name="validationQuizAnswer" required >
                                     </label>
                                 </div>
                                 <button type="submit" id="resetButton" class="btn btn-primary btn-block">비밀번호 찾기</button>
@@ -170,8 +168,10 @@
 </body>
 
 <script>
+
+// 로그인
 $(document).ready(function() {
-      $('#login-btn').click(function(event) {
+      $('#loginBtn').click(function(event) {
         event.preventDefault();
         console.log("로그인 버튼 클릭");
         const email = $('#loginemail').val();
@@ -195,7 +195,7 @@ $(document).ready(function() {
           if (data.success == 1){
             alert('로그인 성공!');
             // 로그인 성공 후 처리 (예: 메인 페이지 이동)
-            window.location.href = '/main';
+            window.location.href = '/test-main';
           } else {
             alert('로그인 실패: ' + data.success);
           }
@@ -207,7 +207,7 @@ $(document).ready(function() {
       });
     });
 
-
+// 회원 가입
 $(document).ready(function() {
   $('#signupButton').click(function(event) {
     event.preventDefault();
@@ -271,13 +271,14 @@ $(document).ready(function() {
   }
 });
 
+// 비밀번호 찾기
 $(document).ready(function() {
-    $('#reset-form').submit(function(event) {
+    $('#resetButton').submit(function(event) {
         event.preventDefault(); // 기본 submit 행동 방지
 
-        const email = $('#email').val();
-        const validationQuizQuestion = $('#validationQuizQuestion').val();
-        const validationQuizAnswer = $('#validationQuizAnswer').val();
+        const email = $('#findEmail').val();
+        const validationQuizQuestion = $('#findValidationQuizQuestion').val();
+        const validationQuizAnswer = $('#findValidationQuizAnswer').val();
 
         const data = {
             email,
