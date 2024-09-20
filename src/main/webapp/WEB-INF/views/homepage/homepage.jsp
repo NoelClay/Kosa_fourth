@@ -7,110 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${userNickname}'s HomePage</title>
-    <style>
-        /* 레이아웃 스타일 */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 24px;
-        }
-
-        nav {
-            float: left;
-            width: 15%;
-            background-color: #c4c4c4;
-            padding: 20px;
-            height: 100vh;
-        }
-
-        nav button {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #a9a9a9;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            color: white;
-        }
-
-        nav button:hover {
-            background-color: #888;
-        }
-
-        .main-content {
-            margin-left: 15%;
-            padding: 20px;
-            background-color: white;
-        }
-
-        .audio-player {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .guestbook {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .guestbook th, .guestbook td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        .guestbook th {
-            background-color: black;
-            color: white;
-        }
-
-        /* 모달 스타일 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover, .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/hompage/mainpagestyle.css">
+    <c:if test="${activeTheme != nullObj}">
+        <link rel="stylesheet" href="${activeTheme}">
+    </c:if>
 </head>
 <body>
 
@@ -130,7 +30,7 @@
         <button id="openSettings">내 홈피 설정 변경</button>
     </c:if>
     <c:if test="${loginUserId != pageUserId}">
-        <button>나의 한마디</button>
+        <button id="openGuestBookForm">나의 한마디</button>
     </c:if>
 </nav>
 
@@ -210,7 +110,30 @@
     </div>
 </div>
 
+<!-- 모달 4: 게스트북 등록하기-->
+<div id="guestBookFormModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeThemeChange">&times;</span>
+        <h2>내가 쓴 한마디</h2>
+        <form action="guestbook/register" method="post">
+
+            <textarea name="myComment" id="myComment" cols="30" rows="10">
+
+            </textarea>
+
+            <button type="submit"> 등록하기 </button>
+
+        </form>
+    </div>
+</div>
+
+
 <script>
+    //게스트북 등록하기 버튼을 누르면 내가 쓴 방명록 모달이 떠요.
+    document.getElementById('openGuestBookForm').onclick = function(){
+        document.getElementById('guestBookFormModal').style.display = "block";
+    };
+
     // 내 홈피 설정 모달 열기
     document.getElementById('openSettings').onclick = function() {
         document.getElementById('settingsModal').style.display = 'block';

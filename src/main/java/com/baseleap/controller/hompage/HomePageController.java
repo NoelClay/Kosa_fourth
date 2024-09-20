@@ -31,21 +31,33 @@ public class HomePageController {
 
     @Autowired
     private IHomePageService homeService;
+
+    // @Autowired
+    // private IThemeService themeService;
     
     
     //일단 처음에 홈페이지 띄우는것 부터
     
     @GetMapping("/page")
     public String loadHomePage(@RequestParam("userId") Long userId, HttpSession session, Model model) {
+        //null을 비교하고 싶어서 저장
+        model.addAttribute("nullObj", null);
+
         // 세션에서 로그인한 사용자 pk 가져오기
         Integer temp = (Integer) session.getAttribute("loginUserId");
         Long loginUserId = temp.longValue();
+
         //페이지 이동 측에서 가져온 오너 아이디로 세션 페이지 아이디 수정 최초엔 로그인 아이디로 전달 요망
         session.setAttribute("homePageId", userId);
 
-        // 해당 유저의 테마 설정 불러오기
-        // ThemeModel theme = homeService.getThemeByUserId(userId);
-        // model.addAttribute("theme", theme);
+        // // 해당 유저의 활성화된 테마를 jsp 스타일 태그에 넣어주기
+        // List<String> themeInfo = themeservice.getStringListMusicByOwnerID(userId);
+        // if (musicInfo != null && musicInfo.size() > 1) {
+        //     model.addAttribute("musicPath", musicInfo.get(1));
+        // } else {
+        //     // 기본값 또는 null 처리
+        //     model.addAttribute("musicPath", "");  // 또는 예외 처리
+        // }
 
         // 해당 유저의 배경 음악 불러오기 0. 음악명 1. 음악 패스 그런데 사실상 패스만 뿌릴거
         List<String> musicInfo = musicService.getStringListMusicByOwnerID(userId);
