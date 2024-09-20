@@ -45,20 +45,40 @@ public class GuestBookController {
     }
 
     // 방명록 항목을 추가하는 메서드
-    @PostMapping("/add")
-    public String addGuestBookEntry(@RequestParam Long writerId,
-                                    @RequestParam Long ownerId,
-                                    @RequestParam String noteComment) {
-        GuestBook guestBook = new GuestBook();
+    @PostMapping("/register")
+    public String registerGuestBook(@RequestParam Long loginUserId,
+                                    @RequestParam Long pageUserId,
+                                    @RequestParam String myComment) {
 
-        guestBook.setWriterId(writerId);
-        log.info(Long.toString(writerId));
-        guestBook.setOwnerId(ownerId);
-        log.info(Long.toString(ownerId));
-        guestBook.setComment(noteComment);
-        log.info(noteComment);
-        guestBookService.insertGuestBook(guestBook);
-        return "redirect:/guestbook/" + ownerId; // 방명록 리스트 페이지로 리다이렉트
+        log.info("============");
+        log.info(loginUserId.toString());
+        log.info(pageUserId.toString());
+        log.info(myComment);
+        
+        boolean b = false;
+        GuestBook guestBook;
+        GuestBook gb = guestBookService.getGuestBookByWriterAndOwner(loginUserId, pageUserId);
+        if(gb != null){
+            b= true;
+            guestBook=gb;
+        }
+        else{
+            b=false;
+            guestBook = new GuestBook();
+        }
+        guestBook.setWriterId(loginUserId);
+        log.info(Long.toString(loginUserId));
+        guestBook.setOwnerId(pageUserId);
+        log.info(Long.toString(pageUserId));
+        guestBook.setComment(myComment);
+        log.info(myComment);
+        if(b){
+            guestBookService.updateGuestBook(guestBook);
+        }
+        else{
+            guestBookService.insertGuestBook(guestBook);
+        }
+        return "redirect:/home/page?userId=" + pageUserId; // 방명록 리스트 페이지로 리다이렉트
     }
 
     // 방명록 항목을 업데이트하는 메서드

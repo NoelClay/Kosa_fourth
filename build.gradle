@@ -39,14 +39,12 @@ dependencies {
 	
 	//추가
 	// JSP
-	// implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
 	implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	
 	// JSTL
-	// implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
 	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.1'
- 	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 
 
 
@@ -54,6 +52,9 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 	// page관련
 	implementation 'org.springframework.data:spring-data-commons:2.7.0'
+
+	//th
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {

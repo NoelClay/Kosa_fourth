@@ -61,7 +61,7 @@ public class MusicController {
 
     // 2. 음악 리스트에서 선택한 음악 활성화 처리
     @PostMapping("/activate")
-    public String activateMusic(@RequestParam("selectedMusic") String selectedMusic,
+    public String activateMusic(@RequestParam(name="selectedMusic", required=false, defaultValue="" ) String selectedMusic,
             HttpSession session) {
         // 세션에서 로그인한 사용자 ID 가져오기
 
@@ -76,15 +76,19 @@ public class MusicController {
             throw new IllegalArgumentException("Session attribute 'userId' is neither Integer nor Long.");
         }
 
+        if(selectedMusic==""){
+            return "redirect:/home/page?userId=" + loginUserId;
+        }
+        else{
         // 모든 음악을 비활성화한 후 선택된 음악만 활성화
         List<MusicModel> musicList = musicService.getMusicModelByOwnerID(loginUserId);
-        for (MusicModel music : musicList) {
-            boolean isActive = music.getName().equals(selectedMusic);
-            musicService.setIsActiveMusic(music, isActive);
+            for (MusicModel music : musicList) {
+                boolean isActive = music.getName().equals(selectedMusic);
+                musicService.setIsActiveMusic(music, isActive);
+            }
+                // 성공 후 로그인된 사용자의 홈페이지로 리다이렉트
+            return "redirect:/home/page?userId=" + loginUserId;
         }
-
-        // 성공 후 로그인된 사용자의 홈페이지로 리다이렉트
-        return "redirect:/home/page?userId=" + loginUserId;
     }
 
     @GetMapping("/{userId}/{fileName}")

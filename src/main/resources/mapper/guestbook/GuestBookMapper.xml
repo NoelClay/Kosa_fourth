@@ -45,10 +45,10 @@
     </delete>
 
     <!-- 특정 writerId와 ownerId에 해당하는 방명록 항목을 검색 -->
-    <select id="selectGuestBookByWriterOwnerId" parameterType="map" resultType="com.baseleap.model.guestbook.GuestBook">
-        SELECT *
+    <select id="selectGuestBookByWriterOwnerId" parameterType="Long" resultType="com.baseleap.model.guestbook.GuestBook">
+        SELECT id,  writer_id as writerId, owner_id as ownerId, comment, created_at as createdAt
         FROM Guest_book
-        WHERE owner_id = #{ownerId} AND writer_id = #{writerId}
+        WHERE owner_id = #{param1} AND writer_id = #{param2}
     </select>
 
 </mapper>

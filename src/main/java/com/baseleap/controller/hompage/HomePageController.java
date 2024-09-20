@@ -1,5 +1,6 @@
 package com.baseleap.controller.hompage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.baseleap.model.guestbook.GuestBook;
 import com.baseleap.model.music.MusicModel;
 import com.baseleap.service.guestbook.IGuestBookService;
+import com.baseleap.service.homepage.HomePageServiceImpl;
 import com.baseleap.service.homepage.IHomePageService;
 import com.baseleap.service.music.IMusicService;
 
@@ -69,8 +71,16 @@ public class HomePageController {
         }
 
         // 해당 유저의 방명록 리스트 불러오기
-        List<GuestBook> guestbookEntries = guestBookService.getGuestBookListByOwnerId(userId);
-        model.addAttribute("guestbookEntries", guestbookEntries);
+        List<GuestBook> guestbooks= guestBookService.getGuestBookListByOwnerId(userId);
+        List<String> usernames = new ArrayList<>();
+        List<String> commentList = new ArrayList<>();
+
+        for(GuestBook gbi : guestbooks ){
+            commentList.addLast(gbi.getComment());
+            usernames.addLast(homeService.getUserNicknameByUserId(gbi.getWriterId()));
+        }
+        model.addAttribute("usernames", usernames);
+        model.addAttribute("comments", commentList);
 
         // 로그인한 사용자 ID와 페이지 사용자 ID를 비교하여 버튼을 설정할거라 전달
         model.addAttribute("loginUserId", loginUserId);
@@ -83,6 +93,15 @@ public class HomePageController {
         // 유저의 음악 리스트 (활성화 모달에 사용될 데이터)
         List<MusicModel> musicList = musicService.getMusicModelByOwnerID(userId);
         model.addAttribute("musicList", musicList); // 음악 리스트 추가
+
+        //내가 다른 유저에게 쓴 게스트북이 있나요?????
+        GuestBook gb = guestBookService.getGuestBookByWriterAndOwner(userId, loginUserId);
+        if(gb==null){
+            model.addAttribute("myCommentWrote", null);
+        }
+        else{
+            model.addAttribute("myCommentWrote", gb);
+        }
 
         return "/homepage/homepage"; // JSP 파일로 이동
     }
