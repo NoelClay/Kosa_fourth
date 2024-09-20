@@ -1,0 +1,25 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Form styles */
+.signup-form {
+    width: 80%;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.signup-form td {
+    padding: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .signup-form {
+        width: 90%;
+    }
+}

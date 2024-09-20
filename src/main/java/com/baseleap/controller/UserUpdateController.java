@@ -42,7 +42,7 @@ public class UserUpdateController {
             log.info("userUpdateForm() :: returnUserModel ={}", returnUserModel);
             model.addAttribute("user",returnUserModel);
 
-            return "updateForm";
+            return "updateFormPage";
         } else {
             log.info("userUpdateForm() :: loginEmail ={}", loginEmail);
             return "redirect:/login/loginForm";
@@ -64,7 +64,7 @@ public class UserUpdateController {
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "demo";
+            return "test-main";
         }else {
             return "updateFail";
         }
