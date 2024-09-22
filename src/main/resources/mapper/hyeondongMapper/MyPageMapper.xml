@@ -11,8 +11,8 @@
             nickname,
             profile_image as profileImage,
             user_introduce as userIntroduce,
-            created_time as createdTime,
-            last_login_time as lastLoginTime,
+            date_format(created_time,"%Y년 %m월 %d일 %H:%i") AS createdTime,
+            date_format(last_login_time,"%Y년 %m월 %d일 %H:%i") AS lastLoginTime,
             validation_quiz_question as validationQuizQuestion,
             validation_quiz_answer as validationQuizAnswer,
             active
@@ -33,6 +33,7 @@
     </select>
     <select id="getMyFollowers" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
         select
+            u.id,
             u.profile_image as profileImage,
             u.email,
             u.nickname,
@@ -45,6 +46,7 @@
     </select>
     <select id="getMeFollowings" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
         select
+            u.id,
             u.profile_image as profileImage,
             u.email,
             u.nickname,

@@ -40,7 +40,7 @@ public class MessageController {
         messageService.createNewMessage(senderId, receiverId, content);
 
         // 알림 만들기.
-        String alarmContent = "새로운 메세지";
+        String alarmContent = "님이 보낸 새로운 메세지가 있습니다.";
         alarmService.createNewAlarm(senderId, receiverId, alarmContent);
 
         Map<String, String> responseBody = new HashMap<>();

@@ -1,44 +1,123 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: KOSA
-  Date: 2024-09-11
-  Time: 오후 2:45
-  To change this template use File | Settings | File Templates.
+  User: 문현동
+  Date: 2024-09-22
+  Time: 오후 8:43
+  유저 마이페이지.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>마이 페이지</title>
+	<link rel="stylesheet" href="/css/template-style.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-여기는 마이페이지 입니다. <a href="${pageContext.request.contextPath}/alarm/get-list">모든 알람 보기</a>
-<hr>
-DB 아이디: ${userInfo.id}
-<br>
-이메일: ${userInfo.email}
-<br>
-비밀번호: ${userInfo.password}
-<br>
-닉네임: ${userInfo.nickname}
-<br>
-프로필 이미지: <img src="${userInfo.profileImage}" alt="">
-<br>
-자기소개: ${userInfo.userIntroduce}
-<br>
-가입 일자:${userInfo.createdTime}
-<br>
-마지막 로그인 시각: ${userInfo.lastLoginTime}
-<br>
-비밀번호 찾기 질문: ${userInfo.validationQuizQuestion}
-<br>
-비밀번호 찾기 답변: ${userInfo.validationQuizAnswer}
-<br>
-회원 상태: ${userInfo.active}
-<hr>
-<a href="${pageContext.request.contextPath}/my-page/follower-list">나를 팔로우 중인 사람들</a>
-<a href="${pageContext.request.contextPath}/my-page/following-list">내가 팔로잉 중인 사람들</a>
-<a href="${pageContext.request.contextPath}/my-page/search">사람을 찾습니다...</a>
-<a href="${pageContext.request.contextPath}/my-page/new-messages">받은 메세지함</a>
-<a href="${pageContext.request.contextPath}/my-page/all-messages">전체 메세지함</a>
+<div class="container">
+	<!--
+			Sidebar 메뉴를 담당하는 aside 요소
+			상단에는 게시글 보기, 방명록 보기, 유저 검색 버튼
+			중간에는 유저 프로필과 소개 (프로필 사진 클릭 시 페이지 이동)
+			하단에는 게시글 쓰기, 방명록 쓰기, 페이지 설정 버튼
+	-->
+	<aside class="sidebar">
+		<!-- 상단 메뉴 -->
+		<div class="menu-top">
+			<a href="#" class="menu-icon" title="게시글 보기"><img src="post-icon.png" alt="게시글 보기"></a>
+			<a href="#" class="menu-icon" title="방명록 보기"><img src="guestbook-icon.png" alt="방명록 보기"></a>
+			<a href="${pageContext.request.contextPath}/my-page/search" class="menu-icon" title="유저 검색"><img src="search-icon.png" alt="유저 검색"></a>
+		</div>
+		
+		<!-- 유저 프로필 영역 -->
+		<div class="user-profile">
+			<a href="my-page.html">
+				<img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
+			</a>
+			<div class="user-info">
+				<h2>Deeper Learning</h2>
+				<p>Dlaiml</p>
+			</div>
+		</div>
+		
+		<!-- 하단 메뉴 -->
+		<div class="menu-bottom">
+			<a href="#" class="menu-icon" title="게시글 쓰기"><img src="write-icon.png" alt="게시글 쓰기"></a>
+			<a href="#" class="menu-icon" title="방명록 쓰기"><img src="guestbook-write-icon.png" alt="방명록 쓰기"></a>
+			<a href="#" class="menu-icon" title="페이지 설정"><img src="settings-icon.png" alt="페이지 설정"></a>
+		</div>
+	</aside>
+	
+	<!-- 메인 콘텐츠 -->
+	<main class="content">
+		<div class="post-summary">
+			<div class="d-flex justify-content-center align-items-center">
+				<h1>My page</h1>
+				<div>
+					<a href="${pageContext.request.contextPath}/alarm/get-list">
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+							<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+			<hr>
+			<div>
+				<table class="table table-hover table-bordered">
+					<tbody>
+						<tr>
+							<td>이메일</td>
+							<td>${userInfo.email}</td>
+						</tr>
+						<tr>
+							<td>닉네임</td>
+							<td><img class="profile-img" src="/image/${userInfo.profileImage}" alt=""> ${userInfo.nickname}</td>
+						</tr>
+						<tr>
+							<td>자기소개</td>
+							<td>${userInfo.userIntroduce}</td>
+						</tr>
+						<tr>
+							<td>가입 일자</td>
+							<td>${userInfo.createdTime}</td>
+						</tr>
+						<tr>
+							<td>마지막 로그인 시각</td>
+							<td>${userInfo.lastLoginTime}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="d-flex justify-content-between">
+					<div class="mb-2">
+						<a href="${pageContext.request.contextPath}/my-page/new-messages" class="btn btn-outline-primary" type="button">받은 메세지함</a>
+					</div>
+					<div class="mb-2">
+						<a href="${pageContext.request.contextPath}/my-page/follower-list" class="btn btn-outline-primary" type="button">나를 팔로우 중인 사람들</a>
+					</div>
+				</div>
+				<div class="d-flex justify-content-between">
+					<div class="mb-2">
+						<a href="${pageContext.request.contextPath}/my-page/all-messages" class="btn btn-outline-primary" type="button">전체 메세지함</a>
+					</div>
+					<div class="mb-2">
+						<a href="${pageContext.request.contextPath}/my-page/following-list" class="btn btn-outline-primary" type="button">내가 팔로잉 중인 사람들</a>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="d-flex">
+				<div class="me-auto">
+					<a href="/update/updateForm" class="btn btn-primary" type="button">내 정보 수정</a>
+				</div>
+				<div>
+					<a href="/loginMain/loginOut" class="btn btn-warning" type="button">로그 아웃</a>
+					<a href="/signOut/signOutForm" class="btn btn-danger" type="button">회원 탈퇴</a>
+				</div>
+			</div>
+		</div>
+	</main>
+</div>
 </body>
 </html>

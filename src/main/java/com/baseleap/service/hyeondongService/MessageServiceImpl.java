@@ -1,7 +1,6 @@
 package com.baseleap.service.hyeondongService;
 
 import com.baseleap.mapper.hyeondongMapper.MessageMapper;
-import com.baseleap.model.hyeondongModel.MessageDTO;
 import com.baseleap.model.hyeondongModel.MessageUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
