@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Three Section Layout</title>
-    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/layout2.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link
       rel="stylesheet"
@@ -12,264 +12,394 @@
     />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <style>
+      /* 기존 코드는 그대로 유지하고 다음 내용을 수정 또는 추가합니다 */
+
+      /* 레이아웃 */
+
+      /* 기존 코드는 그대로 유지하고 다음 내용을 수정 또는 추가합니다 */
       a {
-        text-decoration: none; /* 밑줄 없애기 */
+        text-decoration: none;
       }
-      .heart1 {
-        color: red;
+      .container {
+        display: flex;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
       }
 
-      .main-content {
-        margin-left: 30px;
-        margin-right: 50px;
+      .sidebar {
+        flex: 0 0 400px;
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
       }
+
+      /* ... (중간 코드 생략) ... */
+
+      main {
+        flex: 1;
+        margin-left: 400px;
+        padding: 20px;
+        min-width: 0;
+        background-color: #ecf0f1;
+        overflow-x: hidden; /* 가로 스크롤 방지 */
+      }
+
+      /* 컨텐츠 박스 */
+      .content-box,
+      .comment-content-box {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        overflow: hidden; /* 내용이 넘치지 않도록 */
+      }
+
+      /* Swiper 컨테이너 */
       .swiper-container {
-        width: 100%;
-        height: 400px;
-        position: relative;
-        border: 2px solid black;
-      }
-      .content-box {
-        border: 2px solid black;
-      }
-
-      .find-image {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        margin-bottom: 20px;
+        max-width: 100%;
+        overflow: hidden;
       }
 
       .swiper-slide {
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
+      }
+
+      .swiper-slide img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
       }
 
       .swiper-button-next,
       .swiper-button-prev {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.5);
         color: white;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+        z-index: 10;
       }
 
       .swiper-button-next {
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
+        right: 10px;
       }
 
       .swiper-button-prev {
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
+        left: 10px;
       }
-      .user-btn {
+
+      .swiper-button-next::after,
+      .swiper-button-prev::after {
+        font-size: 20px;
       }
-      .comment-content-box {
-        border: 2px solid black;
+
+      /* 기타 이미지에 대한 스타일 */
+      img,
+      video,
+      iframe {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
       }
-      .comment-text {
-        width: 100%;
-        height: 50px;
-      }
+
+      /* ... (반응형 디자인 코드는 그대로 유지) ... */
     </style>
   </head>
   <body>
-    <div class="header">
-      <div class="logo">LOGO</div>
-      <div class="title">Title</div>
-    </div>
     <div class="container">
-      <div class="sidebar">
-        <ul>
-          <li>Menu 1</li>
-          <li>Menu 2</li>
-          <li>Menu 3</li>
-        </ul>
-      </div>
-      <div class="main-content">
-        <input th:value="${findPost.post.id}" id="postId" />
-        <div>
-          <h2 th:text="${findPost.post.title}"></h2>
+      <!-- 
+          Sidebar 메뉴를 담당하는 aside 요소
+          상단에는 게시글 보기, 방명록 보기, 유저 검색 버튼
+          중간에는 유저 프로필과 소개 (프로필 사진 클릭 시 페이지 이동)
+          하단에는 게시글 쓰기, 방명록 쓰기, 페이지 설정 버튼
+      -->
+      <aside class="sidebar">
+        <!-- 상단 메뉴 -->
+        <div class="menu-top">
+          <a href="#" class="menu-icon" title="게시글 보기"
+            ><img src="post-icon.png" alt="게시글 보기"
+          /></a>
+          <a href="#" class="menu-icon" title="방명록 보기"
+            ><img src="guestbook-icon.png" alt="방명록 보기"
+          /></a>
+          <a href="#" class="menu-icon" title="유저 검색"
+            ><img src="search-icon.png" alt="유저 검색"
+          /></a>
+        </div>
 
-          <a href="javascript:void(0);" class="heart" onclick="like(0)">♡</a>
-          <a href="javascript:void(0);" class="heart1" onclick="like(1)">♥</a>
+        <!-- 유저 프로필 영역 -->
+        <div class="user-profile">
+          <a href="my-page.html">
+            <img
+              src="profile-picture.jpg"
+              alt="Profile Picture"
+              class="profile-picture"
+            />
+          </a>
+          <div class="user-info">
+            <h2>Deeper Learning</h2>
+            <p>Dlaiml</p>
+          </div>
+        </div>
 
-          <h5 th:text="${findPost.post.nickName}"></h5>
-          <h6 th:text="${findPost.post.createdAt}"></h6>
-          <div class="user-btn">
-            <a th:href="@{/baseleap/postupdate(postId=${findPost.post.id})}"
-              >수정</a
+        <!-- 하단 메뉴 -->
+        <div class="menu-bottom">
+          <a href="#" class="menu-icon" title="게시글 쓰기"
+            ><img src="write-icon.png" alt="게시글 쓰기"
+          /></a>
+          <a href="#" class="menu-icon" title="방명록 쓰기"
+            ><img src="guestbook-write-icon.png" alt="방명록 쓰기"
+          /></a>
+          <a href="#" class="menu-icon" title="페이지 설정"
+            ><img src="settings-icon.png" alt="페이지 설정"
+          /></a>
+        </div>
+      </aside>
+
+      <!-- 메인 콘텐츠 -->
+      <main class="content">
+        <div class="post-summary">
+          <input type="hidden" th:value="${findPost.post.id}" id="postId" />
+          <input type="hidden" id="userNickName" th:value="${userNickName}" />
+          <input type="hidden" id="userId" th:value="${userId}" />
+          <div>
+            <h2 th:text="${findPost.post.title}"></h2>
+            <a
+              href="javascript:void(0);"
+              id="haert"
+              class="heart"
+              th:attr="hidden=${findPost.post.userCheck != 0}"
+              onclick="like(0)"
+              >♡</a
             >
-            <button class="delete-btn">삭제</button>
-          </div>
-        </div>
-        <div class="swiper-container">
-          <div class="swiper-wrapper">
-            <div th:if="${findPost.post.image1 != null}" class="swiper-slide">
-              <img
-                th:src="${findPost.post.image1}"
-                alt="이미지"
-                class="find-image"
-              />
-            </div>
-            <div th:if="${findPost.post.image2 != null}" class="swiper-slide">
-              <img
-                th:src="${findPost.post.image2}"
-                alt="이미지"
-                class="find-image"
-              />
-            </div>
-            <div th:if="${findPost.post.image3 != null}" class="swiper-slide">
-              <img
-                th:src="${findPost.post.image3}"
-                alt="이미지"
-                class="find-image"
-              />
-            </div>
-          </div>
-          <!-- Swiper navigation buttons -->
-          <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-pagination"></div>
-        </div>
-        <div class="content-box">
-          <p>내용</p>
-          <p th:text="${findPost.post.content}" readonly></p>
-        </div>
-        <div class="comment-content-box">
-          <ul class="cc" id="comment-ul">
-            <block th:each="comment : ${findPost.postComments}">
-              <li
-                class="comment"
-                th:if="${comment.parentid == null}"
-                th:id="'comment-li-' + ${comment.id}"
-              >
-                <div class="comment-id" th:text="${comment.usernickname}">
-                  User1
-                </div>
-                <div
-                  class="comment-content"
-                  th:id="'comment-content-text-' + ${comment.id}"
-                  th:text="${comment.comment}"
-                >
-                  댓글 내용 1
-                </div>
+            <a
+              href="javascript:void(0);"
+              id="heart1"
+              class="heart1"
+              th:attr="hidden=${findPost.post.userCheck == 0}"
+              onclick="like(1)"
+              >♥</a
+            >
 
-                <div
-                  th:id="'comment-edit-' + ${comment.id}"
-                  style="display: none"
+            <!--          <a href="javascript:void(0);" class="heart" th:if="${findPost.post.userCheck == 0}" onclick="like(0)" >♡</a>-->
+            <!--          <a href="javascript:void(0);" class="heart1" th:if="${findPost.post.userCheck != 0}" onclick="like(1)">♥</a>-->
+            <span
+              readonly
+              id="like-count"
+              th:text="${findPost.post.likeCount}"
+            ></span>
+
+            <h5 th:text="${findPost.post.nickName}"></h5>
+            <h6 th:text="${findPost.post.createdAt}"></h6>
+
+            <div class="user-btn" th:if="${userId == homePageId}">
+              <a th:href="@{/baseleap/postupdate(postId=${findPost.post.id})}"
+                >수정</a
+              >
+              <a
+                th:href="@{/baseleap/postdelete(postId=${findPost.post.id})}"
+                class="delete-btn"
+                >삭제</a
+              >
+            </div>
+          </div>
+          <div class="content-box">
+            <p>내용</p>
+            <p th:text="${findPost.post.content}" readonly></p>
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div th:if="${findPost.post.image1 != null}" class="swiper-slide">
+                <img
+                  th:src="${findPost.post.image1}"
+                  alt="이미지"
+                  class="find-image"
+                />
+              </div>
+              <div th:if="${findPost.post.image2 != null}" class="swiper-slide">
+                <img
+                  th:src="${findPost.post.image2}"
+                  alt="이미지"
+                  class="find-image"
+                />
+              </div>
+              <div th:if="${findPost.post.image3 != null}" class="swiper-slide">
+                <img
+                  th:src="${findPost.post.image3}"
+                  alt="이미지"
+                  class="find-image"
+                />
+              </div>
+            </div>
+            <!-- Swiper navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="comment-content-box">
+            <ul class="cc" id="comment-ul">
+              <block th:each="comment : ${findPost.postComments}">
+                <li
+                  class="comment"
+                  th:if="${comment.parentid == null}"
+                  th:id="'comment-li-' + ${comment.id}"
                 >
-                  <input
-                    type="text"
-                    th:id="'comment-input-' + ${comment.id}"
-                    th:value="${comment.comment}"
-                  />
-                  <button
-                    th:id="'comment-save-btn-' + ${comment.id}"
-                    th:onclick="'commentUpdate(' + ${comment.id} + ')'"
+                  <div class="comment-id" th:text="${comment.usernickname}">
+                    User1
+                  </div>
+                  <div
+                    class="comment-content"
+                    th:id="'comment-content-text-' + ${comment.id}"
+                    th:text="${comment.comment}"
                   >
-                    등록
-                  </button>
-                </div>
-                <div>
-                  <div class="comment-date" th:text="${comment.createdAt}">
-                    2024-09-16
+                    댓글 내용 1
+                  </div>
+
+                  <div
+                    th:id="'comment-edit-' + ${comment.id}"
+                    style="display: none"
+                  >
+                    <input
+                      type="text"
+                      th:id="'comment-input-' + ${comment.id}"
+                      th:value="${comment.comment}"
+                    />
+                    <button
+                      th:id="'comment-save-btn-' + ${comment.id}"
+                      th:onclick="'commentUpdate(' + ${comment.id} + ')'"
+                    >
+                      등록
+                    </button>
+                  </div>
+                  <div>
+                    <div class="comment-date" th:text="${comment.createdAt}">
+                      2024-09-16
+                    </div>
+                    <div th:if="${userId == homePageId}">
+                      <button
+                        th:id="'comment-update-btn-' + ${comment.id}"
+                        th:onclick="'openUpdate(' + ${comment.id} + ')'"
+                      >
+                        수정
+                      </button>
+                      <button
+                        th:id="'comment-delete-btn-' + ${comment.id}"
+                        th:onclick="'commentDelete(' + ${comment.id} + ')'"
+                      >
+                        삭제
+                      </button>
+                    </div>
                   </div>
                   <button
-                    th:id="'comment-update-btn-' + ${comment.id}"
-                    th:onclick="'openUpdate(' + ${comment.id} + ')'"
+                    th:id="'reply-btn-' + ${comment.id}"
+                    th:onclick="'replyOpen(' + ${comment.id} + ')'"
                   >
-                    수정
+                    답글쓰기
                   </button>
-                  <button
-                    th:id="'comment-delete-btn-' + ${comment.id}"
-                    th:onclick="'commentDelete(' + ${comment.id} + ')'"
-                  >
-                    삭제
-                  </button>
-                </div>
-                <button
-                  th:id="'reply-btn-' + ${comment.id}"
-                  th:onclick="'replyOpen(' + ${comment.id} + ')'"
-                >
-                  답글쓰기
-                </button>
-                <div th:id="'reply-input-' + ${comment.id}" hidden>
-                  <input
-                    class="reply-text"
-                    type="text"
-                    th:id="'reply-text-' + ${comment.id}"
-                  />
-                  <button
-                    id="reply-add-btn"
-                    th:onclick="'replyAdd(' + ${comment.id} + ')'"
-                  >
-                    답글등록
-                  </button>
-                </div>
+                  <div th:id="'reply-input-' + ${comment.id}" hidden>
+                    <input
+                      class="reply-text"
+                      type="text"
+                      th:id="'reply-text-' + ${comment.id}"
+                    />
+                    <button
+                      id="reply-add-btn"
+                      th:onclick="'replyAdd(' + ${comment.id} + ')'"
+                    >
+                      답글등록
+                    </button>
+                  </div>
 
-                <div th:id="'comment-box-' + ${comment.id} + ''">
-                  <ul
-                    class="nested"
-                    th:each="reply : ${findPost.postComments}"
-                    th:if="${reply.parentid == comment.id}"
-                  >
-                    <li class="recomment" th:id="'reply-li-' + ${reply.id}">
-                      <div class="recomment-id" th:text="${reply.usernickname}">
-                        User2
-                      </div>
-                      <div
-                        class="recomment-content"
-                        th:text="${reply.comment}"
-                        th:id="'reply-text-' + ${reply.id}"
-                      >
-                        대댓글 1-1 내용
-                      </div>
-                      <div class="recomment-date" th:text="${reply.createdAt}">
-                        2024-09-16
-                      </div>
-                      <div
-                        th:id="'reply-edit-' + ${reply.id}"
-                        style="display: none"
-                      >
-                        <input
-                          type="text"
-                          th:id="'reply-input-' + ${reply.id}"
-                          th:value="${reply.comment}"
-                        />
-                        <button
-                          th:id="'comment-save-btn-' + ${reply.id}"
-                          th:onclick="'replyUpdate(' + ${reply.id} + ')'"
+                  <div th:id="'comment-box-' + ${comment.id} + ''">
+                    <ul
+                      class="nested"
+                      th:each="reply : ${findPost.postComments}"
+                      th:if="${reply.parentid == comment.id}"
+                    >
+                      <li class="recomment" th:id="'reply-li-' + ${reply.id}">
+                        <div
+                          class="recomment-id"
+                          th:text="${reply.usernickname}"
                         >
-                          등록
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          th:onclick="'replyUpdateOpen(' + ${reply.id} + ')'"
+                          User2
+                        </div>
+                        <div
+                          class="recomment-content"
+                          th:text="${reply.comment}"
+                          th:id="'reply-text-' + ${reply.id}"
                         >
-                          수정
-                        </button>
-                        <button th:onclick="'replyDelete('+ ${reply.id} + ')'">
-                          삭제
-                        </button>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </block>
-          </ul>
-          <input class="comment-text" type="text" id="comment-text" />
-          <button id="comment-add-btn">댓글쓰기</button>
+                          대댓글 1-1 내용
+                        </div>
+                        <div
+                          class="recomment-date"
+                          th:text="${reply.createdAt}"
+                        >
+                          2024-09-16
+                        </div>
+                        <div
+                          th:id="'reply-edit-' + ${reply.id}"
+                          style="display: none"
+                        >
+                          <input
+                            type="text"
+                            th:id="'reply-input-' + ${reply.id}"
+                            th:value="${reply.comment}"
+                          />
+                          <button
+                            th:id="'comment-save-btn-' + ${reply.id}"
+                            th:onclick="'replyUpdate(' + ${reply.id} + ')'"
+                          >
+                            등록
+                          </button>
+                        </div>
+                        <div th:if="${userId == homePageId}">
+                          <button
+                            th:onclick="'replyUpdateOpen(' + ${reply.id} + ')'"
+                          >
+                            수정
+                          </button>
+                          <button
+                            th:onclick="'replyDelete('+ ${reply.id} + ')'"
+                          >
+                            삭제
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </block>
+            </ul>
+            <input class="comment-text" type="text" id="comment-text" />
+            <button id="comment-add-btn">댓글쓰기</button>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   </body>
   <script>
@@ -302,10 +432,12 @@
       const minutes = String(now.getMinutes()).padStart(2, "0");
       const formattedDate = `${year}.${month}.${day}. ${hours}:${minutes}`;
       const data = {
-        userId: 1,
+        userId: $("#userId").val(),
         comment: commentText,
         postId: $("#postId").val(),
       };
+
+      const userNickName = $("#userNickName").val();
 
       $.ajax({
         type: "post",
@@ -316,7 +448,7 @@
         if (resp == "SUCCESS") {
           $("#comment-ul").append(`
                 <li class="comment">
-                  <div class="comment-id">${data.userId}</div>
+                  <div class="comment-id">${userNickName}</div>
                   <div class="comment-content">${data.comment}</div>
                   <div class="comment-date">${formattedDate}</div>
                 </li>
@@ -348,9 +480,11 @@
       const replyInput = document.getElementById("reply-text-" + commentId);
       const replyText = replyInput.value;
 
+      const userNickName = $("#userNickName").val();
+
       const data = {
         postId: $("#postId").val(),
-        userId: 1,
+        userId: $("#userId").val(),
         commentId: commentId,
         reply: replyText,
       };
@@ -366,7 +500,7 @@
                 <ul class="nested">
                       <li class="recomment">
                         <div class="recomment-id">
-                          ${data.userId}
+                        ${userNickName}
                         </div>
                         <div class="recomment-content">
                           ${data.reply}
@@ -453,17 +587,35 @@
     function like(check) {
       const data = {
         postId: $("#postId").val(),
-        userId: 1,
+        userId: $("#userId").val(),
         check: check,
       };
-      console.log("postId => " + data.postId);
-      console.log("userId => " + data.userId);
+      const likeCount = $("#like-count");
+      let nowCount = parseInt(likeCount.text(), 10);
+
       $.ajax({
         type: "post",
         url: "/baseleap/postlike",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
-      }).done((resp) => {});
+      }).done((resp) => {
+        if (check == 0) {
+          nowCount++;
+          likeCount.text(nowCount);
+
+          $("#heart").css("display", "none"); // Directly show inactive heart
+          $("#heart1").css("display", "inline"); // Directly hide active heart
+          // $("#heart").attr("hidden", true)
+          // $("#heart1").attr("hidden", false)
+        } else {
+          nowCount--;
+          likeCount.text(nowCount);
+          $("#heart1").css("display", "none"); // Directly show active heart
+          $("#heart").css("display", "inline"); // Directly hide inactive heart
+          // $("#heart1").attr("hidden", true)
+          // $("#heart").attr("hidden", false)
+        }
+      });
     }
   </script>
 </html>

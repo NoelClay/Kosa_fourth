@@ -57,6 +57,7 @@ public class UserController {
             session = request.getSession();
             session.setAttribute("loginEmail", returnUserModel.getEmail());
             session.setAttribute("loginUserId", returnUserModel.getId());
+            session.setAttribute("nickName", returnUserModel.getNickName());
             session.setAttribute("homePageId", returnUserModel.getId());
             userService.userUpdateLastLoginTime(returnUserModel.getEmail());
 

@@ -7,15 +7,15 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface PostService {
-    void create(PostCreateModel postCreateModel);
+    void create(PostCreateModel postCreateModel, Long userId);
 
-    PostFindByIdModel findOneById(Long postId);
-    PostFindOneModel findOnePrevById(Long postId);
+    PostFindByIdModel findOneById(Long postId, Long userId);
+    PostFindOneModel findOnePrevById(Long postId, Long userId);
 
     void update(PostUpdateModel postUpdateModel);
 
-    void delete(Long postId, Long userId);
+    void delete(Long postId);
 
-    PageImpl<PostListModel> findAll(int page);
+    PageImpl<PostListModel> findAll(int page, Long homePageId);
 
 }
