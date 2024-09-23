@@ -51,13 +51,13 @@ public class GuestBookController {
                                     @RequestParam String myComment) {
 
         log.info("============");
-        log.info(loginUserId.toString());
-        log.info(pageUserId.toString());
+        log.info("현재로그인한 유저는" + loginUserId.toString());
+        log.info("요청한 페이지의" + pageUserId.toString());
         log.info(myComment);
         
         boolean b = false;
         GuestBook guestBook;
-        GuestBook gb = guestBookService.getGuestBookByWriterAndOwner(loginUserId, pageUserId);
+        GuestBook gb = guestBookService.getGuestBookByWriterAndOwner(pageUserId, loginUserId );
         if(gb != null){
             b= true;
             guestBook=gb;

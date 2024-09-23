@@ -34,7 +34,7 @@
     <update id="updateGuestBook" parameterType="com.baseleap.model.guestbook.GuestBook">
         UPDATE Guest_book
         SET comment = #{comment},
-            updated_at = NOW()
+            created_at = NOW()
         WHERE id = #{id}
     </update>
 
