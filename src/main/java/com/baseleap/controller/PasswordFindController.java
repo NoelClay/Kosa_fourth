@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
 @Slf4j
 @RequestMapping("/find")
 public class PasswordFindController {
@@ -35,22 +35,30 @@ public class PasswordFindController {
 
 
     // 비밀번호 찾기 처리
+    @ResponseBody
     @PostMapping(value = "/passwordFind")
-    public String passwordFind(@ModelAttribute UserModel userModel , Model model) {
+    // 왜 RequestParam 인지 모름
+
+    public Map<String, Integer> passwordFind(
+            @RequestBody UserModel userModel,
+            Model model) {
         //요청
         log.info("passwordFind() :: userModel = {}",userModel);
 
         //요청 처리
         // - 받은 정보로 유저 검색
+        Map<String, Integer> findMap = new HashMap<>();
         UserModel returnCnt = passwordFindService.findUserPassword(userModel.getEmail(),userModel.getValidationQuizQuestion(),userModel.getValidationQuizAnswer());
         log.info("passwordFind() :: returnCnt = {} ",returnCnt);
         model.addAttribute("userFind",returnCnt);
         
         // 리턴
         if(returnCnt != null){
-            return "passwordFindResultPage";
+            findMap.put("success",1);
+            return findMap;
         } else {
-            return "passwordFindFormPage";
+            findMap.put("success",0);
+            return findMap;
         }
 
     }
@@ -59,16 +67,20 @@ public class PasswordFindController {
 
     // 비밀번호 변경 처리
     @PostMapping(value = "/passwordFindResult")
-    public String passwordFindResult(@ModelAttribute UserModel userModel , Model model) {
-        //요청
-        log.info("passwordFindResult() :: userModel = {}",userModel);
+    public Map<String, Integer> passwordFindResult(@RequestBody UserModel userModel) {
+        log.info("passwordFindResult() :: userModel = {}", userModel);
 
-        //요청 처리
-        // - 회원 정보를 업데이트
+        Map<String, Integer> response = new HashMap<>();
         int returnCnt = userUpdateService.userUpdatePassword(userModel);
-        log.info("passwordFindResult() :: returnCnt = {} ",returnCnt);
 
-        // 리턴
-        return "redirect:/login/loginForm";
+        if (returnCnt > 0) {
+            response.put("success", 1);
+
+        } else {
+            response.put("success", 0);
+
+        }
+
+        return response;
     }
 }

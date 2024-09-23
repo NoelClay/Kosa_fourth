@@ -8,13 +8,13 @@ import com.baseleap.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
-@Controller
+@RestController
 @Slf4j
 @RequestMapping("/signup")
 public class SignUpController {
@@ -34,22 +34,26 @@ public class SignUpController {
     }
 
     //회원 가입을 처리 한다
+    @ResponseBody
     @PostMapping(value = "/signup")
-    public String signup( @ModelAttribute UserModel userModel ) {
+    public Map<String,Integer> signup(@RequestBody UserModel userModel ) {
         // 요청
         log.info("signup() :: userModel.getCreatedTime = {} ",userModel.toString());
 
         // 요청 처리
         // - 회원 정보를 저장
         // 중복 이메일 예외처리 해야함
+        Map<String, Integer> signupMap = new HashMap<>();
         UserModel returnUserEmail = signUpService.getUserByEmail(userModel.getEmail());
         log.info("signup() :: userModel.returnUserModel = {} ",returnUserEmail);
         if (returnUserEmail == null) {
+            signupMap.put("success",1);
             int returnCnt = signUpService.signUp(userModel);
             log.info("signup() :: returnCnt = {} ",returnCnt);
-            return "redirect:/signup/signUpSuccess";
+            return signupMap;
         }else {
-            return "redirect:/signup/signUpFail";
+            signupMap.put("success",0);
+            return signupMap;
         }
 
     }
