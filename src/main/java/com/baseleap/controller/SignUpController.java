@@ -63,7 +63,7 @@ public class SignUpController {
     public String loginSuccess() {
         log.info("signUpSuccess()");
 
-        return "demo";
+        return "redirect:/";
     }
 
     // 회원 가입 실패 화면으로 이동

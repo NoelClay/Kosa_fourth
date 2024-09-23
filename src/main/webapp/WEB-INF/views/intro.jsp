@@ -259,7 +259,7 @@
                     if (data.success) {
                         alert('회원가입 성공!');
                         // 회원가입 후 처리 (메인 페이지 이동 등)
-                        window.location.href = '/demo';
+                        window.location.href = '/intro';
                     } else {
                         alert('회원가입 실패: ' + data.message);
                     }

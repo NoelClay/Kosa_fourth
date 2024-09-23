@@ -3,7 +3,7 @@ function submitSendMessageForm(event) {
     const form = event.currentTarget;
     const receiverId = form.querySelector(".receiver-id");
     const content = form.querySelector("textarea");
-    fetch("/message/send-message", {
+    fetch("/baseleap/message/send-message", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

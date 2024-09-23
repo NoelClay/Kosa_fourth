@@ -34,12 +34,12 @@
 		
 		<!-- 유저 프로필 영역 -->
 		<div class="user-profile">
-			<a href="my-page.html">
+			<a href="/baseleap/my-page/info">
 				<img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
 			</a>
 			<div class="user-info">
-				<h2>Deeper Learning</h2>
-				<p>Dlaiml</p>
+				<h1>${sessionScope.nickName}</h1>
+				<h2>전체 메세지함</h2>
 			</div>
 		</div>
 		
@@ -47,7 +47,7 @@
 		<div class="menu-bottom">
 			<a href="#" class="menu-icon" title="게시글 쓰기"><img src="write-icon.png" alt="게시글 쓰기"></a>
 			<a href="#" class="menu-icon" title="방명록 쓰기"><img src="guestbook-write-icon.png" alt="방명록 쓰기"></a>
-			<a href="#" class="menu-icon" title="페이지 설정"><img src="settings-icon.png" alt="페이지 설정"></a>
+			<a href="/baseleap/my-page/info" class="menu-icon" title="마이 페이지"><img src="settings-icon.png" alt="마이 페이지"></a>
 		</div>
 	</aside>
 	
@@ -83,7 +83,7 @@
 											${messageUserDTO.readAt}
 										</c:when>
 										<c:otherwise>
-											<form action="${pageContext.request.contextPath}/message/read" method="post">
+											<form action="${pageContext.request.contextPath}/baseleap/message/read" method="post">
 												<input type="hidden" name="messageId" value="${messageUserDTO.id}">
 												<button class="btn btn-primary" type="submit">확인</button>
 											</form>
@@ -91,7 +91,7 @@
 									</c:choose>
 								</td>
 								<td>
-									<form action="${pageContext.request.contextPath}/message/delete" method="post">
+									<form action="${pageContext.request.contextPath}/baseleap/message/delete" method="post">
 										<input type="hidden" name="messageId" value="${messageUserDTO.id}">
 										<button class="btn btn-warning" type="submit">삭제</button>
 									</form>
@@ -104,7 +104,7 @@
 			</c:choose>
 		</div>
 		<div class="mt-3 d-flex justify-content-center align-items-center">
-			<a href="/my-page/info" class="btn btn-primary" type="button">돌아가기</a>
+			<a href="/baseleap/my-page/info" class="btn btn-primary" type="button">돌아가기</a>
 		</div>
 	</main>
 </div>

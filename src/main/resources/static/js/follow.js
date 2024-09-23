@@ -19,7 +19,7 @@ function submitUnfollowForm(event) {
 
 
 function following(input, button) {
-    fetch("/my-page/following", {
+    fetch("/baseleap/my-page/following", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function following(input, button) {
 
 
 function unfollow(input, button) {
-    fetch("/my-page/unfollow", {
+    fetch("/baseleap/my-page/unfollow", {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",

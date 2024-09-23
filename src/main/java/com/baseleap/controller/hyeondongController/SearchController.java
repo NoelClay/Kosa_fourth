@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/my-page")
+@RequestMapping(value = "/baseleap/my-page")
 public class SearchController {
     @Autowired
     private MyPageService myPageService;
