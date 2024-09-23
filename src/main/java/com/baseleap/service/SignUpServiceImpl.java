@@ -15,8 +15,17 @@ public class SignUpServiceImpl implements SignUpService{
     private SignUpMapper signUpMapper;
 
     @Override
+    public UserModel getUserByEmail(String email) {
+        log.info("signUp() :: getUserByEmail = {} ",email);
+        return signUpMapper.getUserByEmail(email);
+    }
+
+    @Override
     public int signUp(UserModel userModel) {
         log.info("signUp() :: userModel = {} ",userModel.toString());
         return signUpMapper.signUp(userModel);
     }
+
+
+
 }

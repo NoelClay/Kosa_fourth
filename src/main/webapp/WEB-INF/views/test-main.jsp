@@ -10,7 +10,7 @@
 <body>
 <h1>테스트 화면 이동 </h1>
 
-    <a href = "/login/loginOut" >  {로그 아웃(GET)}</a>
+    <a href = "/loginMain/loginOut" >  {로그 아웃(GET)}</a>
     <br>
 
     <a href = "/update/updateForm" >  {정보 수정(GET)}</a>

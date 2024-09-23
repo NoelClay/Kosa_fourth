@@ -9,11 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -25,22 +25,29 @@ public class MessageController {
     @Autowired
     private AlarmService alarmService;
 
+    @ResponseBody
     @PostMapping(value = "/send-message")
-    public String sendMessage(HttpServletRequest request) {
+    public Map<String, String> sendMessage(
+            HttpServletRequest request,
+            @RequestBody HashMap<String, String> requestBody) {
         // 메세지 만들기.
         HttpSession session = request.getSession();
-        String content = request.getParameter("content");
         String stringSenderId = (String) session.getAttribute("userId");
-        String stringReceiverId = request.getParameter("receiverId");
+        String stringReceiverId = requestBody.get("receiverId");
         int senderId = Integer.parseInt(stringSenderId);
         int receiverId = Integer.parseInt(stringReceiverId);
+        String content = (String) requestBody.get("content");
         messageService.createNewMessage(senderId, receiverId, content);
 
         // 알림 만들기.
-        String alarmContent = "새로운 메세지";
+        String alarmContent = "님이 보낸 새로운 메세지가 있습니다.";
         alarmService.createNewAlarm(senderId, receiverId, alarmContent);
 
-        return "redirect:/my-page/search";
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("status", "success");
+        responseBody.put("message", "성공적으로 보냈습니다.");
+
+        return responseBody;
     }
 
     @GetMapping(value = "/new-messages")
