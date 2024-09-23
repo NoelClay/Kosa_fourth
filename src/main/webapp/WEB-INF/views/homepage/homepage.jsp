@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- JSP -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         <!DOCTYPE html>
         <html lang="ko">
@@ -361,7 +363,7 @@
                             <h2>홈피 설정 변경</h2>
                             <button id="musicRegisterBtn">음악 등록</button>
                             <button id="musicActivateBtn">음악 활성화</button>
-                            <button id="themeChangeBtn">테마 색상 변경</button>
+                            <!-- <button id="themeChangeBtn">테마 색상 변경</button> -->
                         </div>
                     </div>
 
@@ -393,9 +395,8 @@
                                 <c:forEach var="music" items="${musicList}">
                                     <label>
                                         <!-- 활성화된 음악 선택 -->
-                                        <input type="radio" name="selectedMusic" value="${music.name}" ${music.active
-                                            ? 'checked' : '' }>
-                                        ${music.name}
+                                        <input type="radio" name="selectedMusic" value="${music.name}" ${music.active ? 'checked' : '' }>
+                                        ${fn:split(music.name,'_')[1]}
                                     </label>
                                     <br>
                                 </c:forEach>

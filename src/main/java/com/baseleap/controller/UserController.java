@@ -72,6 +72,7 @@ public class UserController {
                 session.setAttribute("homePageId", returnUserModel.getId());
                 session.setAttribute("nickName", returnUserModel.getNickName());
                 userService.userUpdateLastLoginTime(returnUserModel.getEmail());
+                loginMap.put("userId", returnUserModel.getId());
                 return loginMap;
             } else {
                 loginMap.put("success",0);

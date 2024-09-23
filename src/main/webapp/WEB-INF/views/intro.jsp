@@ -203,7 +203,7 @@
                         alert('로그인 성공!');
                         // 로그인 성공 후 처리 (예: 메인 페이지 이동)
                         // window.location.href = '/test-main';
-                        window.location.href = '/my-page/info';
+                        window.location.href = `/baseleap/home/page?userId=`+data.userId;
                     } else {
                         alert('로그인 실패: ' + data.success);
                     }
