@@ -66,7 +66,7 @@ public class S3ServiceImpl implements S3Service{
         for(MultipartFile file : files){
             if(file != null && !file.isEmpty()){
                 System.out.println("여긴 파일 오리지널네임 ==>> " + file.getOriginalFilename());
-                File convertFile = new File("/Users/junghunmok/Desktop/1조/postimage/"+file.getOriginalFilename());
+                File convertFile = new File("/Users/"+file.getOriginalFilename());
                 try{
                     if(convertFile.createNewFile()){
                         try(FileOutputStream fos = new FileOutputStream(convertFile)){
@@ -85,8 +85,11 @@ public class S3ServiceImpl implements S3Service{
     }
 
     @Override
-    public List<String> updateImage(List<MultipartFile> file, Long postId) {
-        deleteBucket(postId);
+    public List<String> updateImage(List<MultipartFile> file,List<String> prevImage,  Long postId) {
+        // 파일이 null 이 아니면
+        if(file.isEmpty()) {
+            deleteBucket(postId);
+        }
         List<File> updateImageFiles =  convertFile(file);
         return uploadFile(updateImageFiles, postId);
     }

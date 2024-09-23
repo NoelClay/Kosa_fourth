@@ -19,8 +19,8 @@ public class PostMapperImpl implements PostRepository {
     }
 
     @Override
-    public PostFindOneModel findOne(Long postId) {
-        return postMapper.findOneById(postId);
+    public PostFindOneModel findOne(Long postId, Long userId) {
+        return postMapper.findOneById(postId, userId);
     }
 
     @Override
@@ -36,13 +36,18 @@ public class PostMapperImpl implements PostRepository {
     }
 
     @Override
-    public List<Long> postIds(int size, Long offset) {
-        return postMapper.ids(size, offset);
+    public List<Long> postIds(int size, Long offset, Long homePageId) {
+        return postMapper.ids(size, offset, homePageId);
     }
 
     @Override
     public int countByUserId(Long userId) {
         return postMapper.countByUserId(userId);
 
+    }
+
+    @Override
+    public int delete(Long postId) {
+        return postMapper.delete(postId);
     }
 }

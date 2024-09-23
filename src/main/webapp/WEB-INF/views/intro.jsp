@@ -25,7 +25,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 <div class="container text-center mt-5">
 	<h1>Welcome to the Website</h1>
 	<button id="startButton" class="btn btn-primary mt-3">시작하기</button>
@@ -52,7 +51,7 @@
 						<a class="nav-link" data-toggle="tab" href="#reset" role="tab">비밀번호 찾기</a>
 					</li>
 				</ul>
-
+				
 				<!-- 탭 콘텐츠 -->
 				<div class="tab-content">
 					<div id="login" class="tab-pane fade show active" role="tabpanel">
@@ -73,8 +72,8 @@
 							<button type="submit" id="loginBtn" class="btn btn-primary btn-block">로그인</button>
 						</form>
 					</div>
-
-
+					
+					
 					<div id="signup" class="tab-pane fade" role="tabpanel">
 						<h3 class="mt-3">회원가입</h3>
 						<form id="signup-form" action="/signup/signup" method="post" class="mt-4">
@@ -123,8 +122,8 @@
 							<button type="submit" class="btn btn-primary btn-block" id="signupButton">회원가입</button>
 						</form>
 					</div>
-
-
+					
+					
                         <div id="reset" class="tab-pane fade" role="tabpanel">
                             <h3 class="mt-3">비밀번호 찾기</h3>
                             <form id="reset-form" action="/find/passwordFind" method="post" class="mt-4">

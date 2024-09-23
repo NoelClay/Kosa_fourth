@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping(value = "/message")
+@RequestMapping(value = "/baseleap/message")
 public class MessageController {
     @Autowired
     private MessageService messageService;
