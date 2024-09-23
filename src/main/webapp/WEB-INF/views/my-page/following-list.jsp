@@ -29,12 +29,12 @@
 		<div class="menu-top">
 			<a href="#" class="menu-icon" title="게시글 보기"><img src="post-icon.png" alt="게시글 보기"></a>
 			<a href="#" class="menu-icon" title="방명록 보기"><img src="guestbook-icon.png" alt="방명록 보기"></a>
-			<a href="${pageContext.request.contextPath}/my-page/search" class="menu-icon" title="유저 검색"><img src="search-icon.png" alt="유저 검색"></a>
+			<a href="${pageContext.request.contextPath}/baseleap/my-page/search" class="menu-icon" title="유저 검색"><img src="search-icon.png" alt="유저 검색"></a>
 		</div>
 		
 		<!-- 유저 프로필 영역 -->
 		<div class="user-profile">
-			<a href="/my-page/info">
+			<a href="/baseleap/my-page/info">
 				<img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
 			</a>
 			<div class="user-info">
@@ -47,7 +47,7 @@
 		<div class="menu-bottom">
 			<a href="#" class="menu-icon" title="게시글 쓰기"><img src="write-icon.png" alt="게시글 쓰기"></a>
 			<a href="#" class="menu-icon" title="방명록 쓰기"><img src="guestbook-write-icon.png" alt="방명록 쓰기"></a>
-			<a href="/my-page/info" class="menu-icon" title="마이 페이지"><img src="settings-icon.png" alt="마이 페이지"></a>
+			<a href="/baseleap/my-page/info" class="menu-icon" title="마이 페이지"><img src="settings-icon.png" alt="마이 페이지"></a>
 		</div>
 	</aside>
 	
@@ -108,7 +108,7 @@
 			</div>
 		</div>
 		<div class="mt-3 d-flex justify-content-center align-items-center">
-			<a href="/my-page/info" class="btn btn-primary" type="button">돌아가기</a>
+			<a href="/baseleap/my-page/info" class="btn btn-primary" type="button">돌아가기</a>
 		</div>
 	</main>
 </div>

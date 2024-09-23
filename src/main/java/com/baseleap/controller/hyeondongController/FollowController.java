@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/my-page")
+@RequestMapping(value = "/baseleap/my-page")
 public class FollowController {
     @Autowired
     private MyPageService myPageService;

@@ -64,7 +64,7 @@ public class UserUpdateController {
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "redirect:/my-page/info";
+            return "redirect:/baseleap/my-page/info";
         }else {
             return "updateFail";
         }

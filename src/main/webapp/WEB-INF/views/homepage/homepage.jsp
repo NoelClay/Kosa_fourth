@@ -290,7 +290,7 @@
 
                         <!-- 유저 프로필 영역 -->
                         <div class="user-profile">
-                            <a href="/baseleap/home/page?userId=" +${pageUserId}>
+                            <a href="/baseleap/home/page?userId=${sessionScope.userId}">
                                 <img src="${profileImgPath}" alt="Profile Picture" class="profile-picture">
                             </a>
                             <div class="user-info">

@@ -59,51 +59,51 @@
 			color: white;
 		}
 
-		/* 모달 스타일 */
-		.modal {
-			display: none;
-			position: fixed;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			overflow: auto;
-			background-color: rgba(0, 0, 0, 0.5);
-			padding-top: 60px;
-		}
-
-		.modal-content {
-			background-color: #fefefe;
-			margin: 5% auto;
-			padding: 20px;
-			border: 1px solid #888;
-			width: 60%;
-			border-radius: 10px;
-		}
-
-		.close {
-			color: #aaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-			color: black;
-			text-decoration: none;
-			cursor: pointer;
-		}
-
-		button {
-			border-radius: 4px;
-			transition: all 0.3s ease;
-		}
-
-		button:hover {
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		}
+		/*!* 모달 스타일 *!*/
+		/*.modal {*/
+		/*	display: none;*/
+		/*	position: fixed;*/
+		/*	z-index: 1;*/
+		/*	left: 0;*/
+		/*	top: 0;*/
+		/*	width: 100%;*/
+		/*	height: 100%;*/
+		/*	overflow: auto;*/
+		/*	background-color: rgba(0, 0, 0, 0.5);*/
+		/*	padding-top: 60px;*/
+		/*}*/
+		
+		/*.modal-content {*/
+		/*	background-color: #fefefe;*/
+		/*	margin: 5% auto;*/
+		/*	padding: 20px;*/
+		/*	border: 1px solid #888;*/
+		/*	width: 60%;*/
+		/*	border-radius: 10px;*/
+		/*}*/
+		
+		/*.close {*/
+		/*	color: #aaa;*/
+		/*	float: right;*/
+		/*	font-size: 28px;*/
+		/*	font-weight: bold;*/
+		/*}*/
+		
+		/*.close:hover,*/
+		/*.close:focus {*/
+		/*	color: black;*/
+		/*	text-decoration: none;*/
+		/*	cursor: pointer;*/
+		/*}*/
+		
+		/*button {*/
+		/*	border-radius: 4px;*/
+		/*	transition: all 0.3s ease;*/
+		/*}*/
+		
+		/*button:hover {*/
+		/*	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+		/*}*/
 
 		.menu-icon svg:hover {
 			transform: scale(1.1);
@@ -160,7 +160,7 @@
 					<path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"></path>
 				</svg>
 			</a>
-			<a href="/my-page/search" class="menu-icon" title="유저 검색">
+			<a href="/baseleap/my-page/search" class="menu-icon" title="유저 검색">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
 					<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"></path>
 				</svg>
@@ -169,7 +169,7 @@
 		
 		<!-- 유저 프로필 영역 -->
 		<div class="user-profile">
-			<a href="/my-page/info">
+			<a href="/baseleap/my-page/info">
 				<img src="${profileImgPath}" alt="Profile Picture" class="profile-picture">
 			</a>
 			<div class="user-info">
@@ -196,8 +196,15 @@
 						</path>
 					</svg>
 				</a>
+				<a href="/baseleap/my-page/info" class="menu-icon" title="페이지 설정">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+						<path
+								d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0">
+						</path>
+						<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"></path>
+					</svg>
+				</a>
 			</c:if>
-			
 			<!-- 로그인 유저가 페이지 소유자가 아닌 경우 '나의 한마디' 버튼이 보이도록 설정 -->
 			<c:if test="${loginUserId != pageUserId}">
 				<a class="menu-icon" id="openGuestBookForm">
@@ -205,15 +212,15 @@
 						<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"></path>
 					</svg>
 				</a>
+				<a href="#" class="menu-icon" title="페이지 설정">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+						<path
+								d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0">
+						</path>
+						<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"></path>
+					</svg>
+				</a>
 			</c:if>
-			<a href="#" class="menu-icon" title="페이지 설정">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-					<path
-							d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0">
-					</path>
-					<path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"></path>
-				</svg>
-			</a>
 		</div>
 	</aside>
 	
@@ -222,12 +229,10 @@
 		<div class="post-summary">
 			<div class="d-flex justify-content-center align-items-center">
 				<h1>My page</h1>
-				<div>
-					<a href="${pageContext.request.contextPath}/alarm/get-list">
-						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-							<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-						</svg>
-					</a>
+				<div class="alarm-button" data-bs-toggle="modal" data-bs-target="#alarmModal">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+						<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+					</svg>
 				</div>
 			</div>
 			<hr>
@@ -260,24 +265,24 @@
 				<%--유저 마이페이지 하단 메뉴--%>
 				<div class="d-flex justify-content-between">
 					<div class="mb-2">
-						<a href="${pageContext.request.contextPath}/my-page/new-messages" class="btn btn-outline-primary" type="button">받은 메세지함</a>
+						<a href="${pageContext.request.contextPath}/baseleap/my-page/new-messages" class="btn btn-outline-primary" type="button">받은 메세지함</a>
 					</div>
 					<div class="mb-2">
-						<a href="${pageContext.request.contextPath}/my-page/follower-list" class="btn btn-outline-primary" type="button">나를 팔로우 중인 사람들</a>
+						<a href="${pageContext.request.contextPath}/baseleap/my-page/follower-list" class="btn btn-outline-primary" type="button">나를 팔로우 중인 사람들</a>
 					</div>
 				</div>
 				<div class="d-flex justify-content-between">
 					<div class="mb-2">
-						<a href="${pageContext.request.contextPath}/my-page/all-messages" class="btn btn-outline-primary" type="button">전체 메세지함</a>
+						<a href="${pageContext.request.contextPath}/baseleap/my-page/all-messages" class="btn btn-outline-primary" type="button">전체 메세지함</a>
 					</div>
 					<div class="mb-2">
-						<a href="${pageContext.request.contextPath}/my-page/following-list" class="btn btn-outline-primary" type="button">내가 팔로잉 중인 사람들</a>
+						<a href="${pageContext.request.contextPath}/baseleap/my-page/following-list" class="btn btn-outline-primary" type="button">내가 팔로잉 중인 사람들</a>
 					</div>
 				</div>
 			</div>
 			
 			<%--유저 정보 수정 폼--%>
-			<div id="update-form" style="display: none;">
+			<div id="update-form" class="d-none">
 				<form action="/update/update" method="post">
 					<table>
 						<tr>
@@ -305,7 +310,11 @@
 							<td><input type="text" name="userIntroduce" value="${userInfo.userIntroduce}"></td>
 						</tr>
 					</table>
-					<input class="btn btn-primary" type="submit" value="등록"><input lass="btn btn-warning" type="reset" value="취소">
+					<div class="d-flex">
+						<input class="btn btn-primary" type="submit" value="등록">
+						<button class="me-auto btn btn-warning" type="reset">되돌리기</button>
+						<button id="back" class="btn btn-primary">돌아가기</button>
+					</div>
 				</form>
 			</div>
 			
@@ -357,43 +366,56 @@
 	</div>
 </div>
 </body>
-<script>
-	$(document).ready(function () {
-		$('#userUpdateButton').click(function (event) {
-			console.log("유저 정보 수정 버튼 클릭");
-			$('#update-form').show();
-			$('#userInfo').hide();
-		});
-	});
-
-	$(document).ready(function () {
-		$('#user-SignOut').click(function () {
-			if (confirm('정말 탈퇴하시겠습니까? (탈퇴 후 1년간 재가입 불가)')) {
-				fetch('/signOut/signOut', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						email: userInfo.email,
-					})
-				}).then(response => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					return response.json();
-				}).then((data) => {
-					// 탈퇴 성공 시 처리
-					alert('회원 탈퇴가 완료되었습니다.');
-					window.location.href = '/intro';
-				}).catch(error => {
-					// 탈퇴 실패 시 처리
-					console.error('Error:', error);
-					alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
-				});
-			}
-		});
-	});
-</script>
 <script type="application/javascript" src="/js/alarm.js"></script>
+<script>
+$(document).ready(function () {
+	$('#user-SignOut').click(function () {
+		if (confirm('정말 탈퇴하시겠습니까? (탈퇴 후 1년간 재가입 불가)')) {
+			fetch('/signOut/signOut', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email: userInfo.email,
+				})
+			}).then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			}).then((data) => {
+				// 탈퇴 성공 시 처리
+				alert('회원 탈퇴가 완료되었습니다.');
+				window.location.href = '/intro';
+			}).catch(error => {
+				// 탈퇴 실패 시 처리
+				console.error('Error:', error);
+				alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
+			});
+		}
+	});
+});
+</script>
+<script>
+	const backButton = document.querySelector("#back");
+	const userUpdateButton = document.querySelector("#userUpdateButton");
+  const updateForm = document.querySelector("#update-form");
+  const userInfo = document.querySelector("#userInfo");
+
+  userUpdateButton.addEventListener("click", () => {
+      updateForm.classList.remove("d-none")
+      updateForm.classList.add("d-block");
+      userInfo.classList.remove("d-block");
+      userInfo.classList.add("d-none");
+  })
+  
+  backButton.addEventListener("click", () => {
+      userInfo.classList.remove("d-none")
+      userInfo.classList.add("d-block");
+      updateForm.classList.remove("d-block");
+      updateForm.classList.add("d-none");
+  })
+</script>
+
 </html>
