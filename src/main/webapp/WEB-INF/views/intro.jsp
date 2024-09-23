@@ -14,7 +14,7 @@
 	<!-- 사용자 정의 CSS -->
 	
 	<!-- 사용자 정의 JavaScript -->
-	<script src="modal.js"></script>
+	<script src="/js/modal.js"></script>
 	
 	<!-- jQuery, Popper.js, Bootstrap JS CDN 추가 -->
 	<script
@@ -122,39 +122,57 @@
 					</div>
 					
 					
-					<div id="reset" class="tab-pane fade" role="tabpanel">
-						<h3 class="mt-3">비밀번호 찾기</h3>
-						<form id="reset-form"  action="/find/passwordFind" method="post" class="mt-4">
-							<div class="form-group">
-								<label>이메일:
-									<input type="email" id="findEmail" class="form-control"  name="email" required>
-								</label>
-							</div>
-							<div class="form-group">
-								<label >질문:
-									<select class="form-control" id = "findValidationQuizQuestion"  name="validationQuizQuestion">
-										<option value='1'>졸업한 초등학교</option>
-										<option value='2'>가장 좋아하는 영화</option>
-										<option value='3'>가장 싫어하는 음식</option>
-									</select>
-								</label>
-							</div>
-							<div class="form-group">
-								<label >답변:
-									<input type="text" class="form-control" id="findValidationQuizAnswer" name="validationQuizAnswer" required >
-								</label>
-							</div>
-							<button type="submit" id="resetButton" class="btn btn-primary btn-block">비밀번호 찾기</button>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			</div>
-		</div>
-	</div>
-</div>
+                        <div id="reset" class="tab-pane fade" role="tabpanel">
+                            <h3 class="mt-3">비밀번호 찾기</h3>
+                            <form id="reset-form" action="/find/passwordFind" method="post" class="mt-4">
+                                <div class="form-group">
+                                    <label>이메일:
+                                    <input type="email" id="findEmail" class="form-control" name="email" required>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>질문:
+                                    <select class="form-control" id="findValidationQuizQuestion" name="validationQuizQuestion">
+                                        <option value='1'>졸업한 초등학교</option>
+                                        <option value='2'>가장 좋아하는 영화</option>
+                                        <option value='3'>가장 싫어하는 음식</option>
+                                    </select>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>답변:
+                                    <input type="text" class="form-control" id="findValidationQuizAnswer" name="validationQuizAnswer" required>
+                                    </label>
+                                </div>
+                                <button type="submit" id="resetButton" class="btn btn-primary btn-block">비밀번호 찾기</button>
+                            </form>
+
+                            <!-- 새 비밀번호 설정 폼 (처음에는 숨겨져 있음) -->
+                            <form id="password-reset-form" style="display: none;" class="mt-4">
+                                <div class="form-group">
+                                    <label>이메일:
+                                    <input type="email" id="email-for-reset" class="form-control" readonly>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>새 비밀번호:
+                                    <input type="password" id="new-password" class="form-control" required>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">새 비밀번호 설정</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 <script>
 
@@ -261,44 +279,79 @@
         }
     });
 
-    // 비밀번호 찾기
-    $(document).ready(function() {
-        $('#resetButton').submit(function(event) {
-            event.preventDefault(); // 기본 submit 행동 방지
+// 비밀번호 찾기
+$(document).ready(function() {
+    $('#reset-form').submit(function(event) {
+        event.preventDefault();
 
-            const email = $('#findEmail').val();
-            const validationQuizQuestion = $('#findValidationQuizQuestion').val();
-            const validationQuizAnswer = $('#findValidationQuizAnswer').val();
+        const email = $('#findEmail').val();
+        const validationQuizQuestion = $('#findValidationQuizQuestion').val();
+        const validationQuizAnswer = $('#findValidationQuizAnswer').val();
 
-            const data = {
-                email,
-                validationQuizQuestion,
-                validationQuizAnswer
-            };
+        const data = {
+            email,
+            validationQuizQuestion,
+            validationQuizAnswer
+        };
 
-            fetch('/find/passwordFind', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success == 1){
-                        alert('비밀번호 찾기 성공!');
-                        // 비밀벊 찾기 후 이동
-                        window.location.href = '/find/passwordFindResultPage';
-                        //res.redirect('/find/passwordFindResultPage');
-                    } else {
-                        alert('비밀번호 찾기 실패: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    alert('비밀번호 찾기 중 오류 발생');
-                    console.error(error);
-                });
+        fetch('/find/passwordFind', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success == 1) {
+                alert('비밀번호 찾기 성공! 새 비밀번호를 설정해주세요.');
+                // 비밀번호 재설정 폼 표시 (이 부분은 HTML에 해당 폼이 있다고 가정)
+                $('#password-reset-form').show();
+                $('#reset-form').hide();
+                $('#email-for-reset').val(email);  // 이메일 필드에 값 설정
+            } else {
+                alert('비밀번호 찾기 실패 ');
+            }
+        })
+        .catch(error => {
+            alert('비밀번호 찾기 중 오류 발생');
+            console.error(error);
         });
     });
+
+    // 새 비밀번호 설정
+    $('#password-reset-form').submit(function(event) {
+        event.preventDefault();
+
+        const email = $('#email-for-reset').val();
+        const newPassword = $('#new-password').val();
+
+        const data = {
+            email,
+            password: newPassword
+        };
+
+        fetch('/find/passwordFindResult', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success == 1) {
+                alert('비밀번호가 성공적으로 변경되었습니다.');
+                window.location.href = '/demo';
+            } else {
+                alert('비밀번호 변경 실패');
+            }
+        })
+        .catch(error => {
+            alert('비밀번호 변경 중 오류 발생');
+            console.error(error);
+        });
+    });
+});
 </script>
 </html>

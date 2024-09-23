@@ -70,17 +70,17 @@ public class PasswordFindController {
     public Map<String, Integer> passwordFindResult(@RequestBody UserModel userModel) {
         log.info("passwordFindResult() :: userModel = {}", userModel);
 
-        Map<String, Integer> response = new HashMap<>();
+        Map<String, Integer> passwordMao = new HashMap<>();
         int returnCnt = userUpdateService.userUpdatePassword(userModel);
 
         if (returnCnt > 0) {
-            response.put("success", 1);
+            passwordMao.put("success", 1);
 
         } else {
-            response.put("success", 0);
+            passwordMao.put("success", 0);
 
         }
 
-        return response;
+        return passwordMao;
     }
 }

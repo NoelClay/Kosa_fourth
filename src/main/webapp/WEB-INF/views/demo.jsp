@@ -204,7 +204,7 @@ $(document).ready(function() {
             // 로그인 성공 후 처리 (예: 메인 페이지 이동)
             window.location.href = '/test-main';
           } else {
-            alert('로그인 실패: ' + data.success);
+            alert('로그인 실패');
           }
         })
         .catch(error => {
@@ -260,7 +260,7 @@ $(document).ready(function() {
         // 회원가입 후 처리 (메인 페이지 이동 등)
          window.location.href = '/demo';
       } else {
-        alert('회원가입 실패: ' + data.success);
+        alert('회원가입 실패 ');
       }
     })
     .catch(error => {
@@ -304,7 +304,7 @@ $(document).ready(function() {
                 $('#reset-form').hide();
                 $('#email-for-reset').val(email);  // 이메일 필드에 값 설정
             } else {
-                alert('비밀번호 찾기 실패: ' + data.message);
+                alert('비밀번호 찾기 실패 ');
             }
         })
         .catch(error => {
@@ -338,7 +338,7 @@ $(document).ready(function() {
                 alert('비밀번호가 성공적으로 변경되었습니다.');
                 window.location.href = '/demo';
             } else {
-                alert('비밀번호 변경 실패: ' + data.message);
+                alert('비밀번호 변경 실패');
             }
         })
         .catch(error => {
