@@ -16,6 +16,7 @@
     <select id="getAllAlarms" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.AlarmUserDTO">
         select
             a.id as alarmId,
+            u.profile_image as userProfileImage,
             u.nickname as userNickname,
             a.content as alarmContent
         from alarm as a

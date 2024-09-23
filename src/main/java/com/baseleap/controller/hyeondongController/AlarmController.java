@@ -9,12 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLSyntaxErrorException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -23,22 +24,31 @@ public class AlarmController {
     @Autowired
     private AlarmService alarmService;
 
+    @ResponseBody
     @GetMapping(value = "/get-list")
-    public String getAllAlarms(
-            HttpServletRequest request,
-            Model model
+    public Map<String, Object> getAllAlarms(
+            HttpServletRequest request
     ) {
         HttpSession session = request.getSession();
         String stringUserId = (String) session.getAttribute("userId");
         int userId = Integer.parseInt(stringUserId);
         List<AlarmUserDTO> alarmUserDTOList = alarmService.getAllAlarms(userId);
-        model.addAttribute("alarmUserDTOList", alarmUserDTOList);
-        return "my-page/alarm-list";
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("status", "success");
+        responseBody.put("message", "알림 리스트 가져오기 성공.");
+        responseBody.put("data", alarmUserDTOList);
+        return responseBody;
     }
 
-    @PostMapping(value = "/read")
-    public String readAlarm(@RequestParam("alarmId") int alarmId) {
+    @ResponseBody
+    @DeleteMapping(value = "/read")
+    public Map<String, String> readAlarm(
+            @RequestBody HashMap<String, Integer> requestBody) {
+        int alarmId = requestBody.get("alarmId");
+        Map<String, String> responseBody = new HashMap<>();
         alarmService.readAlarm(alarmId);
-        return "redirect:/alarm/get-list";
+        responseBody.put("status", "success");
+        responseBody.put("message", "읽음 처리 완료...");
+        return responseBody;
     }
 }

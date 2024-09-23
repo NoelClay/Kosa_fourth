@@ -54,12 +54,12 @@
 		
 		<!-- 유저 프로필 영역 -->
 		<div class="user-profile">
-			<a href="my-page.html">
+			<a href="/my-page/info">
 				<img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
 			</a>
 			<div class="user-info">
-				<h2>Deeper Learning</h2>
-				<p>Dlaiml</p>
+				<h1>블로그 주인의 닉네임</h1>
+				<h2></h2>
 			</div>
 		</div>
 		
@@ -67,7 +67,7 @@
 		<div class="menu-bottom">
 			<a href="#" class="menu-icon" title="게시글 쓰기"><img src="write-icon.png" alt="게시글 쓰기"></a>
 			<a href="#" class="menu-icon" title="방명록 쓰기"><img src="guestbook-write-icon.png" alt="방명록 쓰기"></a>
-			<a href="#" class="menu-icon" title="페이지 설정"><img src="settings-icon.png" alt="페이지 설정"></a>
+			<a href="/my-page/info" class="menu-icon" title="마이 페이지"><img src="settings-icon.png" alt="마이 페이지"></a>
 		</div>
 	</aside>
 	

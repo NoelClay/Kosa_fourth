@@ -2,9 +2,11 @@
   User: 문현동
   Date: 2024-09-22
   Time: 오후 8:43
-  유저 마이페이지.
+  유저 정보를 볼 수 있는 마이페이지.
+  유저가 받은 모든 알림들을 볼 수도 있습니다.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -33,12 +35,12 @@
 		
 		<!-- 유저 프로필 영역 -->
 		<div class="user-profile">
-			<a href="my-page.html">
+			<a href="/my-page/info">
 				<img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture">
 			</a>
 			<div class="user-info">
-				<h2>Deeper Learning</h2>
-				<p>Dlaiml</p>
+				<h1>블로그 주인의 닉네임</h1>
+				<h2></h2>
 			</div>
 		</div>
 		
@@ -46,7 +48,7 @@
 		<div class="menu-bottom">
 			<a href="#" class="menu-icon" title="게시글 쓰기"><img src="write-icon.png" alt="게시글 쓰기"></a>
 			<a href="#" class="menu-icon" title="방명록 쓰기"><img src="guestbook-write-icon.png" alt="방명록 쓰기"></a>
-			<a href="#" class="menu-icon" title="페이지 설정"><img src="settings-icon.png" alt="페이지 설정"></a>
+			<a href="/my-page/info" class="menu-icon" title="마이 페이지"><img src="settings-icon.png" alt="마이 페이지"></a>
 		</div>
 	</aside>
 	
@@ -55,12 +57,10 @@
 		<div class="post-summary">
 			<div class="d-flex justify-content-center align-items-center">
 				<h1>My page</h1>
-				<div>
-					<a href="${pageContext.request.contextPath}/alarm/get-list">
-						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-							<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-						</svg>
-					</a>
+				<div class="alarm-button" data-bs-toggle="modal" data-bs-target="#alarmModal">
+					<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+						<path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+					</svg>
 				</div>
 			</div>
 			<hr>
@@ -119,5 +119,39 @@
 		</div>
 	</main>
 </div>
+<!-- 알림 아이콘 눌렀을 때 나오는 모달. -->
+<div class="modal fade" id="alarmModal" tabindex="-1" aria-labelledby="alarmModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="alarmModalLabel">새 소식 확인</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div id="modal-body" class="modal-body">
+				<%--알림 리스트가 비어있을 때...--%>
+				<div id="empty" class="d-flex justify-content-center align-items-center mb-0">
+					아직 새로운 소식이 없습니다.
+				</div>
+				<%--리스트가 비어있지 않음.--%>
+				<div id="not-empty">
+					<table class="mb-0 table table-hover table-bordered">
+						<thead>
+							<th>보낸사람</th>
+							<th>내용</th>
+							<th>읽음</th>
+						</thead>
+						<tbody id="not-empty-tbody">
+						
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
+<script type="application/javascript" src="/js/alarm.js"></script>
 </html>
