@@ -482,7 +482,7 @@
                                         <h1 class="modal-title fs-5">메세지 보내기</h1>
                                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="닫기"></button> -->
-                                        <span class="close" id="closeGuestBookRegister">&times;</span>
+                                        <span class="close" id="closeGuestBookRegister" data-bs-dismiss="modal">&times;</span>
                                     </div>
                                     <div class="modal-body">
                                         <form id="send-message-form" onsubmit="submitSendMessageForm(event)">
@@ -491,25 +491,21 @@
                                                 <label for="target-user" class="col-form-label">받는 사람:
                                                 </label>
                                                 <input type="text" class="form-control" id="target-user"
-                                                    value="${userNickname}" readonly>
+                                                    value="${userNickname}" readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">메세지 내용:
                                                 </label>
                                                 <textarea class="form-control" id="message-text"></textarea>
                                             </div>
-                                            <button form="send-message-form" type="submit"
-                                                class="btn btn-primary">보내기</button>
-                                            <button form="send-message-form" type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">취소</button>
                                         </form>
                                     </div>
-                                    <!-- <div class="modal-footer">
+                                    <div class="modal-footer">
                                         <button form="send-message-form" type="submit"
                                             class="btn btn-primary">보내기</button>
-                                        <button form="send-message-form" type="button"
+                                        <button 
                                             class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
