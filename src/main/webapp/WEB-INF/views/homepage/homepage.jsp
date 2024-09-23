@@ -263,7 +263,7 @@
         <aside class="sidebar">
             <!-- 상단 메뉴 -->
             <div class="menu-top">
-                <a href="#" class="menu-icon" title="게시글 보기">
+                <a href="/baseleap/postlist" class="menu-icon" title="게시글 보기">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
