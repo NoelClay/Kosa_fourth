@@ -61,6 +61,7 @@ public class PostViewController {
     public String viewList(
         @SessionAttribute("homePageId") Long homePageId,
         @SessionAttribute("loginUserId") Long userId,
+        @SessionAttribute("nickName") String nickName,
         Model model,
         @RequestParam(name = "page", defaultValue = "1") int page
     ){
@@ -68,6 +69,7 @@ public class PostViewController {
         model.addAttribute("postList", result);
         model.addAttribute("homePageId", homePageId);
         model.addAttribute("userId", userId);
+        model.addAttribute("userNickName", nickName);
         return "thymeleaf/post/list";
     }
 
