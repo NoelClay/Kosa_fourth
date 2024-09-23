@@ -13,7 +13,7 @@ public interface S3Service{
      String uploadS3(File uploadFile, String fileName);
      void removeFile(File targetFile);
      List<File> convertFile(List<MultipartFile> file);
-     List<String> updateImage(List<MultipartFile> fileName, Long postId);
+     List<String> updateImage(List<MultipartFile> fileName, List<String> prevImage,Long postId);
      void deleteBucket(Long postId);
 }
 

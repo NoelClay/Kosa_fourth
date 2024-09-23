@@ -29,52 +29,47 @@ public class PostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public void create(PostCreateModel postCreateModel){
-        Post post = Post.create(postCreateModel);
+    public void create(PostCreateModel postCreateModel, Long userId){
+        Post post = Post.create(postCreateModel, userId);
         int check = postRepository.insert(post);
         List<String> urls = s3Service.savePostImages(postCreateModel.getImage(), post.getId());
         postImageRepository.create(urls, post.getId());
     }
 
     @Override
-    public PostFindByIdModel findOneById(Long postId) {
+    public PostFindByIdModel findOneById(Long postId, Long userId) {
         List<PostCommentFindModel> postCommentFindModels = postCommentRepository.findByPostId(postId);
-        PostFindOneModel postFindOneModel = postRepository.findOne(postId);
+        PostFindOneModel postFindOneModel = postRepository.findOne(postId, userId);
        return PostFindByIdModel.builder()
            .post(postFindOneModel)
            .postComments(postCommentFindModels).build();
-
     }
 
     @Override
-    public PostFindOneModel findOnePrevById(Long postId) {
-        return postRepository.findOne(postId);
+    public PostFindOneModel findOnePrevById(Long postId, Long userId) {
+        return postRepository.findOne(postId, userId);
     }
 
     @Override
     @Transactional
     public void update(PostUpdateModel postUpdateModel) {
-        List<String> imageUrls = s3Service.updateImage(postUpdateModel.getUpdateImages(), postUpdateModel.getPostId());
+        List<String> imageUrls = s3Service.updateImage(postUpdateModel.getUpdateImages(),postUpdateModel.getPrevImage() ,postUpdateModel.getPostId());
         int updatePost = postRepository.update(postUpdateModel);
         int updateImage = postImageRepository.update(updateImage(postUpdateModel.getPrevImage(), imageUrls),postUpdateModel.getPostId());
     }
 
     @Override
-    public void delete(Long postId, Long userId) {
-
+    public void delete(Long postId) {
+        postRepository.delete(postId);
     }
 
     @Override
-    public PageImpl<PostListModel> findAll(int page) {
+    public PageImpl<PostListModel> findAll(int page, Long homePageId) {
         Pageable pageable = PageRequest.of(page - 1, 10);
-        List<Long> result = postRepository.postIds(pageable.getPageSize(), pageable.getOffset());
+        List<Long> result = postRepository.postIds(pageable.getPageSize(), pageable.getOffset(), homePageId);
         List<PostListModel> aa =  postRepository.findAll(result);
-        int count = postRepository.countByUserId(1L);
-        System.out.println("카운트 ==>> " + count);
-        PageImpl<PostListModel> postPage = new PageImpl<>(aa, pageable, count);
-        System.out.println("pagenext" + postPage.hasNext());
-        System.out.println("prevpgae" + postPage.hasPrevious());
-        return postPage;
+        int count = postRepository.countByUserId(homePageId);
+        return new PageImpl<>(aa, pageable, count);
     }
 
 

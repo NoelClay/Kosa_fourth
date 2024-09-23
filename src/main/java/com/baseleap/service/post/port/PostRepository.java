@@ -7,9 +7,10 @@ import java.util.List;
 
 public interface PostRepository {
     int insert(Post post);
-    PostFindOneModel findOne(Long postId);
+    PostFindOneModel findOne(Long postId, Long userId);
     int update(PostUpdateModel postUpdateModel);
     List<PostListModel> findAll(List<Long> ids);
-    List<Long> postIds(int size ,Long offset);
+    List<Long> postIds(int size ,Long offset, Long homePageId);
     int countByUserId(Long userId);
+    int delete(Long postId);
 }

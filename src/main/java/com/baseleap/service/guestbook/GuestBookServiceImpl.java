@@ -36,6 +36,8 @@ public class GuestBookServiceImpl implements IGuestBookService {
 
     @Override
     public GuestBook getGuestBookByWriterAndOwner(Long ownerId, Long writerId) {
-        return guestBookMapper.selectGuestBookByWriterOwnerId(ownerId, writerId);
+
+        GuestBook gb = guestBookMapper.selectGuestBookByWriterOwnerId(ownerId, writerId);
+        return gb;
     }
 }

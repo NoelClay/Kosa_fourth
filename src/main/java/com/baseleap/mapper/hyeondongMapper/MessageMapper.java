@@ -1,6 +1,5 @@
 package com.baseleap.mapper.hyeondongMapper;
 
-import com.baseleap.model.hyeondongModel.MessageDTO;
 import com.baseleap.model.hyeondongModel.MessageUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 

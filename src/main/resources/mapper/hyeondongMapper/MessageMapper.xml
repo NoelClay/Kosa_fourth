@@ -20,8 +20,8 @@
             u.profile_image as profileImage,
             u.nickname,
             m.content,
-            m.createdat as createdAt,
-            m.read_at as readAt
+            date_format(m.createdat,"%Y년 %m월 %d일 %H:%i") AS createdAt,
+            date_format(m.read_at,"%Y년 %m월 %d일 %H:%i") AS readAt
         from message as m
         join user as u
         where m.sender_id = u.id
@@ -33,8 +33,8 @@
             u.profile_image as profileImage,
             u.nickname,
             m.content,
-            m.createdat as createdAt,
-            m.read_at as readAt
+            date_format(m.createdat,"%Y년 %m월 %d일 %H:%i") AS createdAt,
+            date_format(m.read_at,"%Y년 %m월 %d일 %H:%i") AS readAt
         from message as m
         join user as u
         where m.sender_id = u.id

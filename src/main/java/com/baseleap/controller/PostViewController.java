@@ -1,8 +1,6 @@
 package com.baseleap.controller;
 
-import com.baseleap.model.post.PostFindByIdModel;
-import com.baseleap.model.post.PostFindOneModel;
-import com.baseleap.model.post.PostListModel;
+import com.baseleap.model.post.*;
 import com.baseleap.service.post.PostService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/baseleap")
-@ResponseStatus
 @RequiredArgsConstructor
 public class PostViewController {
     private final PostService postService;
@@ -24,37 +21,70 @@ public class PostViewController {
         return "thymeleaf/post/create";
     }
 
+    @PostMapping("/postcreate")
+    public String create(
+        @ModelAttribute PostCreateModel postCreateModel,
+        @SessionAttribute("loginUserId") Long userId
+    ){
+        postService.create(postCreateModel, userId);
+        return "redirect:/baseleap/postlist";
+    }
+
     @GetMapping("/postfind")
     public String viewFindOne(
         @RequestParam("postId") Long postId,
+        @SessionAttribute("loginUserId") Long userId,
+        @SessionAttribute("nickName") String nickName,
+        @SessionAttribute("homePageId") Long homePageId,
         Model model
     ){
-        System.out.println("postId =>> " + postId);
-        PostFindByIdModel postFindOneModel = postService.findOneById(postId);
+        PostFindByIdModel postFindOneModel = postService.findOneById(postId, userId);
         model.addAttribute("findPost", postFindOneModel);
+        model.addAttribute("userNickName", nickName);
+        model.addAttribute("userId", userId);
+        model.addAttribute("homePageId", homePageId);
         return "thymeleaf/post/findone";
     }
 
     @GetMapping("/postupdate")
     public String viyewUpdate(
         @RequestParam("postId") Long postId,
+        @SessionAttribute("loginUserId") Long userId,
         Model model
     ){
-        PostFindOneModel postFindOneModel = postService.findOnePrevById(postId);
+        PostFindOneModel postFindOneModel = postService.findOnePrevById(postId, userId);
         model.addAttribute("updatePost", postFindOneModel);
         return "thymeleaf/post/update";
     }
 
     @GetMapping("/postlist")
     public String viewList(
-        HttpSession session,
+        @SessionAttribute("homePageId") Long homePageId,
+        @SessionAttribute("loginUserId") Long userId,
         Model model,
         @RequestParam(name = "page", defaultValue = "1") int page
-//        @PageableDefault(size = 10) Pageable pageable
     ){
-        System.out.println("ssss ===>> " + page);
-        PageImpl<PostListModel> result =  postService.findAll(page);
+        PageImpl<PostListModel> result =  postService.findAll(page, homePageId);
         model.addAttribute("postList", result);
+        model.addAttribute("homePageId", homePageId);
+        model.addAttribute("userId", userId);
         return "thymeleaf/post/list";
+    }
+
+
+    @PostMapping("/postupdate")
+    public String update(
+        @ModelAttribute PostUpdateModel postUpdateModel
+    ){
+        postService.update(postUpdateModel);
+        return "redirect:/baseleap/postfind?postId=" + postUpdateModel.getPostId();
+    }
+
+    @GetMapping("/postdelete")
+    public String delete(
+        @RequestParam("postId") Long postId
+    ){
+        postService.delete(postId);
+        return "redirect:/baseleap/postlist";
     }
 }
