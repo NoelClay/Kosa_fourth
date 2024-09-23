@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public class PostLikeModel {
-    private Long postId;
-    private Long userId;
-    private int check;
+    private final Long postId;
+    private final Long userId;
+    private final int check;
 
     public PostLikeModel(Long postId, Long userId, int check) {
         this.postId = postId;

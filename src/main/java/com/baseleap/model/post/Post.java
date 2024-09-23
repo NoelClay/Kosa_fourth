@@ -24,12 +24,12 @@ public class Post {
         this.userId = userId;
     }
 
-    public static Post create(PostCreateModel postCreateModel){
+    public static Post create(PostCreateModel postCreateModel, Long userId){
         return Post.builder()
             .title(postCreateModel.getTitle())
             .content(postCreateModel.getContent())
             .createdAt(LocalDateTime.now())
-            .userId(postCreateModel.getUserId())
+            .userId(userId)
             .build();
     }
 }

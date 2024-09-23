@@ -85,8 +85,11 @@ public class S3ServiceImpl implements S3Service{
     }
 
     @Override
-    public List<String> updateImage(List<MultipartFile> file, Long postId) {
-        deleteBucket(postId);
+    public List<String> updateImage(List<MultipartFile> file,List<String> prevImage,  Long postId) {
+        // 파일이 null 이 아니면
+        if(file.isEmpty()) {
+            deleteBucket(postId);
+        }
         List<File> updateImageFiles =  convertFile(file);
         return uploadFile(updateImageFiles, postId);
     }

@@ -3,6 +3,7 @@ package com.baseleap.controller;
 import com.baseleap.common.util.ResponseType;
 import com.baseleap.model.post.*;
 import com.baseleap.service.post.PostCommentService;
+import com.baseleap.service.post.PostLikeService;
 import com.baseleap.service.post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Delete;
@@ -18,23 +19,10 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
     private final PostCommentService postCommentService;
+    private final PostLikeService postLikeService;
 
-    @PostMapping("/postcreate")
-    public String create(
-        @ModelAttribute PostCreateModel postCreateModel,
-        @SessionAttribute("loginUserId") Long userId
-    ){
-        postService.create(postCreateModel);
-        return "aaa";
-    }
-    @PostMapping("/postupdarte")
-    public String update(
-        @ModelAttribute PostUpdateModel postUpdateModel
-//        @SessionAttribute("loginUserId") Long userId
-    ){
-        postService.update(postUpdateModel);
-        return "aaa";
-    }
+
+
     @PostMapping("/postcommentcreate")
     public ResponseEntity<ResponseType> commentCreate(
         @RequestBody PostCommentCreateModel postCommentCreateModel
@@ -82,7 +70,9 @@ public class PostController {
     ){
         System.out.println("postId = > "+postLikeModel.getPostId());
         System.out.println("userId = > "+postLikeModel.getUserId());
-        System.out.println("check => " + postLikeModel.getCheck() );
+        System.out.println("check => " + postLikeModel.getCheck());
+        if(postLikeModel.getCheck() == 0) postLikeService.insert(postLikeModel);
+        else postLikeService.delete(postLikeModel);
         return ResponseEntity.ok(ResponseType.SUCCESS);
     }
 }

@@ -4,9 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Three Section Layout</title>
-    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/layout2.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+      /* .content{
+        margin-left: 450px;
+      } */
+
+
+
       .ol-cl {
           list-style-type: none;
           padding: 0;
@@ -71,6 +77,9 @@
     font-weight: bold;
     color: red;
 }
+.postCreate{
+  text-decoration: none;
+}
 
       @media (max-width: 768px) {
           .ol-cl {
@@ -93,19 +102,52 @@
     </style>
   </head>
   <body>
-    <div class="header">
-      <div class="logo">LOGO</div>
-      <div class="title">Title</div>
-    </div>
-    <div class="container">
-      <div class="sidebar">
-        <ul>
-          <li><a href="#" class="m">Menu 1</a></li>
-          <li><a href="#">Menu 1</a></li>
-          <li><a href="#">Menu 1</a></li>
-        </ul>
+    <aside class="sidebar">
+      <!-- 상단 메뉴 -->
+      <div class="menu-top">
+        <a href="#" class="menu-icon" title="게시글 보기"
+          ><img src="post-icon.png" alt="게시글 보기"
+        /></a>
+        <a href="#" class="menu-icon" title="방명록 보기"
+          ><img src="guestbook-icon.png" alt="방명록 보기"
+        /></a>
+        <a href="#" class="menu-icon" title="유저 검색"
+          ><img src="search-icon.png" alt="유저 검색"
+        /></a>
       </div>
-      <div class="main-content">
+
+      <!-- 유저 프로필 영역 -->
+      <div class="user-profile">
+        <a href="my-page.html">
+          <img
+            src="profile-picture.jpg"
+            alt="Profile Picture"
+            class="profile-picture"
+          />
+        </a>
+        <div class="user-info">
+          <h2>Deeper Learning</h2>
+          <p>Dlaiml</p>
+        </div>
+      </div>
+
+      <!-- 하단 메뉴 -->
+      <div class="menu-bottom">
+        <a href="#" class="menu-icon" title="게시글 쓰기"
+          ><img src="write-icon.png" alt="게시글 쓰기"
+        /></a>
+        <a href="#" class="menu-icon" title="방명록 쓰기"
+          ><img src="guestbook-write-icon.png" alt="방명록 쓰기"
+        /></a>
+        <a href="#" class="menu-icon" title="페이지 설정"
+          ><img src="settings-icon.png" alt="페이지 설정"
+        /></a>
+      </div>
+    </aside>
+
+
+
+      <main class="content">
         <ol class="ol-cl">
           <block th:each="post : ${postList.getContent()}">
             <li>
@@ -125,7 +167,8 @@
           <blcok th:each="page : ${#numbers.sequence(((postList.getPageable().getPageNumber()/ 5) * 5) + 1, (postList.totalPages > ((postList.getPageable().getPageNumber() / 5) * 5) + 5) ?
         ((postList.getPageable().getPageNumber() / 5) * 5) + 5 : postList.totalPages
     )}">
-            <a th:href="@{/baseleap/postlist(page=${page})}"
+
+            <a th:if="${page != 0}" th:href="@{/baseleap/postlist(page=${page})}"
                th:classappend="${postList.getPageable().getPageNumber() + 1 == page} ? 'active' : ''"
                th:text="${page}">
             </a>
@@ -134,7 +177,8 @@
           </blcok>
           <a th:href="@{/baseleap/postlist(page=${postList.nextPageable().getPageNumber() + 1})}" th:if="${postList.hasNext()}">다음</a>
         </div>
-      </div>
+        <button th:if="${userId == homePageId}"><a class="postCreate" href="/baseleap/postcreate">게시물 작성</a> </button>
+      </main>
     </div>
     <script>
     </script>
