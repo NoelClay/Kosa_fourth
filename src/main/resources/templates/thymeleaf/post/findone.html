@@ -189,11 +189,12 @@
           <input type="hidden" id="userId" th:value="${userId}" />
           <div>
             <h2 th:text="${findPost.post.title}"></h2>
+
             <a
               href="javascript:void(0);"
-              id="haert"
+              id="heart"
               class="heart"
-              th:attr="hidden=${findPost.post.userCheck != 0}"
+              th:style="${findPost.post.userCheck != 0 ? 'display:none' : ''}"
               onclick="like(0)"
               >♡</a
             >
@@ -201,13 +202,11 @@
               href="javascript:void(0);"
               id="heart1"
               class="heart1"
-              th:attr="hidden=${findPost.post.userCheck == 0}"
+              th:style="${findPost.post.userCheck == 0 ? 'display:none' : ''}"
               onclick="like(1)"
               >♥</a
             >
 
-            <!--          <a href="javascript:void(0);" class="heart" th:if="${findPost.post.userCheck == 0}" onclick="like(0)" >♡</a>-->
-            <!--          <a href="javascript:void(0);" class="heart1" th:if="${findPost.post.userCheck != 0}" onclick="like(1)">♥</a>-->
             <span
               readonly
               id="like-count"
@@ -603,15 +602,16 @@
           nowCount++;
           likeCount.text(nowCount);
 
-          $("#heart").css("display", "none"); // Directly show inactive heart
-          $("#heart1").css("display", "inline"); // Directly hide active heart
+          $("#heart").hide(); // 비활성 하트 숨기기
+          $("#heart1").show(); // 활성 하트 보이기
           // $("#heart").attr("hidden", true)
           // $("#heart1").attr("hidden", false)
         } else {
           nowCount--;
           likeCount.text(nowCount);
-          $("#heart1").css("display", "none"); // Directly show active heart
-          $("#heart").css("display", "inline"); // Directly hide inactive heart
+
+          $("#heart1").hide(); // 활성 하트 숨기기
+          $("#heart").show(); // 비활성 하트 보이기
           // $("#heart1").attr("hidden", true)
           // $("#heart").attr("hidden", false)
         }
