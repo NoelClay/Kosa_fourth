@@ -126,7 +126,9 @@
                         </tr>
                         <tr>
                            <td>패스워드:</td>
-                           <td><input type="password" name="password" value = "${userInfo.password}"></td>
+                           <td><input type="password" name="password" value = "${userInfo.password}" required
+                                    placeholder="영문 + 특수문자 + 숫자 포함 최소 8자리"
+                                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"></td>
                         </tr>
                         <tr>
                             <td>닉네임:</td>
@@ -135,9 +137,9 @@
                         <tr>
                             <td>프로필 이미지:</td>
                             <td>
-                            <input type="radio" name="profileImage" value="cupid.png" <c:out value="${userInfo.profileImage == 'cupid.png' ? 'checked' : ''}"/>><img src=/image/cupid.png  width = 50>
-                            <input type="radio" name="profileImage" value="groceries.png" <c:out value="${userInfo.profileImage == 'groceries.png' ? 'checked' : ''}"/>><img src=/image/groceries.png  width = 50>
-                            <input type="radio" name="profileImage" value="sculpture.png" <c:out value="${userInfo.profileImage == 'sculpture.png' ? 'checked' : ''}"/>><img src=/image/sculpture.png  width = 50>
+                                <input type="radio" name="profileImage" value="cupid.png" <c:out value="${userInfo.profileImage == 'cupid.png' ? 'checked' : ''}"/>><img src=/image/cupid.png  width = 50>
+                                <input type="radio" name="profileImage" value="groceries.png" <c:out value="${userInfo.profileImage == 'groceries.png' ? 'checked' : ''}"/>><img src=/image/groceries.png  width = 50>
+                                <input type="radio" name="profileImage" value="sculpture.png" <c:out value="${userInfo.profileImage == 'sculpture.png' ? 'checked' : ''}"/>><img src=/image/sculpture.png  width = 50>
                             </td>
                         </tr>
                         <tr>
