@@ -5,6 +5,7 @@
   유저 마이페이지.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%><!-- JSTL -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,6 +15,13 @@
 	<link rel="stylesheet" href="/css/template-style.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- jQuery, Popper.js, Bootstrap JS CDN 추가 -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -64,7 +72,7 @@
 				</div>
 			</div>
 			<hr>
-			<div>
+			<div id ='userInfo'>
 				<table class="table table-hover table-bordered">
 					<tbody>
 						<tr>
@@ -89,6 +97,8 @@
 						</tr>
 					</tbody>
 				</table>
+
+
 				<div class="d-flex justify-content-between">
 					<div class="mb-2">
 						<a href="${pageContext.request.contextPath}/my-page/new-messages" class="btn btn-outline-primary" type="button">받은 메세지함</a>
@@ -106,18 +116,96 @@
 					</div>
 				</div>
 			</div>
+			<div id ="update-form" style="display: none;">
+            	<form action="/update/update"  method="post">
+
+                   <table >
+                        <tr>
+                           <td>email:</td>
+                           <td><input type="email" name="email"  value = "${userInfo.email}" readonly ></td>
+                        </tr>
+                        <tr>
+                           <td>패스워드:</td>
+                           <td><input type="password" name="password" value = "${userInfo.password}"></td>
+                        </tr>
+                        <tr>
+                            <td>닉네임:</td>
+                            <td><input type="text" name="nickName" value = "${userInfo.nickname}"></td>
+                        </tr>
+                        <tr>
+                            <td>프로필 이미지:</td>
+                            <td>
+                            <input type="radio" name="profileImage" value="cupid.png" <c:out value="${userInfo.profileImage == 'cupid.png' ? 'checked' : ''}"/>><img src=/image/cupid.png  width = 50>
+                            <input type="radio" name="profileImage" value="groceries.png" <c:out value="${userInfo.profileImage == 'groceries.png' ? 'checked' : ''}"/>><img src=/image/groceries.png  width = 50>
+                            <input type="radio" name="profileImage" value="sculpture.png" <c:out value="${userInfo.profileImage == 'sculpture.png' ? 'checked' : ''}"/>><img src=/image/sculpture.png  width = 50>
+                            </td>
+                        </tr>
+                        <tr>
+                             <td>간단한 소개:</td>
+                             <td><input type="text" name="userIntroduce" value = "${userInfo.userIntroduce}"></td>
+                        </tr>
+
+                   </table>
+                   <input class="btn btn-primary" type="submit" value="등록"><input lass="btn btn-warning" type="reset" value="취소">
+                </form>
+            </div>
 			<hr>
 			<div class="d-flex">
 				<div class="me-auto">
-					<a href="/update/updateForm" class="btn btn-primary" type="button">내 정보 수정</a>
+					<button type="button" class="btn btn-primary" id = "userUpdateButton">내 정보 수정</button>
 				</div>
 				<div>
 					<a href="/loginMain/loginOut" class="btn btn-warning" type="button">로그 아웃</a>
-					<a href="/signOut/signOutForm" class="btn btn-danger" type="button">회원 탈퇴</a>
+
+					<button type="button" class="btn btn-danger" id="user-SignOut"> 회원 탈퇴</button>
+
 				</div>
 			</div>
 		</div>
 	</main>
 </div>
 </body>
+<script>
+  $(document).ready(function() {
+    $('#userUpdateButton').click(function(event) {
+      console.log("유저 정보 수정 버튼 클릭");
+      $('#update-form').show();
+      $('#userInfo').hide();
+    });
+  });
+
+$(document).ready(function() {
+    $('#user-SignOut').click(function() {
+        if (confirm('정말 탈퇴하시겠습니까? (탈퇴 후 1년간 재가입 불가)')) {
+            // Fetch API를 이용한 탈퇴 요청
+            fetch('/signOut/signOut', {
+                method: 'POST', // HTTP 메서드
+                headers: {
+                    'Content-Type': 'application/json' // 서버로 보내는 데이터 형식
+                },
+                body: JSON.stringify({
+                    // 필요한 데이터 (예: 사용자 ID, 탈퇴 사유 등)
+                    email: userInfo.email,
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // 탈퇴 성공 시 처리
+                alert('회원 탈퇴가 완료되었습니다.');
+                window.location.href = '/intro';
+            })
+            .catch(error => {
+                // 탈퇴 실패 시 처리
+                console.error('Error:', error);
+                alert('회원 탈퇴에 실패했습니다. 다시 시도해주세요.');
+            });
+        }
+    });
+});
+</script>
 </html>

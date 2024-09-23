@@ -45,7 +45,7 @@ public class UserUpdateController {
             return "updateFormPage";
         } else {
             log.info("userUpdateForm() :: loginEmail ={}", loginEmail);
-            return "redirect:/login/loginForm";
+            return "redirect:/intro";
         }
     }
 
@@ -64,7 +64,7 @@ public class UserUpdateController {
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "test-main";
+            return "redirect:/my-page/info";
         }else {
             return "updateFail";
         }

@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -45,11 +45,12 @@ public class UserSignOutController {
 
 
     // 회원 탈퇴 처리
+    @ResponseBody
     @PostMapping(value = "/signOut")
-    public String signOutUser(HttpSession session , @ModelAttribute UserModel userModel) {
+    public  Map<String, Integer> signOutUser(HttpSession session , @RequestBody UserModel userModel) {
         //요청
         String loginEmail =  (String) session.getAttribute("loginEmail");
-
+        Map<String, Integer> signOutMap = new HashMap<>();
         //요청 처리
         //  데이터 베이스에서 사용자 정보를 얻는다
         UserModel returnUserModel = userService.getUser(loginEmail);
@@ -64,9 +65,11 @@ public class UserSignOutController {
         // 리턴
         // returnCnt = 0; // 태스트용
         if (returnCnt == 1){
-            return "redirect:/login/loginForm";
+            signOutMap.put("success", 1);
+            return signOutMap;
         }else {
-            return "demo";
+            signOutMap.put("success", 0);
+            return signOutMap;
         }
     }
 }
