@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-@RequestMapping(value = "/my-page")
+@RequestMapping(value = "baseleap/my-page")
 public class MyPageController {
     @Autowired
     private MyPageService myPageService;
@@ -37,11 +37,11 @@ public class MyPageController {
 
     @GetMapping("/new-messages")
     public String newMessages() {
-        return "redirect:/message/new-messages";
+        return "redirect:baseleap/message/new-messages";
     }
 
     @GetMapping("/all-messages")
     public String allMessages() {
-        return "redirect:/message/all-messages";
+        return "redirect:baseleap/message/all-messages";
     }
 }
