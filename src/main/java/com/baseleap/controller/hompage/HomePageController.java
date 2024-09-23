@@ -99,6 +99,14 @@ public class HomePageController {
             model.addAttribute("myCommentWrote", gb);
         }
 
+        // 지금 현재 페이지의 프사 가져오기
+        String profileImgPath = homeService.getUserProfileImgPath(pageUserId);
+        model.addAttribute("profileImgPath", profileImgPath);
+
+        //지금 현재 페이지의 자기 소개 가져오기
+        String userIntroduce = homeService.getUserProfileSelfInfo(pageUserId);
+        model.addAttribute("userIntroduce", userIntroduce);
+
         return "/homepage/homepage"; // JSP 파일로 이동
     }
 
