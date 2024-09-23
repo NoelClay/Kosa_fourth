@@ -11,8 +11,8 @@ public class UserDTO {
     private String nickname;
     private String profileImage;
     private String userIntroduce;
-    private Date createdTime;
-    private Date lastLoginTime;
+    private String createdTime;
+    private String lastLoginTime;
     private String validationQuizQuestion;
     private String validationQuizAnswer;
     private boolean active;

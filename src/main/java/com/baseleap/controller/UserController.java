@@ -3,7 +3,9 @@ package com.baseleap.controller;
 
 import com.baseleap.model.LoginResponseDto;
 import com.baseleap.model.UserModel;
+import com.baseleap.model.hyeondongModel.UserDTO;
 import com.baseleap.service.UserService;
+import com.baseleap.service.hyeondongService.HDUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.baseleap.service.hyeondongService.HDUserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +24,8 @@ import java.util.Map;
 @RequestMapping("/loginMain")
 public class UserController {
 
+    @Autowired
+    private HDUserService HDUserService; // 현동 추가
 
     @Autowired
     private UserService userService;
@@ -52,6 +57,7 @@ public class UserController {
         // 요청 처리
         Map<String, Integer> loginMap = new HashMap<>();
         UserModel returnUserModel = userService.login(userModel);
+        UserDTO userDTO = HDUserService.getUserByEmail(userModel.getEmail()); // 현동 추가.
         try {
             // 세션 처리
             // -세션에서 id(pk) 가져오기
@@ -62,6 +68,7 @@ public class UserController {
                 session = request.getSession();
                 session.setAttribute("loginEmail", returnUserModel.getEmail());
                 session.setAttribute("loginUserId", returnUserModel.getId());
+                session.setAttribute("userId", userDTO.getId()); // 현동 추가.
                 session.setAttribute("homePageId", returnUserModel.getId());
                 session.setAttribute("nickName", returnUserModel.getNickName());
                 userService.userUpdateLastLoginTime(returnUserModel.getEmail());
@@ -120,7 +127,8 @@ public class UserController {
         // - 세션 삭제한다
         session.invalidate();
 
-        return "redirect:/demo";
+//      return "redirect:/demo";
+        return "redirect:/intro";
     }
 
 }

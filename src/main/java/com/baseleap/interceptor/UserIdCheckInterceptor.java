@@ -21,6 +21,7 @@ public class UserIdCheckInterceptor implements HandlerInterceptor {
                 // 세션이 있으면서, 유저 아이디도 포함 되어 있으면 성공.
                 return true;
             }
+            System.out.println(userId);
         }
         response.sendRedirect(request.getContextPath() + "/intro");
         return false;

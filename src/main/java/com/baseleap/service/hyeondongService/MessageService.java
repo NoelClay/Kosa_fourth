@@ -1,6 +1,5 @@
 package com.baseleap.service.hyeondongService;
 
-import com.baseleap.model.hyeondongModel.MessageDTO;
 import com.baseleap.model.hyeondongModel.MessageUserDTO;
 
 import java.util.List;

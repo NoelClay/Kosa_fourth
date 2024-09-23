@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.Date;
 
+// 메세지를 만들기 위한 DTO.
 @Data
 public class MessageDTO {
     private int id;
