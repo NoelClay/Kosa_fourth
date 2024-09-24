@@ -71,6 +71,10 @@ public class UserController {
                 session.setAttribute("userId", userDTO.getId()); // 현동 추가.
                 session.setAttribute("homePageId", returnUserModel.getId());
                 session.setAttribute("nickName", returnUserModel.getNickName());
+                //김남영 추가 블록 세션에 패스워드 빼고는 싹 다 박아아
+                session.setAttribute("profileImg", userDTO.getProfileImage());
+                session.setAttribute("userIntroduce", userDTO.getUserIntroduce());
+                //김남영 추가 블록록
                 userService.userUpdateLastLoginTime(returnUserModel.getEmail());
                 loginMap.put("userId", returnUserModel.getId());
                 return loginMap;

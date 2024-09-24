@@ -34,10 +34,11 @@ public class HomePageController {
     private IHomePageService homeService;
 
     @GetMapping("/page")
-    public String loadHomePage(@RequestParam("userId") Long pageUserId, HttpSession session, Model model) {
+    public String loadHomePage(@RequestParam("pageUserId") Long pageUserId, HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 pk 가져오기
         Object temp = session.getAttribute("loginUserId");
 
+  
         // loginUserId가 Long 타입일 수도 있으므로 instanceof로 타입을 체크한 후 캐스팅
         Long loginUserId = null;
 
@@ -52,7 +53,41 @@ public class HomePageController {
             throw new IllegalStateException("로그인된 사용자 ID가 세션에 없습니다.");
         }
 
+        if (loginUserId == null) {
+            // loginUserId가 null인 경우, 예외 처리나 기본값 설정이 필요할 수 있습니다.
+            throw new IllegalStateException("로그인된 사용자 ID가 세션에 없습니다.");
+        }
+
+        // // log.info(pageObjUserId.toString());
+        // int intPageUserId = (Integer) Integer.parseInt(pageObjUserId.toString());
+        
+        // Long pageUserId = null;
+        // Object temp2 = pageObjUserId;
+        // if (temp2 instanceof Integer) {
+        //     pageUserId = ((Integer) temp2).longValue();
+        // } else if (temp2 instanceof Long) {
+        //     pageUserId = (Long) temp2;
+        // } else {
+            
+        //     pageUserId = (Long)temp2;
+        //     log.info(pageUserId.toString());
+        // }
+        // log.info(pageUserId.toString());
+        // if (pageUserId == null) {
+        //     // loginUserId가 null인 경우, 예외 처리나 기본값 설정이 필요할 수 있습니다.
+        //     throw new IllegalStateException("현재 페이지 ID가 이상해요.");
+        // }
+
+
         // 페이지 사용자 ID를 세션에 저장하지 않고, 모델에만 전달 (세션에는 로그인한 사용자만 저장)
+        //-> 페이지 요청이 들어올때 해당 페이지 아이디와 관련한 모든 세션값 변경
+        session.setAttribute("homePageUserId", pageUserId);
+        session.setAttribute("homePageId", pageUserId);
+        session.setAttribute("nickName", homeService.getUserNicknameByUserId(pageUserId) );
+        session.setAttribute("profileImg", homeService.getUserProfileImgPath(pageUserId));
+        session.setAttribute("userIntroduce", homeService.getUserProfileSelfInfo(pageUserId));
+
+
         session.setAttribute("loginUserId", loginUserId);
         model.addAttribute("loginUserId", loginUserId);
         model.addAttribute("pageUserId", pageUserId);  // 페이지 오너의 userId

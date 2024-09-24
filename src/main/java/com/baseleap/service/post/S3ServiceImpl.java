@@ -66,7 +66,7 @@ public class S3ServiceImpl implements S3Service{
         for(MultipartFile file : files){
             if(file != null && !file.isEmpty()){
                 System.out.println("여긴 파일 오리지널네임 ==>> " + file.getOriginalFilename());
-                File convertFile = new File("/Users/"+file.getOriginalFilename());
+                File convertFile = new File("C:/Users/noel/Desktop/kosafourthimg/"+file.getOriginalFilename());
                 try{
                     if(convertFile.createNewFile()){
                         try(FileOutputStream fos = new FileOutputStream(convertFile)){
