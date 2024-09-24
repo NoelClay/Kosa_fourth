@@ -41,7 +41,8 @@ public class SearchController {
                 .stream()
                 .map(target -> {
                     UserFollowStatus ufs = new UserFollowStatus();
-                    FollowDTO followDTO = myPageService.isFollowing(myId, Integer.parseInt(target.getId())); // target을 내가 팔로우하고 있는지 어떤지를 확인...쿼리 결과값이 없으면 followDTO는 null.
+                    // target을 내가 팔로우하고 있는지 어떤지를 확인...쿼리 결과값이 없으면 followDTO는 null.
+                    FollowDTO followDTO = myPageService.isFollowing(myId, Integer.parseInt(target.getId()));
                     ufs.setUserDTO(target);
                     ufs.setFollow(followDTO != null);
                     // 결과적으로 ufs 객체는 UserDTO와, 내가 그 UserDTO를 팔로우하는지 여부(T/F)를 가짐.

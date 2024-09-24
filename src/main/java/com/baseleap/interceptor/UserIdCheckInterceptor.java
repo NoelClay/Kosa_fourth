@@ -13,7 +13,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Slf4j
 public class UserIdCheckInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response, Object handler
+    ) throws Exception {
         HttpSession session = request.getSession(false);
         if (session != null) {
             String userId = (String) session.getAttribute("userId");
