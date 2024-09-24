@@ -78,7 +78,7 @@ public class GuestBookController {
         else{
             guestBookService.insertGuestBook(guestBook);
         }
-        return "redirect:/baseleap/home/page?userId=" + pageUserId; // 방명록 리스트 페이지로 리다이렉트
+        return "redirect:/baseleap/home/page?pageUserId=" + pageUserId; // 방명록 리스트 페이지로 리다이렉트
     }
 
     // 방명록 항목을 업데이트하는 메서드

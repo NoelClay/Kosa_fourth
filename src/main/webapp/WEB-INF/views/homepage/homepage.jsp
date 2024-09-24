@@ -436,12 +436,12 @@
                                 <h2>음악 활성화</h2>
                                 <form action="/music/activate" method="post">
                                     <!-- 사용자의 음악 리스트를 반복하여 출력 -->
-                                    <c:forEach var="music" items="${musicList}">
+                                    <c:forEach var="music" items="${musicList}" varStatus="status">
                                         <label>
                                             <!-- 활성화된 음악 선택 -->
                                             <input type="radio" name="selectedMusic" value="${music.name}"
                                                 ${music.active ? 'checked' : '' }>
-                                            ${fn:split(music.name,'_')[1]}
+                                            ${status.count} - ${fn:split(music.name,'_')[1]}
                                         </label>
                                         <br>
                                     </c:forEach>
