@@ -29,8 +29,12 @@ public class MyPageController {
     public String myPage(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
         String stringUserId = (String) session.getAttribute("userId");
+
         int userId = Integer.parseInt(stringUserId);
         UserDTO userInfo = myPageService.getUserInfoById(userId);
+
+        
+
         model.addAttribute("userInfo", userInfo);
         return "my-page/info";
     }
