@@ -296,23 +296,33 @@
 			<%--유저 정보 수정 폼--%>
 			<div id="update-form" class="d-none">
 				<form action="/update/update" method="post">
-					<table>
+					<table class="table table-hover table-bordered">
+						<tbody>
 						<tr>
-							<td>email:</td>
-							<td><input type="email" name="email" value="${userInfo.email}" readonly></td>
+							<td>email</td>
+							<td><input class="form-control" type="email" name="email" value="${userInfo.email}" readonly></td>
 						</tr>
 						<tr>
-							<td>패스워드:</td>
-							<td><input type="password" name="password" value="${userInfo.password}" required placeholder="영문 + 특수문자 + 숫자 포함 최소 8자리"
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
-                                        title="영문 + 특수문자 + 숫자 포함 최소 8자리"></td>
+							<td>패스워드</td>
+							<td>
+								<input
+										class="form-control"
+										type="password"
+										name="password"
+										value="${userInfo.password}"
+										required
+										placeholder="영문 + 특수문자 + 숫자 포함 최소 8자리"
+										pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$"
+										title="영문 + 특수문자 + 숫자 포함 최소 8자리"
+								>
+							</td>
 						</tr>
 						<tr>
-							<td>닉네임:</td>
-							<td><input type="text" name="nickName" value="${userInfo.nickname}"></td>
+							<td>닉네임</td>
+							<td><input class="form-control" type="text" name="nickName" value="${userInfo.nickname}"></td>
 						</tr>
 						<tr>
-							<td>프로필 이미지:</td>
+							<td>프로필 이미지</td>
 							<td>
 								<input type="radio" name="profileImage" value="cupid.png" <c:out value="${userInfo.profileImage == 'cupid.png' ? 'checked' : ''}" />> <img src=/image/cupid.png width=50>
 								<input type="radio" name="profileImage" value="groceries.png" <c:out value="${userInfo.profileImage == 'groceries.png' ? 'checked' : ''}" />><img src=/image/groceries.png width=50>
@@ -320,12 +330,13 @@
 							</td>
 						</tr>
 						<tr>
-							<td>간단한 소개:</td>
-							<td><input type="text" name="userIntroduce" value="${userInfo.userIntroduce}"></td>
+							<td>간단한 소개</td>
+							<td><input class="form-control" type="text" name="userIntroduce" value="${userInfo.userIntroduce}"></td>
 						</tr>
+						</tbody>
 					</table>
 					<div class="d-flex">
-						<input class="btn btn-primary" type="submit" value="등록">
+						<input class="btn btn-primary me-2" type="submit" value="등록">
 						<button class="me-auto btn btn-warning" type="reset">되돌리기</button>
 						<button id="back" class="btn btn-primary">돌아가기</button>
 					</div>
