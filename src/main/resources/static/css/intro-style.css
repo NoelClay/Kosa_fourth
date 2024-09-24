@@ -1,0 +1,17 @@
+body {
+    /*background-image : url("../image/intro-bg.jpg");*/
+    background-image : url("../image/intro-background.jpg");
+    background-size : cover;
+    background-repeat : no-repeat;
+}
+
+.title-box {
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+}
+
+.title {
+    color: white;
+}

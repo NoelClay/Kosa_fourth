@@ -43,6 +43,7 @@ public class SignUpController {
         // 요청 처리
         // - 회원 정보를 저장
         // 중복 이메일 예외처리 해야함
+
         Map<String, Integer> signupMap = new HashMap<>();
         UserModel returnUserEmail = signUpService.getUserByEmail(userModel.getEmail());
         log.info("signup() :: userModel.returnUserModel = {} ",returnUserEmail);
