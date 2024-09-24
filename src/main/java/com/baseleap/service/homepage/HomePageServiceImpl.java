@@ -8,10 +8,8 @@ import com.baseleap.model.UserModel;
 
 @Service
 public class HomePageServiceImpl implements IHomePageService {
-
     @Autowired
     private UserHomePageMapper umapper;
-
     @Override
     public String getUserNicknameByUserId(Long userId) {
         String result = "닉네임없음";
@@ -25,7 +23,6 @@ public class HomePageServiceImpl implements IHomePageService {
             return umodel.getNickName();
         }
     }
-
     @Override
     public String getUserProfileImgPath(Long userId) {
 
@@ -56,6 +53,4 @@ public class HomePageServiceImpl implements IHomePageService {
         }
 
     }
-    
-    
 }

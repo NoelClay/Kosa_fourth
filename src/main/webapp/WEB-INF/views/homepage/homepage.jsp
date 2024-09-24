@@ -300,7 +300,6 @@
                                 <p>${userIntroduce}</p>
                             </div>
                         </div>
-F
                         <!-- 하단 메뉴 -->
                         <div class="menu-bottom">
                             <a href="/baseleap/home/page?pageUserId=${sessionScope.loginUserId}" class="menu-icon" title="내 홈피로 가기"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
