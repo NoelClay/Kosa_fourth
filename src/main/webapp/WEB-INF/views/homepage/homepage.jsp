@@ -170,7 +170,7 @@
                         color: white;
                     }
 
-                    /* 모달 스타일 */
+                    /* 모달 스타일
                     .modal {
                         display: none;
                         position: fixed;
@@ -183,6 +183,7 @@
                         background-color: rgba(0, 0, 0, 0.5);
                         padding-top: 60px;
                     }
+                    */
 
                     .modal-content {
                         background-color: #fefefe;
@@ -474,7 +475,7 @@
                             </div>
                         </div>
 
-                        <!-- 모달5 문현동 메시지 보내기 기능 일부 발췌 -->
+                        <!-- 모달 5: 문현동 메시지 보내기 기능 일부 발췌 -->
                         <div class="modal" id="message-modal" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -482,7 +483,7 @@
                                         <h1 class="modal-title fs-5">메세지 보내기</h1>
                                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="닫기"></button> -->
-                                        <span class="close" id="closeGuestBookRegister">&times;</span>
+                                        <span class="close">&times;</span>
                                     </div>
                                     <div class="modal-body">
                                         <form id="send-message-form" onsubmit="submitSendMessageForm(event)">
