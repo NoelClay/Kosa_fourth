@@ -1,5 +1,6 @@
 package com.baseleap.mapper;
 
+import com.baseleap.common.util.DataAccessException;
 import com.baseleap.model.post.*;
 import com.baseleap.service.post.port.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +16,31 @@ public class PostMapperImpl implements PostRepository {
 
     @Override
     public int insert(Post post){
-        return postMapper.insert(post);
+        try{
+            return postMapper.insert(post);
+        }catch (Exception e){
+            throw new DataAccessException("postinsert");
+        }
     }
 
     @Override
     public PostFindOneModel findOne(Long postId, Long userId) {
-        return postMapper.findOneById(postId, userId);
+        try{
+            return postMapper.findOneById(postId, userId);
+        }catch (Exception e){
+            throw new DataAccessException("postFindOne");
+        }
+
     }
 
     @Override
     public int update(PostUpdateModel postUpdateModel) {
-        return postMapper.update(postUpdateModel);
+        try{
+            return postMapper.update(postUpdateModel);
+        }catch (Exception e){
+            throw new DataAccessException("postUpdate");
+        }
+
 
     }
 
@@ -48,6 +63,11 @@ public class PostMapperImpl implements PostRepository {
 
     @Override
     public int delete(Long postId) {
-        return postMapper.delete(postId);
+       try{
+           return postMapper.delete(postId);
+       }catch (Exception e){
+           throw new DataAccessException("postDelete");
+       }
+
     }
 }

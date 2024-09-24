@@ -11,7 +11,9 @@
 </insert>
 
 <select id="findOneById" parameterType="long" resultType="com.baseleap.model.post.PostFindOneModel">
-    select p.id, title, content, p.createdat , p.updatedat,
+    select p.id, title, content,
+    DATE_FORMAT(p.createdat, '%Y.%m.%d. %H:%i') AS createdat,
+    DATE_FORMAT(p.updatedat, '%Y.%m.%d. %H:%i') AS updatedat,
     pi.image1, pi.image2 ,pi.image3  ,u.nickname,
     (select count(pl.postid) from postlike pl where pl.postid = p.id) as likecount,
     (select count(pl.postid) from postlike pl where pl.postid = p.id and pl.userid = #{userId}) as usercheck
