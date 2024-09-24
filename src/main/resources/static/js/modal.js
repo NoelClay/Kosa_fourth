@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         alert('로그인 성공!');
                         // 로그인 성공 후 처리 (예: 메인 페이지 이동)
                         // window.location.href = '/test-main';
-                        window.location.href = `/baseleap/home/page?userId=`+data.userId;
+                        window.location.href = `/baseleap/home/page?pageUserId=`+data.userId;
                     } else {
                         alert('로그인 실패');
                     }

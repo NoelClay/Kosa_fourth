@@ -271,7 +271,7 @@
                                     <path fill-rule="evenodd"
                                         d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5m4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5m-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
                                 </svg></a>
-                            <a href="http://localhost:8080/home/page?userId=${pageUserId}" class="menu-icon"
+                            <a href="/baseleap/home/page?pageUserId=${pageUserId}" class="menu-icon"
                                 title="방명록 보기"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
                                     <path
@@ -291,7 +291,7 @@
 
                         <!-- 유저 프로필 영역 -->
                         <div class="user-profile">
-                            <a href="/baseleap/home/page?userId=${sessionScope.userId}">
+                            <a href="/baseleap/home/page?pageUserId=${pageUserId}">
                                 <img src="${profileImgPath}" alt="Profile Picture" class="profile-picture">
                             </a>
                             <div class="user-info">
@@ -303,13 +303,9 @@
 
                         <!-- 하단 메뉴 -->
                         <div class="menu-bottom">
-                            <a href="#" class="menu-icon" title="게시글 쓰기"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd"
-                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                            <a href="/baseleap/home/page?pageUserId=${sessionScope.loginUserId}" class="menu-icon" title="내 홈피로 가기"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
                                 </svg></a>
 
                             <!-- 현재 로그인한 유저가 페이지 소유자인 경우 홈피 꾸미기 버튼이 보이도록 설정 -->
@@ -337,7 +333,7 @@
                                         <path
                                             d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
                                     </svg></a>
-                                <a href="#" class="menu-icon" title="페이지 설정"><svg xmlns="http://www.w3.org/2000/svg"
+                                <a href="/baseleap/my-page/info" class="menu-icon" title="페이지 설정"><svg xmlns="http://www.w3.org/2000/svg"
                                         width="16" height="16" fill="currentColor" class="bi bi-gear"
                                         viewBox="0 0 16 16">
                                         <path
@@ -483,7 +479,7 @@
                                         <h1 class="modal-title fs-5">메세지 보내기</h1>
                                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="닫기"></button> -->
-                                        <span class="close">&times;</span>
+                                        <span class="close" id="closeGuestBookRegister" data-bs-dismiss="modal">&times;</span>
                                     </div>
                                     <div class="modal-body">
                                         <form id="send-message-form" onsubmit="submitSendMessageForm(event)">
@@ -492,25 +488,21 @@
                                                 <label for="target-user" class="col-form-label">받는 사람:
                                                 </label>
                                                 <input type="text" class="form-control" id="target-user"
-                                                    value="${userNickname}" readonly>
+                                                    value="${userNickname}" readonly />
                                             </div>
                                             <div class="mb-3">
                                                 <label for="message-text" class="col-form-label">메세지 내용:
                                                 </label>
                                                 <textarea class="form-control" id="message-text"></textarea>
                                             </div>
-                                            <button form="send-message-form" type="submit"
-                                                class="btn btn-primary">보내기</button>
-                                            <button form="send-message-form" type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">취소</button>
                                         </form>
                                     </div>
-                                    <!-- <div class="modal-footer">
+                                    <div class="modal-footer">
                                         <button form="send-message-form" type="submit"
                                             class="btn btn-primary">보내기</button>
-                                        <button form="send-message-form" type="button"
-                                            class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    </div> -->
+                                        <button 
+                                            class="close2 btn btn-secondary" onclick="modalClose()">취소</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -571,6 +563,12 @@
                             button.closest('.modal').style.display = 'none';
                         });
                     });
+
+                    function modalClose(event){
+                    
+                        const messageModal = document.querySelector("#message-modal");
+                        messageModal.style.display="none";
+                    }
 
                     // 각 폼이 독립적으로 작동하게 설정
                     var guestBookForm = document.querySelector('#guestBookFormModal form');
