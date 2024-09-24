@@ -29,7 +29,6 @@
         from user
         where active = 1
         and (email like '%${keyword}%' or nickname like '%${keyword}%');
-
     </select>
     <select id="getMyFollowers" parameterType="_int" resultType="com.baseleap.model.hyeondongModel.UserDTO">
         select
