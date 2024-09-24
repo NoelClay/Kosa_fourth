@@ -110,11 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 validationQuizQuestion,
                 validationQuizAnswer
             };
+            // 유효성 검사 함수 호출
+            if (!validateForm(data)) {
 
-            if (password != password2) {
-                alert('회원가입 실패(입력한 비밀 번호가 다릅니다)');
                 return;
             }
+
             // Fetch 요청
             fetch('/signup/signup', {
                 method: 'POST',
@@ -143,14 +144,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('회원가입 중 오류가 발생했습니다.');
                 });
         });
-
-        // 유효성 검사 함수 (예시)
         function validateForm(data) {
-            // 이메일, 비밀번호, 닉네임 등 유효성 검사
-            // ...
+               const password2 = $('#password2').val();
+            // 이메일 유효성 검사 (정규 표현식 활용)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('이메일 형식이 올바르지 않습니다.');
+                return false;
+            }
 
-            return isValid; // 모든 검사 통과 시 true 반환
+            // 비밀번호 유효성 검사 (기존 정규 표현식 활용)
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+            if (!passwordRegex.test(data.password)) {
+                alert('비밀번호 형식이 올바르지 않습니다.');
+                return false;
+            }
+            if (!isMatch(data.password, $('#password2').val())) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return false;
+            }
+
+            return true;
         }
+
+        function isMatch(password, confirmPassword) {
+           return password === confirmPassword;
+        }
+
     });
 
 // 비밀번호 찾기
