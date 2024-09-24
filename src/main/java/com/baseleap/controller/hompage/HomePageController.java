@@ -23,16 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/baseleap/home")
 public class HomePageController {
-
     @Autowired
     private IMusicService musicService;
-
     @Autowired
     private IGuestBookService guestBookService;
-
     @Autowired
     private IHomePageService homeService;
-
     @GetMapping("/page")
     public String loadHomePage(@RequestParam("pageUserId") Long pageUserId, HttpSession session, Model model) {
         // 세션에서 로그인한 사용자 pk 가져오기
@@ -92,7 +88,7 @@ public class HomePageController {
         model.addAttribute("loginUserId", loginUserId);
         model.addAttribute("pageUserId", pageUserId);  // 페이지 오너의 userId
 
-        // 해당 유저의 배경 음악 불러오기 0. 음악명 1. 음악 패스 그런데 사실상 패스만 뿌릴거
+        // 해당 유저의 배경 음악 불러오기 0. 음악명 1. 음악패스
         List<String> musicInfo = musicService.getStringListMusicByOwnerID(pageUserId);
         if (musicInfo != null && musicInfo.size() > 1) {
             model.addAttribute("musicPath", musicInfo.get(1));
