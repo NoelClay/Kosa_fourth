@@ -13,13 +13,14 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 	<link rel="stylesheet" href="/css/intro-style.css">
 </head>
 <body>
 <div class="title-box">
 	<div class="container text-center mt-5">
-		<h1 class="title">Welcome to the Kostory</h1>
-		<button id="startButton" class="btn btn-primary mt-3">입장하기</button>
+		<h1 class="title animate__animated animate__fadeInUp">Welcome to the Kostory</h1>
+		<button id="startButton" class="btn btn-primary mt-3 animate__animated animate__fadeInDown">입장하기</button>
 	</div>
 </div>
 <!-- 모달 창 -->
