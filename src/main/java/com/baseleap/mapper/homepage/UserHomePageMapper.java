@@ -6,7 +6,5 @@ import com.baseleap.model.UserModel;
 
 @Mapper
 public interface UserHomePageMapper {
-
     public UserModel getUserByKey(Long userId);
-
 }
